@@ -53,25 +53,25 @@ Distro features
 ===============
 
  - kernel v3.14 LTS
- - Replaced sysvinit by systemd
- - Replaced busybox by toybox
- - Replaced RPM package by Debian package
- - Enable some features: ipv6, iptables, avahi, nfs...
+ - sysvinit is replaced by systemd
+ - busybox is replaced by toybox
+ - RPM packages manager is replaced by Debian packages manager
+ - Enable some features by default: ipv6, iptables, selinux, avahi, nfs...
 
 Image features
 ===============
 
  - read-only root filesystem
- - Replaced openssh by dropbear
+ - openssh is replaced by dropbear
  - Enable hardware codecs by default
  - Enable NFS server by default
- - 
+ - Enable SELinux by default
 
-Package group features
-======================
+.. Package group features
+.. ======================
 
- - Common features
-  - Linux kernel v3.14 LTS
+..  - Common features
+..   - Linux kernel v3.14 LTS
 
   .. - toybox
   .. - pam
@@ -95,55 +95,55 @@ Package group features
   .. - LUKS
   .. - LXC
 
- - Embedded features
+  .. - Embedded features
   .. - serial console
   .. - ro root + overlayFS
 
- - Real time features
-  - Linux kernel v3.14 preempt-rt
+ .. - Real time features
+ ..  - Linux kernel v3.14 preempt-rt
 
- - Proxies features
-  - Reverse proxy (Varnish)
-  - Cache proxy (Nginx)
+ .. - Proxies features
+ ..  - Reverse proxy (Varnish)
+ ..  - Cache proxy (Nginx)
 
- - Router features
-  - DNS
-  - DHCP
-  - Freelan server
+ .. - Router features
+ ..  - DNS
+ ..  - DHCP
+ ..  - Freelan server
 
- - Sabnzbd features
-  - TODO
+ .. - Sabnzbd features
+ ..  - TODO
 
- - CI features
-  - git
-  - devtools
-   - TODO
-  - Buildbot
-  - TODO
+ .. - CI features
+ ..  - git
+ ..  - devtools
+ ..   - TODO
+ ..  - Buildbot
+ ..  - TODO
 
- - NAS features
-  - TODO
+ .. - NAS features
+ ..  - TODO
 
- - HTPC features
-  - TODO
+ .. - HTPC features
+ ..  - TODO
 
- - Desktop features
-  - packages management debian
+ .. - Desktop features
+ ..  - packages management debian
 
- - Laptop features
-  - TODO
+ .. - Laptop features
+ ..  - TODO
 
- - ROS features
-  - ROSc
-  - TODO
+ .. - ROS features
+ ..  - ROSc
+ ..  - TODO
 
 Supported machine
 =================
 
- - Qemu-(x86-64|arm|arm64|mips)
+ - Qemu-(x86-64|arm|arm64|mips|ppc)
  - generic-x86-64
  - Raspberry Pi rev. B
- - BeagleBone rev. ??
+ - BeagleBone Black rev. B
 
 Contributing
 ============
@@ -184,5 +184,7 @@ other layers needed. e.g.:
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-selinux \
+    /path/to/yocto/meta-musl \
     /path/to/yocto/meta-exiguous \
     "
