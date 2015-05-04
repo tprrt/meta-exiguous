@@ -32,17 +32,17 @@ This layer depends on:
  - revision: HEAD
  - prio: default
 
-:meta-selinux:
- - URI: git://git.yoctoproject.org/meta-selinux
- - branch: master
- - revision: HEAD
- - prio: default
+.. :meta-selinux:
+..  - URI: git://git.yoctoproject.org/meta-selinux
+..  - branch: master
+..  - revision: HEAD
+..  - prio: default
 
-:meta-musl:
- - URI: git://git@github.com:kraj/meta-musl.git
- - branch: master
- - revision: HEAD
- - prio: default
+.. :meta-musl:
+..  - URI: git://git@github.com:kraj/meta-musl.git
+..  - branch: master
+..  - revision: HEAD
+..  - prio: default
 
 .. :meta-ros:
 ..  - URI: TODO
@@ -207,6 +207,5 @@ other layers needed. e.g.:
     /path/to/yocto/meta-networking \
     /path/to/yocto/meta-python \
     /path/to/yocto/meta-selinux \
-    /path/to/yocto/meta-musl \
     /path/to/yocto/meta-exiguous \
     "
