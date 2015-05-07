@@ -32,11 +32,11 @@ This layer depends on:
  - revision: HEAD
  - prio: default
 
-.. :meta-selinux:
-..  - URI: git://git.yoctoproject.org/meta-selinux
-..  - branch: master
-..  - revision: HEAD
-..  - prio: default
+:meta-selinux:
+ - URI: git://git.yoctoproject.org/meta-selinux
+ - branch: master
+ - revision: HEAD
+ - prio: default
 
 .. :meta-musl:
 ..  - URI: git://git@github.com:kraj/meta-musl.git
@@ -54,18 +54,175 @@ This layer depends on:
 Distro features
 ===============
 
-- kernel v3.14 LTS
-- sysvinit is replaced by systemd
-- busybox is replaced by toybox
+- kernel Linux v3.14 LTSI
+- Sysvinit is replaced by Systemd
+- Busybox is replaced by Toybox
 - RPM packages manager is replaced by Debian packages manager
 - Enable some features by default: ipv6, iptables, selinux, avahi, nfs...
+
+-----------------------------------------------------------------------------
+Common features
+-----------------------------------------------------------------------------
+
+System
+~~~~~~
+
+- E kernel Linux v3.14  openembedded-core
+- E hwcodecs            openembedded-core               IMAGES_FEATURES
+- E cryptsetup          meta-oe
+- E read-only-rootfs    openembedded-core               IMAGES_FEATURES
+- D overlayFS           meta-hipos
+- E systemd             meta-systemd
+- E udev                openembedded-core
+- E toybox              meta-oe
+- E dbus                openembedded-core
+- E udisks              meta-oe
+- E ntp                 openembedded-core
+- E cronie              openembedded-core
+- E pm-utils            openembedded-core
+- E sysklogd            openembedded-core
+- D powerd              meta-webos
+- D lxc                 meta-virtualization
+- E ipv6                openembedded-core
+- E tzdata              openembedded-core
+- E acl                 openembedded-core
+- E xattr               openembedded-core
+- E pam                 openembedded-core
+- E largefile           openembedded-core
+- E useradd             openembedded-core
+- E extrausers          openembedded-core
+- E usbhost             openembedded-core
+- E usbutils            openembedded-core
+- E usbgadget           openembedded-core
+
+Optimizations
+~~~~~~~~~~~~~
+
+- E prelink             openembedded-core
+- D preload		meta-exiguous
+- E zram                meta-oe
+
+Security
+~~~~~~~~
+
+- E selinux             meta-selinux                  IMAGE_INSTALL
+- E iptables            openembedded-core
+- D fail2ban            meta-exiguous
+- D denyhost            meta-exiguous
+- D checksecurity       meta-security
+- D nikto               meta-security
+- D nmap                meta-security
+
+Network
+~~~~~~~
+
+- D ipxe                meta-virtualization
+- E nfs                 openembedded-core             IMAGE_FEATURES
+- E dropbear            openembedded-core             IMAGE_INSTALL
+- E samba               meta-oe
+- E avahi               openembedded-core
+- D freelan (VPN)       meta-exiguous
+
+Backup/Sync
+~~~~~~~~~~~
+
+- D rsync               openembedded-core
+- D unison              meta-exiguous
+
+Tests
+~~~~~
+
+- D ptests              openembedded-core             IMAGE_INSTALL
+- D ptest-runner        openembedded-core
+- D pm-qa               meta-oe
+
+-----------------------------------------------------------------------------
+Additional features for stations
+-----------------------------------------------------------------------------
+
+- D sudo                openembedded-core
+- D package-management  openembedded-core             IMAGE_FEATURES
+- D waylan              openembedded-core
+- D xfdesktop           meta-xfce
+- ...
+
+-----------------------------------------------------------------------------
+Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
+-----------------------------------------------------------------------------
+
+Router Freelan
+~~~~~~~~~~~~~~
+
+- D freeland (VPN)      meta-exiguous
+
+Router TCP/IP
+~~~~~~~~~~~~~
+
+- D ipsec-tools         meta-networking
+- D iproute2            openembedded-core
+- D tcp-wrappers        openembedded-core
+- D rng-tools           meta-oe
+
+Router PPP
+~~~~~~~~~~
+
+- D ppp                 openembedded-core
+- D rp-pppoe            meta-networking
+
+Server DNS
+~~~~~~~~~~
+
+- D bind                openembedded-core
+
+Proxy
+~~~~~
+
+- D squid               meta-networking
+
+Reverse Proxy
+~~~~~~~~~~~~~
+
+- D nginx               meta-webserver
+- D varnish             meta-exiguous
+
+-----------------------------------------------------------------------------
+Additional features for NAS:
+-----------------------------------------------------------------------------
+
+System
+~~~~~~
+
+ - D mdadm              openembedded-core
+
+Newsgroups
+~~~~~~~~~~
+
+- D sabnzbd             meta-exiguous
+- D headphones          meta-exiguous
+- D sickbeard           meta-exiguous
+- D couchpotato         meta-exiguous
+
+torrent
+~~~~~~~
+- D ?
+
+-----------------------------------------------------------------------------
+Additional features for CI:
+-----------------------------------------------------------------------------
+
+- D git                 openembedded-core
+- D buildbot            meta-exiguous
+- D gerrit              meta-exiguous
+- D opengrok            opengrok
+- D git-repo            git-repo
 
 ==============
 Image features
 ==============
 
-- read-only root filesystem
-- openssh is replaced by dropbear
+- Read-only root filesystem
+- Kernel modules
+- Openssh is replaced by Dropbear
 - Enable hardware codecs by default
 - Enable NFS server by default
 - Enable SELinux by default

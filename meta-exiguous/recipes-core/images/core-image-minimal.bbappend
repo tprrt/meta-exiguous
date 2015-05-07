@@ -7,4 +7,8 @@ IMAGE_FEATURES_append = " ssh-server-dropbear"
 IMAGE_FEATURES_append = " hwcodecs read-only-rootfs nfs-server"
 
 IMAGE_INSTALL_remove = "packagegroup-core-ssh-openssh"
-IMAGE_INSTALL_append = " kernel-modules packagegroup-core-selinux packagegroup-core-ssh-dropbear"
+IMAGE_INSTALL_append = " \
+   kernel-modules \
+   packagegroup-core-selinux \
+   packagegroup-core-ssh-dropbear \
+"
