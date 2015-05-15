@@ -60,9 +60,9 @@ Distro features
 - RPM packages manager is replaced by Debian packages manager
 - Enable some features by default: ipv6, iptables, selinux, avahi, nfs...
 
------------------------------------------------------------------------------
+---------------
 Common features
------------------------------------------------------------------------------
+---------------
 
 System
 ~~~~~~
@@ -136,9 +136,9 @@ Tests
 - D ptest-runner        openembedded-core
 - D pm-qa               meta-oe
 
------------------------------------------------------------------------------
+--------------------------------
 Additional features for stations
------------------------------------------------------------------------------
+--------------------------------
 
 - D sudo                openembedded-core
 - D package-management  openembedded-core             IMAGE_FEATURES
@@ -146,9 +146,9 @@ Additional features for stations
 - D xfdesktop           meta-xfce
 - ...
 
------------------------------------------------------------------------------
+---------------------------------------------------------------------
 Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
------------------------------------------------------------------------------
+---------------------------------------------------------------------
 
 Router Freelan
 ~~~~~~~~~~~~~~
@@ -185,9 +185,9 @@ Reverse Proxy
 - D nginx               meta-webserver
 - D varnish             meta-exiguous
 
------------------------------------------------------------------------------
-Additional features for NAS:
------------------------------------------------------------------------------
+---------------------------
+Additional features for NAS
+---------------------------
 
 System
 ~~~~~~
@@ -206,9 +206,9 @@ torrent
 ~~~~~~~
 - D ?
 
------------------------------------------------------------------------------
-Additional features for CI:
------------------------------------------------------------------------------
+--------------------------
+Additional features for CI
+--------------------------
 
 - D git                 openembedded-core
 - D buildbot            meta-exiguous
@@ -310,6 +310,7 @@ Supported machines
 Contributing
 ============
 
+------------
 Mailing List
 ------------
 
@@ -331,6 +332,7 @@ To send changes to mailing list use something like:
   git send-email -M -1 --to openembedded-devel@lists.openembedded.org \
       --subject-prefix=meta-exiguous][PATCH
 
+------------------
 Forking via github
 ------------------
 
@@ -343,6 +345,7 @@ and has a really good web GUI.
 
 Layer Maintainer: `Thomas Perrot <thomas.perrot@tupi.fr>`_
 
+---------------------------------------
 Adding the Exiguous layer to your build
 ---------------------------------------
 
