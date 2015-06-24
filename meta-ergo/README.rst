@@ -43,78 +43,53 @@ This layer depends on:
 Machines configuration
 ======================
 
-:ERgO v0.1:
+:v0.1:
  - DFRobot Romeo v1 (Arduino sketch)
-  - Bluetooth
-  - Motor bridge
-  - 3x ultra sensors
-  - sensors
-   - TODO
+ - 4x DC geared Motors
+ - Bluetooth
+ - 3x Ultrasonic sensors
+ - Ambient sensors
 
-:ERgO v0.2:
- - Raspberry PI rev.B (BuildRoot system)
+:v0.2:
+ - Raspberry PI rev.B (OS based on BuildRoot)
+ - DFRobot Romeo v1 USB serial (Firmware based on an Arduino sketch)
+ - 4x DC geared Motors
+ - 3x Ultrasonic sensors
  - I2C to GPIO modules
-  - Digital sensors
-   - TODO
-  - Analog sensors
-   - TODO
- - DFRobot Romeo v1 USB serial (firmware based on an Arduino sketch)
-  - Bluetooth
-  - Motor bridge
-  - 3x ultra sensors
-  - sensors
-   - TODO
+ - Ambient sensors
 
-:ERgO v1:
- - Raspberry PI rev.B
+:v1.0:
+ - Raspberry PI rev.B (OS based on OpenEmbedded/Yocto)
+ - DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
+ - 4x DC geared Motors
+ - 3x Ultrasonic sensors
  - I2C to GPIO modules
-  - Digital sensors
-   - TODO
-  - Analog sensors
-   - TODO
- - DFRobot Romeo v1 USB serial (firmware based on chibiOS + specific kernel driver)
-  - Motor bridge
-  - 3x ultra sensors
-  - sensors
-   - TODO
+ - Ambient sensors
 
-:ERgO v2:
- - Beagle Bone Black rev.B
+:v2.0:
+ - Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto )
+ - DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
+ - 4x DC geared Motors
+ - 3x Ultrasonic sensors
  - I2C to GPIO modules
-  - Digital sensors
-   - TODO
-  - Analog sensors
-   - TODO
- - DFRobot Romeo v1 over USB serial (firmware based on ChibiOS + specific kernel driver)
-  - Motor bridge
-  - 3x ultra sensors
-  - sensors
-   - TODO
+ - Ambient sensors
 
-:ERgO v2.1:
- - Beagle Bone Black rev.B
+:v2.1:
+ - Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto)
+ - DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
+ - 4x DC geared Motors
+ - 3x Ultrasonic sensors
+ - 3x IR Sensors
  - I2C to GPIO modules
-  - Digital sensors
-   - TODO
-  - Analog sensors
-   - 3x IR Sensors
- - DFRobot Romeo v1 over USB serial (firmware based on ChibiOS + specific kernel driver)
-  - Motor bridge
-  - 3x Ultra sensors
-  - sensors
-   - TODO
+ - Ambient sensors
 
-:ERgO v3 (next step):
- - DFRobot Romeo for Edison Controller
-  - Motor bridge
-  - 3x ultra sensors
-  - sensors
-   - TODO
+:v3.0 (next step):
+ - DFRobot Romeo for Edison Controller (OS based on OpenEmbedded/Yocto)
+ - 4x DC geared Motors
+ - 3x Ultrasonic sensors
+ - 3x IR Sensors
  - I2C to GPIO modules
-  - Digital sensors
-   - TODO
-  - Analog sensors
-   - TODO
+ - Ambient sensors
 
 ============
 Contributing
