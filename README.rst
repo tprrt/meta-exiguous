@@ -7,15 +7,17 @@ Brief description of the layers
 Please see the respective README files in each layer subdirectories for more information.
 
 - **meta-exiguous**: Exiguous distribution layer (forward port, working in progress)
-- **meta-tupi**: Machines configuration layer (not uploaded, forward port doesn't started)
-- **scripts**: Useful tools to build... (forward port, working in progress)
+- **meta-tupi**: Machines configuration layer for homemade NAS, HTPC, router... (not uploaded, forward port doesn't started)
+- **meta-ergo**: Machines configuration layer for a exploration rover (not uploaded, forward port doesn't started)
+- **meta-heart**: Machines configuration layer for a home automation station (not uploaded, forward port doesn't started)
+- **scripts**: Useful tools to build, to flash... (forward port, working in progress)
 - **config**: combo-layer configurations to build Exiguous distributions
 
 To Do
 -----
 
-- Update CI tests to run them on github, travis and circle
-- Upstream stable distribution configuration
+- Update CI tests to run them on github, blessing travis, circle...
+- Upstream stable distribution configurations for all layers
 - Upstream machines configuration
 - Upstream new recipes
 
