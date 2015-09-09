@@ -17,9 +17,41 @@ To Do
 -----
 
 - Update CI tests to run them on github, blessing travis, circle...
-- Clean and upstream stable distribution configurations for all layers
-- Clean and upstream machines configuration
+- Clean and upstream stable distribution layer
+- Clean and upstream machines layers
 - Clean and upstream new recipes
+
+- [common] Complete the list of packages for profiling
+
+- [exiguous] kernel SERIAL_CONSOLE configuration
+- [exiguous] kernel CMDLINE configuration (loglevel, earlyprintk....)
+- [exiguous] kernel CMDLINE_DEBUG  (loglevel, earlyprintk, crashkernel....)
+- [exiguous] kernel APPEND (netconsole...)
+- [exiguous] Enable overlayfs
+- [exiguous] Enable zram only if swap is enabled
+- [exiguous] Enable Exiguous debug symbols package
+- [exiguous] Enable Exiguous tests package
+- [exiguous] Enable ${PN}-features-station
+- [exiguous] Enable ${PN}-features-router
+- [exiguous] Enable ${PN}-features-nas
+- [exiguous] Enable ${PN}-features-mediaserver
+- [exiguous] Enable ${PN}-features-htpc
+- [exiguous] Enable ${PN}-features-ci
+- [exiguous] usbhost usbutils usbgadget
+- [exiguous] Add openssh to BACKFILL CONSIDERED... ?
+- [exiguous] Try to enable Exiguous on initramfs-kexecboot-klibc-image
+
+- [heart] Add the list of sensors
+
+- [script] Add all machines of tupi, ergo and heart layers
+- [script] Enable SAMA5D3 Xplained  to AVAILABLE_TARGETS
+- [script] Enable SABRE Lite Design to AVAILABLE_TARGETS
+- [script] Add a target to build all available target
+- [script] Add a target to run oe-selftest
+- [script] Add a target to update combination layer
+- [script] Add a target to publish images built
+- [script] Add a target to build world
+- [script] If the build is well finished then update combination layer and publish
 
 Upstreaming
 -----------

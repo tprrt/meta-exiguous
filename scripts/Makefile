@@ -33,9 +33,9 @@ OE_BUILD_EASY_SCRIPT := ${COMPO_DIR}/meta-exiguous/scripts/oe-build-easy
 DEFAULT_CONF_PATH := ${COMPO_DIR}/meta-exiguous/conf/$(basename ${MANIFEST}).conf
 CONF_PATH ?= ${DEFAULT_CONF_PATH}
 
-# FIXME Add all machines of tupi, ergo and heart layers
-# FIXME Enable SAMA5D3 Xplained  to AVAILABLE_TARGETS
-# FIXME Enable SABRE Lite Design to AVAILABLE_TARGETS
+# FIXME [script] Add all machines of tupi, ergo and heart layers
+# FIXME [script] Enable SAMA5D3 Xplained  to AVAILABLE_TARGETS
+# FIXME [script] Enable SABRE Lite Design to AVAILABLE_TARGETS
 AVAILABLE_TARGETS := qemux86-64 x86_64 raspberrypi raspberrypi2 beaglebone
 AVAILABLE_DISTROS := nodistro poky oe exiguous
 AVAILABLE_IMAGES := core-image-minimal

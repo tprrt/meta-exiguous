@@ -202,7 +202,7 @@ Tests
 Profiling
 ~~~~~~~~~
 
-.. # FIXME complete list of packages for profiling
+.. # FIXME [common] Complete the list of packages for profiling
 
 - E strace              ????                          (only for DEBUG)
 - E ltrace              ????                          (only for DEBUG)
