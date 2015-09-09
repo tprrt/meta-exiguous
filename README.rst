@@ -1,8 +1,8 @@
 ..
 .. -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
 
-Brief description of the layers
--------------------------------
+Brief description of the layers's collection
+--------------------------------------------
 
 Please see the respective README files in each layer subdirectories for more information.
 
@@ -17,9 +17,9 @@ To Do
 -----
 
 - Update CI tests to run them on github, blessing travis, circle...
-- Upstream stable distribution configurations for all layers
-- Upstream machines configuration
-- Upstream new recipes
+- Clean and upstream stable distribution configurations for all layers
+- Clean and upstream machines configuration
+- Clean and upstream new recipes
 
 Upstreaming
 -----------

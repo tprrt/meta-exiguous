@@ -13,42 +13,75 @@ Dependencies
 This layer depends on:
 
 :openembedded-core:
- - URI: git://git.openembedded.org/openembedded-core
- - branch: master
- - revision: HEAD
- - prio: default
+
+- URI: git://git.openembedded.org/openembedded-core
+- branch: master
+- revision: HEAD
+- prio: default
+
+:meta-openembedded:
+
+- URI: git://git.openembedded.org/meta-openembedded
+- layers: meta-oe, meta-networking, meta-python
+- branch: master
+- revision: HEAD
+- prio: default
 
 :meta-yocto:
- - URI: git://git.yoctoproject.org/meta-yocto
- - layers: meta-yocto, meta-yocto-bsp
- - branch: master
- - revision: HEAD
- - prio: default
 
-:meta-oe:
- - URI: git://git.openembedded.org/meta-openembedded
- - layers: meta-oe, meta-networking, meta-python
- - branch: master
- - revision: HEAD
- - prio: default
+- URI: git://git.yoctoproject.org/meta-yocto
+- layers: meta-yocto, meta-yocto-bsp
+- branch: master
+- revision: HEAD
+- prio: default
 
 :meta-selinux:
- - URI: git://git.yoctoproject.org/meta-selinux
- - branch: master
- - revision: HEAD
- - prio: default
+
+- URI: git://git.yoctoproject.org/meta-selinux
+- branch: master
+- revision: HEAD
+- prio: default
+
+:meta-virtualization:
+
+- URI: git://git.yoctoproject.org/meta-virtualization
+- branch: master
+- revision: HEAD
+- prio: default
+
+:meta-security:
+
+- URI: git://git.yoctoproject.org/meta-security
+- branch: master
+- revision: HEAD
+- prio: default
+
+.. :meta-measured:
+..
+.. - URI: git://git@github.com:flihp/meta-measured.git
+.. - branch: master
+.. - revision: HEAD
+.. - prio: default
 
 .. :meta-musl:
-..  - URI: git://git@github.com:kraj/meta-musl.git
-..  - branch: master
-..  - revision: HEAD
-..  - prio: default
+..
+.. - URI: git://git@github.com:kraj/meta-musl.git
+.. - branch: master
+.. - revision: HEAD
+.. - prio: default
+
+.. :meta-clang:
+..
+.. - URI: git://git@github.com:kraj/meta-clang.git
+.. - branch: master
+.. - revision: HEAD
+.. - prio: default
 
 .. :meta-ros:
-..  - URI: TODO
-..  - layers: TODO 
-..  - branch: master
-..  - revision: HEAD
+.. - URI: git://git@github.com:bmwcarit/meta-ros.git
+.. - branch: master
+.. - revision: HEAD
+.. - prio: default
 
 ===============
 Distro features
@@ -60,29 +93,24 @@ Distro features
 - RPM packages manager is replaced by Debian packages manager
 - Enable some features by default: ipv6, iptables, selinux, avahi, nfs...
 
----------------
-Common features
----------------
+-------------
+Core packages
+-------------
 
 System
 ~~~~~~
 
-- E kernel Linux v3.14  openembedded-core
 - E hwcodecs            openembedded-core               IMAGES_FEATURES
-- E cryptsetup          meta-oe
 - E read-only-rootfs    openembedded-core               IMAGES_FEATURES
-- D overlayFS           meta-hipos
-- E systemd             meta-systemd
+- E kernel Linux v3.14  openembedded-core
 - E udev                openembedded-core
-- E toybox              meta-oe
 - E dbus                openembedded-core
-- E udisks              meta-oe
+- E systemd             openembedded-core
+- E watchdog            openembedded-core
 - E ntp                 openembedded-core
 - E cronie              openembedded-core
-- E pm-utils            openembedded-core
 - E sysklogd            openembedded-core
-- D powerd              meta-webos
-- D lxc                 meta-virtualization
+- E acpid               openembedded-core
 - E ipv6                openembedded-core
 - E tzdata              openembedded-core
 - E acl                 openembedded-core
@@ -94,58 +122,114 @@ System
 - E usbhost             openembedded-core
 - E usbutils            openembedded-core
 - E usbgadget           openembedded-core
+- E bash                openembedded-core
+- E rsync               openembedded-core
+- E pm-utils            openembedded-core
+- E pigz                openembedded-core
+  
+- E bash-completion     meta-oe
+- E cryptsetup          meta-oe
+- E toybox              meta-oe
+- E udisks              meta-oe
+- E networkmanager      meta-oe
 
-Optimizations
+- E lxc                 meta-virtualization
+
+- D pkg-tpm             meta-measured
+
+Optimization
 ~~~~~~~~~~~~~
 
+- E ls-is-gold          openembedded-core
 - E prelink             openembedded-core
-- D preload		meta-exiguous
+
 - E zram                meta-oe
 
-Security
-~~~~~~~~
-
-- E selinux             meta-selinux                  IMAGE_INSTALL
-- E iptables            openembedded-core
-- D fail2ban            meta-exiguous
-- D denyhost            meta-exiguous
-- D checksecurity       meta-security
-- D nikto               meta-security
-- D nmap                meta-security
+- D preload		meta-exiguous
 
 Network
 ~~~~~~~
 
-- D ipxe                meta-virtualization
+- E iptables            openembedded-core
 - E nfs                 openembedded-core             IMAGE_FEATURES
 - E dropbear            openembedded-core             IMAGE_INSTALL
-- E samba               meta-oe
 - E avahi               openembedded-core
+
+- E samba               meta-oe
+
 - D freelan (VPN)       meta-exiguous
 
-Backup/Sync
-~~~~~~~~~~~
+Security
+~~~~~~~~
 
-- D rsync               openembedded-core
+- E security flags      openembedded-core
+
+- E audit               meta-selinux
+- E selinux             meta-selinux                  IMAGE_INSTALL
+
+- D fail2ban            meta-exiguous
+- D denyhost            meta-exiguous
+
+Backup
+~~~~~~
+
 - D unison              meta-exiguous
 
+--------------
+Extra packages
+--------------
+  
+Debug-tools
+~~~~~~~~~~~
+
+- E kexec-tools         openembedded-core             (only for DEBUG)
+- E gdbserver           openembedded-core             (only for DEBUG)
+- E gdb                 openembedded-core             (only for DEBUG)    
+
+Debug symbols
+~~~~~~~~~~~~~
+
+- D ???                 meta-exiguous                 (only for DEBUG)
+  
 Tests
 ~~~~~
 
-- D ptests              openembedded-core             IMAGE_INSTALL
-- D ptest-runner        openembedded-core
-- D pm-qa               meta-oe
+- D ptests              openembedded-core             (only for DEBUG)  IMAGE_INSTALL
+- D ptest-runner        openembedded-core             (only for DEBUG)
 
---------------------------------
-Additional features for stations
---------------------------------
+- D pm-qa               meta-oe                       (only for DEBUG)
+
+Profiling
+~~~~~~~~~
+
+.. # FIXME complete list of packages for profiling
+
+- E strace              ????                          (only for DEBUG)
+- E ltrace              ????                          (only for DEBUG)
+- E perf                ????                          (only for DEBUG)
+- E oprofile            ????                          (only for DEBUG)
+- E valgrind            ????                          (only for DEBUG)
+
+Security analysis
+~~~~~~~~~~~~~~~~~
+
+- E checksec            meta-security                 (only for DEBUG)
+- E checksecurity       meta-security                 (only for DEBUG)
+- E nikto               meta-security                 (only for DEBUG)
+- E nmap                meta-security                 (only for DEBUG)
+- E buck-security       meta-security                 (only for DEBUG)
+
+-------------------------------
+Additional features for station
+-------------------------------
 
 - D sudo                openembedded-core
 - D package-management  openembedded-core             IMAGE_FEATURES
 - D waylan              openembedded-core
-- D xfdesktop           meta-xfce
-- ...
 
+- D pkg-xfce-base       meta-xfce
+- D pkg-xfce-extended   meta-xfce
+  
 ---------------------------------------------------------------------
 Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
 ---------------------------------------------------------------------
@@ -192,7 +276,7 @@ Additional features for NAS
 System
 ~~~~~~
 
- - D mdadm              openembedded-core
+- D mdadm              openembedded-core
 
 Newsgroups
 ~~~~~~~~~~
@@ -202,9 +286,17 @@ Newsgroups
 - D sickbeard           meta-exiguous
 - D couchpotato         meta-exiguous
 
-torrent
-~~~~~~~
-- D ?
+------------------------------------
+Additional features for media server
+------------------------------------
+
+- D minidlna            meta-oe
+
+----------------------------
+Additional features for htpc
+----------------------------
+
+- D xbmc/kodi           meta-multimedia/meta-kodi
 
 --------------------------
 Additional features for CI
@@ -213,8 +305,8 @@ Additional features for CI
 - D git                 openembedded-core
 - D buildbot            meta-exiguous
 - D gerrit              meta-exiguous
-- D opengrok            opengrok
-- D git-repo            git-repo
+- D opengrok            meta-exiguous
+- D git-repo            meta-exiguous
 
 ==============
 Image features
@@ -227,84 +319,22 @@ Image features
 - Enable NFS server by default
 - Enable SELinux by default
 
-.. Package group features
-.. ----------------------
-
-.. - Common features
-.. - Linux kernel v3.14 LTS
-
-.. - toybox
-.. - pam
-.. - systemd
-
-.. - ipv6
-
-.. - prelink
-.. - preload
-.. - zram-config
-
-.. - fail2ban
-.. - denyhost
-
-.. - Freelan (VPN)
-
-.. - nfs share
-.. - samba share
-.. - sync home folded
-
-.. - LUKS
-.. - LXC
-
-.. - Embedded features
-.. - serial console
-.. - ro root + overlayFS
-
-.. - Real time features
-..  - Linux kernel v3.14 preempt-rt
-
-.. - Proxies features
-..  - Reverse proxy (Varnish)
-..  - Cache proxy (Nginx)
-
-.. - Router features
-..  - DNS
-..  - DHCP
-..  - Freelan server
-
-.. - Sabnzbd features
-..  - TODO
-
-.. - CI features
-..  - git
-..  - devtools
-..   - TODO
-..  - Buildbot
-..  - TODO
-
-.. - NAS features
-..  - TODO
-
-.. - HTPC features
-..  - TODO
-
-.. - Desktop features
-..  - packages management debian
-
-.. - Laptop features
-..  - TODO
-
-.. - ROS features
-..  - ROSc
-..  - TODO
-
 ==================
 Supported machines
 ==================
 
-- Qemu-(x86-64|arm|arm64|mips|ppc)
+:Current:
+
+- Qemu-(x86-64|arm|arm64)
 - generic-x86-64
 - Raspberry Pi rev. B
 - BeagleBone Black rev. B
+
+:Next:
+
+- SAMA5D3 Xplained
+- SABRE Lite Design (BD-SL-i.MX6)
+- DFRobot Romeo for Edison Controller
 
 ============
 Contributing
@@ -367,5 +397,7 @@ other layers needed. e.g.:
     /path/to/yocto/meta-networking \
     /path/to/yocto/meta-python \
     /path/to/yocto/meta-selinux \
+    /path/to/yocto/meta-virtualization \
+    /path/to/yocto/meta-security \
     /path/to/yocto/meta-exiguous \
     "

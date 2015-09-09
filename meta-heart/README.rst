@@ -12,47 +12,41 @@ Dependencies
 This layer depends on:
 
 :openembedded-core:
- - URI: git://git.openembedded.org/openembedded-core
- - branch: master
- - revision: HEAD
- - prio: default
+
+- URI: git://git.openembedded.org/openembedded-core
+- branch: master
+- revision: HEAD
+- prio: default
 
 :meta-yocto:
- - URI: git://git.yoctoproject.org/meta-yocto
- - layers: meta-yocto, meta-yocto-bsp
- - branch: master
- - revision: HEAD
- - prio: default
+
+- URI: git://git.yoctoproject.org/meta-yocto
+- layers: meta-yocto, meta-yocto-bsp
+- branch: master
+- revision: HEAD
+- prio: default
 
 :meta-raspberrypi:
- - URI: git://git.yoctoproject.org/meta-raspberrypi
- - branch: master
- - revision: HEAD
 
-:meta-beaglebone:
- - URI: TODO
- - branch: master
- - revision: HEAD
-
-:meta-intel:
- - URI: git://git.yoctoproject.org/meta-intel
- - branch: master
- - revision: HEAD
+- URI: git://git.yoctoproject.org/meta-raspberrypi
+- branch: master
+- revision: HEAD
 
 ======================
 Machines configuration
 ======================
 
 
-:Homemade openHab station:
- - Raspberry PI rev.B
- - I2C to GPIO modules
- - Digital sensors
-  - TODO
- - I2C sensors
-  - TODO
- - Analog sensors
-  - TODO
+:Homemade openHab station v1.0:
+
+.. # FIXME [heart] Add the list of sensors
+
+- Raspberry PI rev.B
+- SDcard ?? 64go
+- I2C to GPIO modules
+- Digital sensors
+- I2C sensors
+- Analog sensors
 
 ============
 Contributing
@@ -91,9 +85,9 @@ and has a really good web GUI.
 
 Layer Maintainer: `Thomas Perrot <thomas.perrot@tupi.fr>`_
 
-===================================
+====================================
 Adding the HEArT layer to your build
-===================================
+====================================
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -103,9 +97,12 @@ OE build tree, you can add it to the build system by adding the
 location of the Tupi layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
+::
+
   BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-raspberrypi \
     /path/to/yocto/meta-heart \
     "

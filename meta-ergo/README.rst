@@ -12,84 +12,108 @@ Dependencies
 This layer depends on:
 
 :openembedded-core:
- - URI: git://git.openembedded.org/openembedded-core
- - branch: master
- - revision: HEAD
- - prio: default
+
+- URI: git://git.openembedded.org/openembedded-core
+- branch: master
+- revision: HEAD
+- prio: default
 
 :meta-yocto:
- - URI: git://git.yoctoproject.org/meta-yocto
- - layers: meta-yocto, meta-yocto-bsp
- - branch: master
- - revision: HEAD
- - prio: default
+
+- URI: git://git.yoctoproject.org/meta-yocto
+- layers: meta-yocto, meta-yocto-bsp
+- branch: master
+- revision: HEAD
+- prio: default
 
 :meta-raspberrypi:
- - URI: git://git.yoctoproject.org/meta-raspberrypi
- - branch: master
- - revision: HEAD
 
-:meta-beaglebone:
- - URI: TODO
- - branch: master
- - revision: HEAD
+- URI: git://git.yoctoproject.org/meta-raspberrypi
+- branch: master
+- revision: HEAD
 
-:meta-intel:
- - URI: git://git.yoctoproject.org/meta-intel
- - branch: master
- - revision: HEAD
+:meta-ti:
+
+- URI: git://git.yoctoproject.org/meta-ti
+- branch: master
+- revision: HEAD
+
+.. :meta-intel:
+..
+.. - URI: git://git.yoctoproject.org/meta-intel
+.. - branch: master
+.. - revision: HEAD
 
 ======================
 Machines configuration
 ======================
 
 :v0.1:
- - DFRobot Romeo v1 (Arduino sketch)
- - 4x DC geared Motors
- - Bluetooth
- - 3x Ultrasonic sensors
- - Ambient sensors
+
+- DFRobot Romeo v1 (Arduino sketch)
+- 4x DC geared Motors
+- Bluetooth
+- 3x Ultrasonic sensors
+- Ambient sensors
 
 :v0.2:
- - Raspberry PI rev.B (OS based on BuildRoot)
- - DFRobot Romeo v1 USB serial (Firmware based on an Arduino sketch)
- - 4x DC geared Motors
- - 3x Ultrasonic sensors
- - I2C to GPIO modules
- - Ambient sensors
+
+- Raspberry PI rev.B (OS based on BuildRoot)
+- DFRobot Romeo v1 USB serial (Firmware based on an Arduino sketch)
+- 4x DC geared Motors
+- 3x Ultrasonic sensors
+- I2C to GPIO modules
+- Ambient sensors
 
 :v1.0:
- - Raspberry PI rev.B (OS based on OpenEmbedded/Yocto)
- - DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
- - 4x DC geared Motors
- - 3x Ultrasonic sensors
- - I2C to GPIO modules
- - Ambient sensors
+
+- Raspberry PI rev.B (OS based on OpenEmbedded/Yocto)
+- SDcard ?? 64go
+- DFRobot Romeo v1 USB serial (Firmware based on an Arduino sketch)
+- 4x DC geared Motors
+- 3x Ultrasonic sensors
+- I2C to GPIO modules
+- Ambient sensors
+
+:v1.1:
+
+- Raspberry PI rev.B (OS based on OpenEmbedded/Yocto)
+- SDcard ?? 64go
+- DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
+- 4x DC geared Motors
+- 3x Ultrasonic sensors
+- I2C to GPIO modules
+- Ambient sensors
 
 :v2.0:
- - Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto )
- - DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
- - 4x DC geared Motors
- - 3x Ultrasonic sensors
- - I2C to GPIO modules
- - Ambient sensors
 
-:v2.1:
- - Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto)
- - DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
- - 4x DC geared Motors
- - 3x Ultrasonic sensors
- - 3x IR Sensors
- - I2C to GPIO modules
- - Ambient sensors
+- Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto )
+- micro SDcard ?? 32go
+- DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
+- 4x DC geared Motors
+- 3x Ultrasonic sensors
+- I2C to GPIO modules
+- Ambient sensors
+
+:v2.1 (current):
+
+- Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto)
+- micro SDcard ?? 32go
+- DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
+- 4x DC geared Motors
+- 3x Ultrasonic sensors
+- 3x IR Sensors
+- I2C to GPIO modules
+- Ambient sensors
 
 :v3.0 (next step):
- - DFRobot Romeo for Edison Controller (OS based on OpenEmbedded/Yocto)
- - 4x DC geared Motors
- - 3x Ultrasonic sensors
- - 3x IR Sensors
- - I2C to GPIO modules
- - Ambient sensors
+
+- DFRobot Romeo for Edison Controller (OS based on OpenEmbedded/Yocto)
+- 4x DC geared Motors
+- 3x Ultrasonic sensors
+- 3x IR Sensors
+- I2C to GPIO modules
+- Ambient sensors
 
 ============
 Contributing
@@ -140,9 +164,12 @@ OE build tree, you can add it to the build system by adding the
 location of the ERgO layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
+::
+
   BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
-    /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-raspberrypi \
+    /path/to/yocto/meta-ti \
     /path/to/yocto/meta-ergo \
     "

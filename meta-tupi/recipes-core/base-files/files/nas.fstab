@@ -1,0 +1,4 @@
+# Merge to distro fstab
+
+/dev/mapper/data-vg    /mnt/data               auto        defaults,noatime,rw                 0  0
+/dev/mapper/swap-vg    none                    swap        sw                                  0  0

@@ -1,0 +1,3 @@
+# Merge to distro fstab
+
+/dev/mapper/swap-vg    none                    swap        sw                                  0  0
