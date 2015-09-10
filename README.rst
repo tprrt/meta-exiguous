@@ -21,8 +21,8 @@ To Do
 - Clean and upstream machines layers
 - Clean and upstream new recipes
 
+- [heart] Add the list of sensors
 - [common] Complete the list of packages for profiling
-
 - [exiguous] kernel SERIAL_CONSOLE configuration
 - [exiguous] kernel CMDLINE configuration (loglevel, earlyprintk....)
 - [exiguous] kernel CMDLINE_DEBUG  (loglevel, earlyprintk, crashkernel....)
@@ -40,12 +40,6 @@ To Do
 - [exiguous] usbhost usbutils usbgadget
 - [exiguous] Add openssh to BACKFILL CONSIDERED... ?
 - [exiguous] Try to enable Exiguous on initramfs-kexecboot-klibc-image
-
-- [heart] Add the list of sensors
-
-- [script] Add all machines of tupi, ergo and heart layers
-- [script] Enable SAMA5D3 Xplained  to AVAILABLE_TARGETS
-- [script] Enable SABRE Lite Design to AVAILABLE_TARGETS
 - [script] Add a target to build all available target
 - [script] Add a target to run oe-selftest
 - [script] Add a target to update combination layer

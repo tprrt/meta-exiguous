@@ -16,7 +16,7 @@ tmpfs                  /var/volatile           tmpfs       defaults             
 
 tmpfs                  /tmp                    tmpfs       nodev,nosuid                        0  0
 
-/dev/mapper/root-vg    /                       auto        defaults,noatime,ro                 0  1
+# /dev/mapper/root-vg    /                       auto        defaults,noatime,ro                 0  1
 
 # FIXME [exiguous] Enable overlayfs
 # /dev/mapper/root-vg    /mnt/root               auto        defaults,noatime,ro                 0  1
