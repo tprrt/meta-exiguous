@@ -68,7 +68,7 @@ Machines configuration
   - Expansions headers, Arduino R3 Shield compatible
   - Power measurement straps
 
-:Homemade HTPC/Game emulator v1.0:
+:Homemade Home Theatre PC/Game emulator v1.0:
 
 - Raspberry PI rev.B
 - SDcard ?? 64go

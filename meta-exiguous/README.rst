@@ -87,12 +87,6 @@ This layer depends on:
 Distro features
 ===============
 
-- kernel Linux v3.14 LTSI
-- Sysvinit is replaced by Systemd
-- Busybox is replaced by Toybox
-- RPM packages manager is replaced by Debian packages manager
-- Enable some features by default: ipv6, iptables, selinux, avahi, nfs...
-
 -------------
 Core packages
 -------------
@@ -100,47 +94,42 @@ Core packages
 System
 ~~~~~~
 
-- E hwcodecs            openembedded-core               IMAGES_FEATURES
-- E read-only-rootfs    openembedded-core               IMAGES_FEATURES
-- E kernel Linux v3.14  openembedded-core
-- E udev                openembedded-core
-- E dbus                openembedded-core
+- E hwcodecs            openembedded-core
+- E read-only-rootfs    openembedded-core
+- E kernel Linux v4.1   openembedded-core
 - E systemd             openembedded-core
+- E dbus                openembedded-core
 - E watchdog            openembedded-core
-- E ntp                 openembedded-core
 - E cronie              openembedded-core
 - E sysklogd            openembedded-core
 - E acpid               openembedded-core
-- E ipv6                openembedded-core
 - E tzdata              openembedded-core
 - E acl                 openembedded-core
-- E xattr               openembedded-core
-- E pam                 openembedded-core
-- E largefile           openembedded-core
-- E useradd             openembedded-core
-- E extrausers          openembedded-core
 - E usbhost             openembedded-core
 - E usbutils            openembedded-core
 - E usbgadget           openembedded-core
-- E bash                openembedded-core
 - E rsync               openembedded-core
 - E pm-utils            openembedded-core
 - E pigz                openembedded-core
-  
-- E bash-completion     meta-oe
+- E busybox             openembedded-core
+- E procps              openembedded-core
+- E kexec               openembedded-core
+
 - E cryptsetup          meta-oe
-- E toybox              meta-oe
 - E udisks              meta-oe
 - E networkmanager      meta-oe
+- E lvm2                meta-oe
 
-- E lxc                 meta-virtualization
+- D lxc                 meta-virtualization
 
 - D pkg-tpm             meta-measured
+
+- E makedumpfile        meta-exiguous (imported from meta-cgl)
+- E thermald            meta-exiguous
 
 Optimization
 ~~~~~~~~~~~~~
 
-- E ls-is-gold          openembedded-core
 - E prelink             openembedded-core
 
 - E zram                meta-oe
@@ -151,8 +140,7 @@ Network
 ~~~~~~~
 
 - E iptables            openembedded-core
-- E nfs                 openembedded-core             IMAGE_FEATURES
-- E dropbear            openembedded-core             IMAGE_INSTALL
+- E dropbear            openembedded-core
 - E avahi               openembedded-core
 
 - E samba               meta-oe
@@ -165,7 +153,7 @@ Security
 - E security flags      openembedded-core
 
 - E audit               meta-selinux
-- E selinux             meta-selinux                  IMAGE_INSTALL
+- E pkg-core-selinux    meta-selinux
 
 - D fail2ban            meta-exiguous
 - D denyhost            meta-exiguous
@@ -182,19 +170,20 @@ Extra packages
 Debug-tools
 ~~~~~~~~~~~
 
-- E kexec-tools         openembedded-core             (only for DEBUG)
 - E gdbserver           openembedded-core             (only for DEBUG)
 - E gdb                 openembedded-core             (only for DEBUG)    
+
+- E crash               meta-oe                       (only for DEBUG)
 
 Debug symbols
 ~~~~~~~~~~~~~
 
 - D ???                 meta-exiguous                 (only for DEBUG)
-  
+
 Tests
 ~~~~~
 
-- D ptests              openembedded-core             (only for DEBUG)  IMAGE_INSTALL
+- D ptests              openembedded-core             (only for DEBUG)
 - D ptest-runner        openembedded-core             (only for DEBUG)
 
 - D pm-qa               meta-oe                       (only for DEBUG)
@@ -202,13 +191,12 @@ Tests
 Profiling
 ~~~~~~~~~
 
-.. # FIXME [common] Complete the list of packages for profiling
+- E strace              openembedded-core             (only for DEBUG)
+- E perf                openembedded-core             (only for DEBUG)
+- E oprofile            openembedded-core             (only for DEBUG)
+- E valgrind            openembedded-core             (only for DEBUG)
 
-- E strace              ????                          (only for DEBUG)
-- E ltrace              ????                          (only for DEBUG)
-- E perf                ????                          (only for DEBUG)
-- E oprofile            ????                          (only for DEBUG)
-- E valgrind            ????                          (only for DEBUG)
+- E ltrace              meta-oe                       (only for DEBUG)
 
 Security analysis
 ~~~~~~~~~~~~~~~~~
@@ -223,13 +211,15 @@ Security analysis
 Additional features for station
 -------------------------------
 
-- D sudo                openembedded-core
-- D package-management  openembedded-core             IMAGE_FEATURES
-- D waylan              openembedded-core
+- E sudo                openembedded-core
+- E wayland             openembedded-core
 
-- D pkg-xfce-base       meta-xfce
-- D pkg-xfce-extended   meta-xfce
-  
+- E pkg-xfce-base       meta-xfce
+- E pkg-xfce-extended   meta-xfce
+- E pkg-xfce-multimedia meta-xfce
+
+- D byobu               meta-exiguous
+
 ---------------------------------------------------------------------
 Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
 ---------------------------------------------------------------------
@@ -242,15 +232,18 @@ Router Freelan
 Router TCP/IP
 ~~~~~~~~~~~~~
 
-- D ipsec-tools         meta-networking
 - D iproute2            openembedded-core
 - D tcp-wrappers        openembedded-core
+
 - D rng-tools           meta-oe
+
+- D ipsec-tools         meta-networking
 
 Router PPP
 ~~~~~~~~~~
 
 - D ppp                 openembedded-core
+
 - D rp-pppoe            meta-networking
 
 Server DNS
@@ -267,7 +260,15 @@ Reverse Proxy
 ~~~~~~~~~~~~~
 
 - D nginx               meta-webserver
+
+- D memcached           meta-networking
+
 - D varnish             meta-exiguous
+
+IRC Bouncer
+~~~~~~~~~~~
+
+- D znc                 meta-networking
 
 ---------------------------
 Additional features for NAS
@@ -303,21 +304,11 @@ Additional features for CI
 --------------------------
 
 - D git                 openembedded-core
+
 - D buildbot            meta-exiguous
 - D gerrit              meta-exiguous
 - D opengrok            meta-exiguous
 - D git-repo            meta-exiguous
-
-==============
-Image features
-==============
-
-- Read-only root filesystem
-- Kernel modules
-- Openssh is replaced by Dropbear
-- Enable hardware codecs by default
-- Enable NFS server by default
-- Enable SELinux by default
 
 ==================
 Supported machines
@@ -325,7 +316,7 @@ Supported machines
 
 :Current:
 
-- Qemu-(x86-64|arm|arm64)
+- qemux86-64
 - generic-x86-64
 - Raspberry Pi rev. B
 - BeagleBone Black rev. B
@@ -395,6 +386,7 @@ other layers needed. e.g.:
     /path/to/yocto/meta-yocto-bsp \
     /path/to/yocto/meta-oe \
     /path/to/yocto/meta-networking \
+    /path/to/yocto/meta-systemd \
     /path/to/yocto/meta-python \
     /path/to/yocto/meta-selinux \
     /path/to/yocto/meta-virtualization \

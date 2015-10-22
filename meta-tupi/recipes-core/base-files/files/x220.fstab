@@ -1,3 +1,6 @@
+#
+# -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
+
 # Merge to distro fstab
 
 /dev/mapper/swap-vg    none                    swap        sw                                  0  0

@@ -6,46 +6,20 @@ Brief description of the layers's collection
 
 Please see the respective README files in each layer subdirectories for more information.
 
-- **meta-exiguous**: Exiguous distribution layer (forward port, working in progress)
-- **meta-tupi**: Machines configuration layer for homemade NAS, HTPC, router... (not uploaded, forward port doesn't started)
-- **meta-ergo**: Machines configuration layer for a exploration rover (not uploaded, forward port doesn't started)
-- **meta-heart**: Machines configuration layer for a home automation station (not uploaded, forward port doesn't started)
-- **scripts**: Useful tools to build, to flash... (forward port, working in progress)
+- **meta-exiguous**: Exiguous distribution layer and recipes can be pushed to OpenEmbedded
+- **meta-tupi**: Machines configuration layer for homemade NAS, HTPC, router...
+- **meta-ergo**: Machines configuration layer for a exploration rover
+- **meta-heart**: Machines configuration layer for a home automation station
+- **scripts**: Useful tools to build, to flash...
 - **config**: combo-layer configurations to build Exiguous distributions
 
 To Do
 -----
 
 - Update CI tests to run them on github, blessing travis, circle...
-- Clean and upstream stable distribution layer
-- Clean and upstream machines layers
-- Clean and upstream new recipes
-
-- [heart] Add the list of sensors
-- [common] Complete the list of packages for profiling
-- [exiguous] kernel SERIAL_CONSOLE configuration
-- [exiguous] kernel CMDLINE configuration (loglevel, earlyprintk....)
-- [exiguous] kernel CMDLINE_DEBUG  (loglevel, earlyprintk, crashkernel....)
-- [exiguous] kernel APPEND (netconsole...)
-- [exiguous] Enable overlayfs
-- [exiguous] Enable zram only if swap is enabled
-- [exiguous] Enable Exiguous debug symbols package
-- [exiguous] Enable Exiguous tests package
-- [exiguous] Enable ${PN}-features-station
-- [exiguous] Enable ${PN}-features-router
-- [exiguous] Enable ${PN}-features-nas
-- [exiguous] Enable ${PN}-features-mediaserver
-- [exiguous] Enable ${PN}-features-htpc
-- [exiguous] Enable ${PN}-features-ci
-- [exiguous] usbhost usbutils usbgadget
-- [exiguous] Add openssh to BACKFILL CONSIDERED... ?
-- [exiguous] Try to enable Exiguous on initramfs-kexecboot-klibc-image
-- [script] Add a target to build all available target
-- [script] Add a target to run oe-selftest
-- [script] Add a target to update combination layer
-- [script] Add a target to publish images built
-- [script] Add a target to build world
-- [script] If the build is well finished then update combination layer and publish
+- Clean and push a stable distribution layer
+- Clean and push machines layers
+- Clean and push new recipes
 
 Upstreaming
 -----------

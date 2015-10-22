@@ -1,35 +1,50 @@
+AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-exiguous:"
 
-LINUX_VERSION_EXTENSION ?= "-exiguous-${LINUX_KERNEL_TYPE}"
+LINUX_VERSION_EXTENSION = "-exiguous-${LINUX_KERNEL_TYPE}"
 
-SRC_URI += "file://security.cfg \
-            file://scripts.cfg \
-            file://loop.cfg \
+INITRAMFS_IMAGE = "exiguous-image-initramfs"
+
+SRC_URI += "file://embedded.cfg \
+            file://watchdog.cfg \
+            file://security.cfg \
+            file://initramfs.cfg \
+            file://earlyprintk.cfg \
             file://netconsole.cfg \
-	    file://earlyprintk.cfg \
-	    file://kdump.cfg \
-	    \
-	    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "file://debug.cfg", "", d)} \
+            file://memtest.cfg \
+            file://kdump.cfg \
+            file://loop.cfg \
+            file://uptime.cfg \
+            \
+            ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "file://systemd.cfg", "", d)} \
+            \
+            ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "file://debug.cfg", "", d)} \
            "
-
-# FIXME [exiguous] kernel SERIAL_CONSOLE configuration
-# FIXME [exiguous] kernel CMDLINE configuration (loglevel, earlyprintk....)
-# FIXME [exiguous] kernel CMDLINE_DEBUG  (loglevel, earlyprintk, crashkernel....)
-# FIXME [exiguous] kernel APPEND (netconsole...)
 
 # NB: APPEND being the name of the variable that is passed to the kernel by the
 # boot loader.
 
-# kdump
-# APPEND += "maxcpus=1 reset_devices crashkernel=512M-2G:64M,2G-:128M"
-# APPEND_(i386|x86_64|ia64) += "irqpoll"
-
+# FIXME [exiguous] Add netconsole to the kernel cmdline
 # netconsole
-# TUPI_NETCONSOLE_PORT ?= "6666"
-# TUPI_NETCONSOLE_IP ?= "192.168.0.10"
-# TUPI_NETCONSOLE_DEVICE ?= "eth0"
-# APPEND += "netconsole=${TUPI_NETCONSOLE_PORT}@${TUPI_NETCONSOLE_IP}/${TUPI_NETCONSOLE_DEVICE},${TUPI_NETCONSOLE_PORT}@${TUPI_NETCONSOLE_IP}/${TUPI_NETCONSOLE_DEVICE}"
+# NETCONSOLE_PORT ?= "6666"
+# NETCONSOLE_IP ?= "192.168.0.10"
+# NETCONSOLE_DEVICE ?= "eth0"
+# CMDLINE += "netconsole=${NETCONSOLE_PORT}@${NETCONSOLE_IP}/${NETCONSOLE_DEVICE},${NETCONSOLE_PORT}@${NETCONSOLE_IP}/${NETCONSOLE_DEVICE}"
 
-# do_kernel_configme_append() {
-#     sed -i -e "s|^CONFIG_CMDLINE=.*$|CONFIG_CMDLINE=\"${CMDLINE}\"|" ${KBUILD_OUTPUT}/.config
-# }
+CMDLINE = " \
+    console=${SERIAL_CONSOLE} \
+    \
+    init=/init \
+    earlyprintk=${SERIAL_CONSOLE} \
+    panic=10 \
+    memtest=5 \
+    crashkernel=512M-2G:64M@64M,2G-:128M@128M \
+    \
+    loglevel=${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "7", "d", d)} \
+"
+
+do_kernel_configme_append() {
+	TRIMMED=$(echo ${CMDLINE}|tr -s ' ')
+	sed -i -e "s|^CONFIG_CMDLINE=.*$|CONFIG_CMDLINE=\"$TRIMMED\"|" ${KBUILD_OUTPUT}/.config
+}
