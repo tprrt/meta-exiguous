@@ -118,16 +118,18 @@ if [ -s /proc/vmcore ]; then
     sync
     umount $TMP_DIR
 
+    # FIXME [exiguous] Enable quick reboot
     # quick reboot
-    KEXEC_CMD="$KEXEC_CMD -l --command-line=\"$CMDLINE\""
+    # KEXEC_CMD="$KEXEC_CMD -l --command-line=\"$CMDLINE\""
 
-    eval $KEXEC_CMD
+    # eval $KEXEC_CMD
 
-    if [ $? -ne 0 ] ; then
-        msg "ERROR: Failed to load the kernel !!!"
-    fi
+    # if [ $? -ne 0 ] ; then
+    #     msg "ERROR: Failed to load the kernel !!!"
+    # fi
 
-    kexec -e
+    # kexec -e
+    reboot -f 0
 
 else
     # Else, we've just booted and need to load the kdump kernel

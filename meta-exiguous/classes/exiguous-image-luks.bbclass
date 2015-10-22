@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=80
 
 inherit image_types
 
-# FIXME Complete exiguous-image.bbclass
+# FIXME [exiguous] Complete exiguous-image.bbclass
 
 # -----------------------------------------------------------------------------
 # COMMON

@@ -25,6 +25,10 @@ SRC_URI += "file://embedded.cfg \
 # NB: APPEND being the name of the variable that is passed to the kernel by the
 # boot loader.
 
+# FIXME [exiguous] Add earlyprintk to the kernel cmdline
+
+# FIXME [exiguous] Add console to the kernel cmdline
+
 # FIXME [exiguous] Add netconsole to the kernel cmdline
 # netconsole
 # NETCONSOLE_PORT ?= "6666"
@@ -33,10 +37,7 @@ SRC_URI += "file://embedded.cfg \
 # CMDLINE += "netconsole=${NETCONSOLE_PORT}@${NETCONSOLE_IP}/${NETCONSOLE_DEVICE},${NETCONSOLE_PORT}@${NETCONSOLE_IP}/${NETCONSOLE_DEVICE}"
 
 CMDLINE = " \
-    console=${SERIAL_CONSOLE} \
-    \
     init=/init \
-    earlyprintk=${SERIAL_CONSOLE} \
     panic=10 \
     memtest=5 \
     crashkernel=512M-2G:64M@64M,2G-:128M@128M \

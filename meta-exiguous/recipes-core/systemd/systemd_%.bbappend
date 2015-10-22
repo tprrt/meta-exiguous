@@ -42,5 +42,5 @@ FILES_${PN} += "${bindir}/coredumpctl"
 # Enable kdus
 # -----------------------------------------------------------------------------
 
-# FIXME Uncomment when kdbus will be available kernel side
+# FIXME [exiguous] Uncomment when kdbus will be available kernel side
 # EXTRA_OECONF := "${@'${EXTRA_OECONF}'.replace('--disable-kdbus', '--enable-kdbus')}"
