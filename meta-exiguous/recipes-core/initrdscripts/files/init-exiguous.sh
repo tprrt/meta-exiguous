@@ -131,7 +131,7 @@ if [ -s /proc/vmcore ]; then
     # kexec -e
     reboot -f 0
 
-else
+elif [ -s /proc/kcore ] ; then
     # Else, we've just booted and need to load the kdump kernel
     msg "Start kdump kernel"
 
