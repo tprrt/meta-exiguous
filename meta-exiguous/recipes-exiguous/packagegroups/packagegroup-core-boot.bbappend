@@ -3,6 +3,7 @@
 
 SUMMARY = "Exiguous minimal boot requirements"
 DESCRIPTION = "Redefine packagegroup-core-boot to remove features are not used by Exiguous"
+
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 LICENSE = "GPLv2"

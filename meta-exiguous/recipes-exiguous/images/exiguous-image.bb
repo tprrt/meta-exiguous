@@ -3,6 +3,7 @@
 
 SUMMARY = "Exiguous distribution image"
 DESCRIPTION = "Exiguous distribution image"
+
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 LICENSE = "GPLv2"

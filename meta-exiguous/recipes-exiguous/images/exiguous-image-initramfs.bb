@@ -3,6 +3,7 @@
 
 SUMMARY = "Exiguous image initramfs"
 DESCRIPTION = "Exiguous image initramfs"
+
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 LICENSE = "GPLv2"

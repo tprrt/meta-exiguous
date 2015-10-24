@@ -1,3 +1,6 @@
+#
+# -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
+
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"

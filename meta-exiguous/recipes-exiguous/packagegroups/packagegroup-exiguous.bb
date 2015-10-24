@@ -3,6 +3,7 @@
 
 SUMMARY = "Merge machine and distro options to create a basic machine task/package"
 DESCRIPTION = ""
+
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 LICENSE = "GPLv2"

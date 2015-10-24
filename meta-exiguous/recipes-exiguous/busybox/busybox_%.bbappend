@@ -1,12 +1,12 @@
+#
+# -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
+
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-# FIXME [exiguous] Remove syslog udhcpc httpd mdev hwclock from busybox configuration
-
 SRC_URI += "file://utils.cfg \
             file://no-udhcp.cfg \
-            file://no-syslog.cfg \
            "
 
 # Whether to split the suid apps into a seperate binary

@@ -1,5 +1,6 @@
 SUMMARY = "Exiguous image init script"
 DESCRIPTION = "Init script used to bootstrap Exgiguous, using kexec, makedumpfile..."
+
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 LICENSE = "GPLv2"
