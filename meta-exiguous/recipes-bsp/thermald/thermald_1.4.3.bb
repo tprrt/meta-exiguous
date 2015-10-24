@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ea8831610e926e2e469075b52bf08848"
 
 SECTION = "base"
 
-# DEPENDS = ""
+DEPENDS = "dbus dbus-glib libxml2"
 
 # RDEPENDS = ""
 
