@@ -63,7 +63,7 @@ RRECOMMENDS_${PN}-core-kernel = "kernel-module-af-packet"
 SUMMARY_${PN}-core-system = "Exiguous core system package"
 RDEPENDS_${PN}-core-system = " \
     acl tzdata procps \
-    busybox systemd watchdog cronie dbus udisks cryptsetup lvm2 \
+    busybox systemd watchdog cronie dbus udisks cryptsetup lvm2 lxc \
     rsync pigz \
     pm-utils acpid thermald \
     "

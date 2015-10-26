@@ -120,7 +120,7 @@ System
 - E networkmanager      meta-oe
 - E lvm2                meta-oe
 
-- D lxc                 meta-virtualization
+- E lxc                 meta-virtualization
 
 - D pkg-tpm             meta-measured
 
