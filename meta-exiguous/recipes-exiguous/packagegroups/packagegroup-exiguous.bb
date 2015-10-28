@@ -73,6 +73,7 @@ RDEPENDS_${PN}-core-system = " \
 SUMMARY_${PN}-core-optimization = "Exiguous core optimization package"
 RDEPENDS_${PN}-core-optimization = " \
     prelink \
+    preload \
     zram \
     "
 
@@ -89,6 +90,8 @@ SUMMARY_${PN}-core-security = "Exiguous core security package"
 RDEPENDS_${PN}-core-security = " \
     audit \
     packagegroup-core-selinux \
+    fail2ban \
+    denyhosts \
     "
 
 # -----------------------------------------------------------------------------

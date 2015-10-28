@@ -94,11 +94,15 @@ done
 KEXEC_CMD="kexec $TMP_DIR/vmlinuz --initrd=$INITRD"
 case "$(uname -m)" in
     arm*)
-        KEXEC_CMD="$KEXEC_CMD --type=zImage --dtb=$verpath/vmlinuz.dtb"
+        KEXEC_CMD="$KEXEC_CMD --type=zImage"
         ;;
     *)
         ;;
 esac
+
+if [ -s /proc/device-tree ]; then
+    kexec_cmd="$kexec_cmd --dtb=$(echo -n /proc/device-tree)"
+fi
 
 if [ -s /proc/vmcore ]; then
     # If we have a /proc/vmcore, then we just kdump'ed

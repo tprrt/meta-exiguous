@@ -134,7 +134,7 @@ Optimization
 
 - E zram                meta-oe
 
-- D preload		meta-exiguous
+- E preload		meta-exiguous
 
 Network
 ~~~~~~~
@@ -155,8 +155,8 @@ Security
 - E audit               meta-selinux
 - E pkg-core-selinux    meta-selinux
 
-- D fail2ban            meta-exiguous
-- D denyhost            meta-exiguous
+- E fail2ban            meta-exiguous
+- E denyhosts           meta-exiguous
 
 Backup
 ~~~~~~
