@@ -100,9 +100,10 @@ case "$(uname -m)" in
         ;;
 esac
 
-if [ -s /proc/device-tree ]; then
-    kexec_cmd="$kexec_cmd --dtb=$(echo -n /proc/device-tree)"
-fi
+# FIXME [exiguous] Identify the material to adjust the parameter in --dtb of kexec_cmd
+# if [ -s /proc/device-tree ]; then
+#     kexec_cmd="$kexec_cmd --dtb=????"
+# fi
 
 if [ -s /proc/vmcore ]; then
     # If we have a /proc/vmcore, then we just kdump'ed
