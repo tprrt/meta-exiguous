@@ -110,9 +110,9 @@ ALLOW_EMPTY_${PN}-extra = "1"
 
 SUMMARY_${PN}-extra-debug = "Exiguous extra debug package"
 RDEPENDS_${PN}-extra-debug = " \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "crash", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "gdbserver", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "gdb", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_DEBUG_TOOLS", "Yes", "crash", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_DEBUG_TOOLS", "Yes", "gdbserver", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_DEBUG_TOOLS", "Yes", "gdb", "", d)} \
     "
 ALLOW_EMPTY_${PN}-extra-debug = "1"
 
@@ -128,21 +128,21 @@ ALLOW_EMPTY_${PN}-extra-tests = "1"
 
 SUMMARY_${PN}-extra-profiling = "Exiguous extra profiling package"
 RDEPENDS_${PN}-extra-profiling = " \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "strace", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "ltrace", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "perf", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "oprofile", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "valgrind", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_PROFILING_TOOLS", "Yes", "strace", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_PROFILING_TOOLS", "Yes", "ltrace", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_PROFILING_TOOLS", "Yes", "perf", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_PROFILING_TOOLS", "Yes", "oprofile", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_PROFILING_TOOLS", "Yes", "valgrind", "", d)} \
     "
 ALLOW_EMPTY_${PN}-extra-profiling = "1"
 
 SUMMARY_${PN}-extra-security-analysis = "Exiguous extra security analysis package"
 RDEPENDS_${PN}-extra-security-analysis = " \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "checksec", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "nmap", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "nikto", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "checksecurity", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "buck-security", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_SECURITY_ANALYSIS_TOOLS", "Yes", "checksec", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_SECURITY_ANALYSIS_TOOLS", "Yes", "nmap", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_SECURITY_ANALYSIS_TOOLS", "Yes", "nikto", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_SECURITY_ANALYSIS_TOOLS", "Yes", "checksecurity", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_EXTRA_SECURITY_ANALYSIS_TOOLS", "Yes", "buck-security", "", d)} \
     "
 ALLOW_EMPTY_${PN}-extra-security = "1"
 
@@ -165,6 +165,9 @@ SUMMARY_${PN}-features-station = "Exiguous extra station package"
 RDEPENDS_${PN}-features-station = " \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "sudo", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "wayland", "", d)} \
+    ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "emacs", "", d)} \
+    ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "picocom", "", d)} \
+    ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "tree", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "packagegroup-xfce-base", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "packagegroup-xfce-extended", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "packagegroup-xfce-multimedia", "", d)} \
@@ -196,3 +199,13 @@ ALLOW_EMPTY_${PN}-features-htpc = "1"
 SUMMARY_${PN}-features-ci = "Exiguous extra ci package"
 RDEPENDS_${PN}-features-ci = ""
 ALLOW_EMPTY_${PN}-features-ci = "1"
+
+python __anonymous() {
+    all_extra = bb.data.getVar("EXIGUOUS_EXTRA_ALL", d, 1)
+    all = bb.data.getVar("EXIGUOUS_ALL", d, 1)
+    if all_extra == "Yes" or all == "Yes":
+        bb.data.setVar("EXIGUOUS_EXTRA_DEBUG_TOOLS", "Yes", d)
+        bb.data.setVar("EXIGUOUS_EXTRA_DEBUG_SYMBOLS", "Yes", d)
+        bb.data.setVar("EXIGUOUS_EXTRA_PROFILING_TOOLS", "Yes", d)
+        bb.data.setVar("EXIGUOUS_EXTRA_SECURITY_ANALYSIS_TOOLS", "Yes", d)
+}

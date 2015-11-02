@@ -27,12 +27,12 @@ FEATURE_PACKAGES_exiguous-ci = "packagegroup-exiguous-features-ci"
 
 # Specifies a list of distro-specific features to INSTALL to ALL Exiguous images.
 IMAGE_FEATURES_append = " \
-    ${@bb.utils.contains("EXIGUOUS_CI", "Yes", "exiguous-ci", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_HTPC", "Yes", "exiguous-htpc", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_MEDIASERVER", "Yes", "exiguous-mediaserver", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_NAS", "Yes", "exiguous-nas", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_ROUTER", "Yes", "exiguous-router", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_STATION", "Yes", "exiguous-station", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_FEATURES_CI", "Yes", "exiguous-ci", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_FEATURES_HTPC", "Yes", "exiguous-htpc", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_FEATURES_MEDIASERVER", "Yes", "exiguous-mediaserver", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_FEATURES_NAS", "Yes", "exiguous-nas", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_FEATURES_ROUTER", "Yes", "exiguous-router", "", d)} \
+    ${@bb.utils.contains("EXIGUOUS_FEATURES_STATION", "Yes", "exiguous-station", "", d)} \
 "
 
 USE_DEVFS = "1"
@@ -46,3 +46,15 @@ IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "syst
 export IMAGE_BASENAME = "exiguous-image"
 
 inherit image
+
+python __anonymous() {
+    all_features = bb.data.getVar("EXIGUOUS_FEATURES_ALL", d, 1)
+    all = bb.data.getVar("EXIGUOUS_ALL", d, 1)
+    if all_features == "Yes" or all == "Yes":
+        bb.data.setVar("EXIGUOUS_FEATURES_CI", "Yes", d)
+        bb.data.setVar("EXIGUOUS_FEATURES_HTPC", "Yes", d)
+        bb.data.setVar("EXIGUOUS_FEATURES_MEDIASERVER", "Yes", d)
+        bb.data.setVar("EXIGUOUS_FEATURES_NAS", "Yes", d)
+        bb.data.setVar("EXIGUOUS_FEATURES_ROUTER", "Yes", d)
+        bb.data.setVar("EXIGUOUS_FEATURES_STATION", "Yes", d)
+}
