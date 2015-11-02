@@ -22,7 +22,8 @@ This layer depends on:
 :meta-openembedded:
 
 - URI: git://git.openembedded.org/meta-openembedded
-- layers: meta-oe, meta-networking, meta-python
+- layers: meta-oe, meta-systemd
+- optional layers: meta-networking, meta-xfce, meta-python, meta-webserver, meta-multimedia
 - branch: master
 - revision: HEAD
 - prio: default
@@ -30,7 +31,7 @@ This layer depends on:
 :meta-yocto:
 
 - URI: git://git.yoctoproject.org/meta-yocto
-- layers: meta-yocto, meta-yocto-bsp
+- layers: meta-yocto
 - branch: master
 - revision: HEAD
 - prio: default
@@ -49,12 +50,14 @@ This layer depends on:
 - revision: HEAD
 - prio: default
 
-:meta-security:
+:meta-security (Optional):
 
 - URI: git://git.yoctoproject.org/meta-security
 - branch: master
 - revision: HEAD
 - prio: default
+
+*NB: Optionals layers are not need to build Exiguous base distribution*
 
 .. :meta-measured:
 ..
@@ -213,6 +216,10 @@ Additional features for station
 
 - E sudo                openembedded-core
 - E wayland             openembedded-core
+
+- E emacs               meta-oe
+- E picocom             meta-oe
+- E tree                meta-oe
 
 - E pkg-xfce-base       meta-xfce
 - E pkg-xfce-extended   meta-xfce
@@ -381,15 +388,12 @@ other layers needed. e.g.:
 ::
 
   BBLAYERS ?= " \
-    /path/to/yocto/meta \
-    /path/to/yocto/meta-yocto \
-    /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-oe \
-    /path/to/yocto/meta-networking \
-    /path/to/yocto/meta-systemd \
-    /path/to/yocto/meta-python \
-    /path/to/yocto/meta-selinux \
-    /path/to/yocto/meta-virtualization \
-    /path/to/yocto/meta-security \
-    /path/to/yocto/meta-exiguous \
+    /path/to/combination/meta \
+    /path/to/combination/meta-yocto \
+    /path/to/combination/meta-yocto-bsp \
+    /path/to/combination/meta-oe \
+    /path/to/combination/meta-systemd \
+    /path/to/combination/meta-selinux \
+    /path/to/combination/meta-virtualization \
+    /path/to/combination/meta-exiguous \
     "
