@@ -7,6 +7,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/linux-exiguous:"
 
 LINUX_VERSION_EXTENSION = "-exiguous-${LINUX_KERNEL_TYPE}"
 
+KCONFIG_MODE = "--allnoconfig"
+
+LINUX_KERNEL_TYPE = "tiny"
+
 INITRAMFS_IMAGE = "exiguous-image-initramfs"
 
 SRC_URI += "file://embedded.cfg \
