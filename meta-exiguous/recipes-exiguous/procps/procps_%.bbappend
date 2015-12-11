@@ -20,4 +20,12 @@ do_install_append() {
             echo $current >> ${D}${sysconfdir}/sysctl.conf
         fi
     done
+
+    # Comment unavailable NMI on ARM
+    if ${@bb.utils.contains("TUNE_FEATURES", "arm", "true", "false", d)} ; then
+        sed -i '/panic_on_io_nmi/s/^/#/' ${D}${sysconfdir}/sysctl.conf
+        sed -i '/panic_on_unrecovered_nmi/s/^/#/' ${D}${sysconfdir}/sysctl.conf
+        sed -i '/hung_task_panic/s/^/#/' ${D}${sysconfdir}/sysctl.conf
+        sed -i '/softlockup_panic/s/^/#/' ${D}${sysconfdir}/sysctl.conf
+    fi
 }
