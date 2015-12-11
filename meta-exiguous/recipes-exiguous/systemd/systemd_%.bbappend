@@ -7,15 +7,14 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 # FIXME [exiguous] Enable systemd configuration !!!!!
 
-# SRC_URI_append = " \
-#                   file://50-default.conf \
-#                   file://system.conf \
-#                   file://user.conf \
-#                   file://journald.conf \
-#                 "
+# SRC_URI_append = " file://50-default.conf \
+#                    file://system.conf \
+#                    file://user.conf \
+#                    file://journald.conf \
+#                  "
 
 # To disable timesyncd if chrony are enabled
-PACKAGECONFIG[audit] = "--disable-timesyncd,--enable-timesyncd,chrony"
+PACKAGECONFIG[chrony] = "--disable-timesyncd,--enable-timesyncd,chrony"
 
 # -----------------------------------------------------------------------------
 # Enable console-getty
