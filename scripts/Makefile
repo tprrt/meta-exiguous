@@ -120,9 +120,9 @@ check:
 .PHONY: components
 components:
 	repo init -u ${MANIFEST_URL} -b ${MANIFEST_BRANCH} -m ${MANIFEST}
-	repo sync -j${NPROC}
+	repo sync --force-sync -j${NPROC}
 	repo start $(basename ${MANIFEST}) --all || repo checkout $(basename ${MANIFEST})
-	repo sync -j${NPROC}
+	repo sync --force-sync -j${NPROC}
 
 ${COMPO_DIR}: components
 
