@@ -68,9 +68,17 @@ Machines configuration
   - Expansions headers, Arduino R3 Shield compatible
   - Power measurement straps
 
-:Homemade Home Theatre PC/Game emulator v1.0:
+:Homemade Home Theatre PC/Game emulator v1.0 (current):
 
 - Raspberry PI rev.B
+- SDcard ?? 64go
+- Logitech wireless keyboard and mouse
+- Dongle USB Bluetooth    
+- Playstation Dualshock 3
+
+:Homemade Home Theatre PC/Game emulator v2.0 (next step):
+
+- Raspberry PI 2 rev.B
 - SDcard ?? 64go
 - Logitech wireless keyboard and mouse
 - Dongle USB Bluetooth    

@@ -125,9 +125,9 @@ System
 
 - E lxc                 meta-virtualization
 
-- D pkg-tpm             meta-measured
+- D pkg-tpm             meta-exiguous (a fork of recipes from meta-measured)
 
-- E makedumpfile        meta-exiguous (imported from meta-cgl)
+- E makedumpfile        meta-exiguous (a fork of recipes from meta-cgl)
 - E thermald            meta-exiguous
 
 Optimization
@@ -181,7 +181,7 @@ Debug-tools
 Debug symbols
 ~~~~~~~~~~~~~
 
-- D ???                 meta-exiguous                 (only for DEBUG)
+- D exiguous-symbols   meta-exiguous                 (only for DEBUG)
 
 Tests
 ~~~~~
@@ -218,6 +218,7 @@ Additional features for station
 - E wayland             openembedded-core
 
 - E emacs               meta-oe
+- E irssi               meta-oe
 - E picocom             meta-oe
 - E tree                meta-oe
 
@@ -226,6 +227,8 @@ Additional features for station
 - E pkg-xfce-multimedia meta-xfce
 
 - D byobu               meta-exiguous
+- D meld                meta-exiguous
+- D chromium            meta-exiguous
 
 ---------------------------------------------------------------------
 Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
@@ -298,13 +301,16 @@ Newsgroups
 Additional features for media server
 ------------------------------------
 
-- D minidlna            meta-oe
+- D ReadyMedia          meta-oe
 
 ----------------------------
 Additional features for htpc
 ----------------------------
 
-- D xbmc/kodi           meta-multimedia/meta-kodi
+- D kodi                meta-exiguous (a fork of recipes from meta-kodi)
+- D libretro            meta-exiguous
+- D EmulationStation    meta-exiguous
+- D Bluetooth-tools     meta-exiguous (a fork of recipes from meta-tizen)
 
 --------------------------
 Additional features for CI
@@ -317,6 +323,8 @@ Additional features for CI
 - D opengrok            meta-exiguous
 - D git-repo            meta-exiguous
 
+.. - D autobuilder meta-exiguous
+
 ==================
 Supported machines
 ==================
@@ -324,12 +332,13 @@ Supported machines
 :Current:
 
 - qemux86-64
-- generic-x86-64
+- corei7-64
 - Raspberry Pi rev. B
 - BeagleBone Black rev. B
 
 :Next:
 
+- Raspberry Pi 2 rev. B
 - SAMA5D3 Xplained
 - SABRE Lite Design (BD-SL-i.MX6)
 - DFRobot Romeo for Edison Controller
@@ -390,7 +399,6 @@ other layers needed. e.g.:
   BBLAYERS ?= " \
     /path/to/combination/meta \
     /path/to/combination/meta-yocto \
-    /path/to/combination/meta-yocto-bsp \
     /path/to/combination/meta-oe \
     /path/to/combination/meta-systemd \
     /path/to/combination/meta-selinux \
