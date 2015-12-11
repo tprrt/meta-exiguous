@@ -36,7 +36,7 @@ do_mount() {
     [ ! -d $3 ] && mkdir -p $3
     mount -t $1 $2 $3 ; status=$?
     if [ $status -ne 0 ] ; then
-        msg "ERROR: Unable to mount $2 to $3"
+        msg "ERROR: Unable to mount $2 to $3 !!!"
     fi
     return $status
 }
@@ -45,7 +45,7 @@ do_move() {
     [ ! -d $2 ] && mkdir -p $2
     mount -n --move $1 $2 ; status=$?
     if [ $status -ne 0 ] ; then
-        msg "ERROR: Unable to move $1 to $2"
+        msg "ERROR: Unable to move $1 to $2 !!!"
     fi
     return $status
 }
@@ -88,6 +88,11 @@ for arg in $CMDLINE ; do
     esac
 done
 
+# Repair mechanism of filesystem
+# -----------------------------------------------------------------------------
+
+# FIXME [exiguous] Re-enable repair mechanism of filesystem
+
 # Kernel coredump mechanism
 # -----------------------------------------------------------------------------
 
@@ -101,11 +106,11 @@ case "$(uname -m)" in
 esac
 
 # FIXME [exiguous] Identify the material to adjust the parameter in --dtb of kexec_cmd
-# if [ -s /proc/device-tree ]; then
+# if [ -s /proc/device-tree ] ; then
 #     kexec_cmd="$kexec_cmd --dtb=????"
 # fi
 
-if [ -s /proc/vmcore ]; then
+if [ -s /proc/vmcore ] ; then
     # If we have a /proc/vmcore, then we just kdump'ed
     msg "Save kernel coredump"
 
@@ -113,24 +118,29 @@ if [ -s /proc/vmcore ]; then
     KDUMP_DIR="/mnt/kdump"
 
     do_mount $ROOT_FS_TYPE $ROOT_FS $TMP_DIR
+    if [ $? -ne 0 ] ; then
+        msg "Unable to mount the partition to save kernel coredump, restarts without saving"
+        # FIXME [exiguous] Enable quick reboot using kexec instead the reboot command
+        reboot -f 0
+    fi
 
     [ -d $TMP_DIR/var/spool/kerneldump ] && mkdir -p $TMP_DIR/var/spool/kerneldump
 
     # Save kernel panic coredump
     SUFFIX=$(date +"%Y%m%d%H%M")
-    [ -d /tmp] || mkdir /tmp
+    [ -d /tmp ] || mkdir /tmp
     makedumpfile -c -d 31 /proc/vmcore $TMP_DIR/var/spool/kerneldump/vmcore.$SUFFIX
     sync
     umount $TMP_DIR
 
-    # FIXME [exiguous] Enable quick reboot
+    # FIXME [exiguous] Enable quick reboot using kexec instead the reboot command
     # quick reboot
     # KEXEC_CMD="$KEXEC_CMD -l --command-line=\"$CMDLINE\""
 
     # eval $KEXEC_CMD
 
     # if [ $? -ne 0 ] ; then
-    #     msg "ERROR: Failed to load the kernel !!!"
+    #     msg "ERROR: Failed to load the kernel to reboot !!!"
     # fi
 
     # kexec -e
@@ -172,7 +182,7 @@ msg "Switching to real root filesystem..."
 
 do_move /proc $ROOT_DIR/proc
 
-do_move/sys $ROOT_DIR/sys
+do_move /sys $ROOT_DIR/sys
 
 do_move /dev $ROOT_DIR/dev
 
