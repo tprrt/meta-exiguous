@@ -166,6 +166,7 @@ RDEPENDS_${PN}-features-station = " \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "sudo", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "wayland", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "emacs", "", d)} \
+    ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "irssi", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "picocom", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "tree", "", d)} \
     ${@bb.utils.contains("IMAGE_FEATURES", "exiguous-station", "packagegroup-xfce-base", "", d)} \
