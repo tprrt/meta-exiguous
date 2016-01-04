@@ -21,13 +21,13 @@ SRC_URI += "file://embedded.cfg \
             file://uptime.cfg \
             file://tpm.cfg \
             file://nmi.cfg \
-	    file://crypto.cfg \
-	    \
-	    ${@bb.utils.contains("TUNE_FEATURES", "neon", "file://crypto-arm.cfg", "", d)} \
-	    \
-	    ${@bb.utils.contains("TUNE_FEATURES", "aarch64", "file://crypto-arm64.cfg", "", d)} \
-	    \
-	    ${@bb.utils.contains("TUNE_FEATURES", "corei7", "file://crypto-intel.cfg", "", d)} \
+            file://crypto.cfg \
+            \
+            ${@bb.utils.contains("TUNE_FEATURES", "neon", "file://crypto-arm.cfg", "", d)} \
+            \
+            ${@bb.utils.contains("TUNE_FEATURES", "aarch64", "file://crypto-arm64.cfg", "", d)} \
+            \
+            ${@bb.utils.contains("TUNE_FEATURES", "corei7", "file://crypto-intel.cfg", "", d)} \
             ${@bb.utils.contains("TUNE_FEATURES", "corei7", "file://microcode.cfg", "", d)} \
             \
             ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "file://systemd.cfg", "", d)} \
