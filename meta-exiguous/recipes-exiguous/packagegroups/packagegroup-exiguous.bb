@@ -57,8 +57,8 @@ RDEPENDS_${PN}-core = " \
     "
 
 SUMMARY_${PN}-core-kernel = "Exiguous core kernel package"
-RDEPENDS_${PN}-core-kernel = "kernel-modules"
-RRECOMMENDS_${PN}-core-kernel = "kernel-module-af-packet"
+RDEPENDS_${PN}-core-kernel = ""
+ALLOW_EMPTY_${PN}-core-kernel = "1"
 
 SUMMARY_${PN}-core-system = "Exiguous core system package"
 RDEPENDS_${PN}-core-system = " \
