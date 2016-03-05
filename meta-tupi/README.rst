@@ -52,60 +52,67 @@ Machines configuration
 :Homemade Router v1.0 (current):
 
 - Beagle Bone Black rev.B
-- micro SDcard ?? 32go
 - D-Link USB 2.0 Fast Ethernet Adapter (DUB-E100)
 
 :Homemade Router v2.0 (next step):
 
 - Atmel SAMA5D3 Xplained
   - SAMA5D36 Cortex-A5 Microprocessor
-  - 256MBytes DDR2
-  - 256MBytes NAND Flash
+  - DDR2 256MB
+  - NAND 256MB
   - LCD connectors
   - Dual Ethernet (GMAC + EMAC) with PHY and connectors
   - Three USB connectors (2 Host + 1 Device)
-  - 1x SD/eMMC and 1x MicroSD slots
+  - x1 SD/eMMC and x1 MicroSD slots
   - Expansions headers, Arduino R3 Shield compatible
   - Power measurement straps
 
-:Homemade Home Theatre PC/Game emulator v1.0 (current):
-
-- Raspberry PI rev.B
-- SDcard ?? 64go
-- Logitech wireless keyboard and mouse
-- Dongle USB Bluetooth    
-- Playstation Dualshock 3
-
-:Homemade Home Theatre PC/Game emulator v2.0 (next step):
+:Homemade Home Theatre PC/Game emulator v2.0 (current):
 
 - Raspberry PI 2 rev.B
-- SDcard ?? 64go
-- Logitech wireless keyboard and mouse
-- Dongle USB Bluetooth    
+- microSD 8GB ???
+- Keyboard and mouse Logitech MK520
+- Dongle USB Bluetooth
 - Playstation Dualshock 3
 
 :Homemade CI/NAS/Media server v1.0:
 
-- Intel i5-3570K
-- DDR3 8go
+- Intel i5-3570K 3.3GHz
+- Motherboard Asrock B75M-ITX
+  - Gigabit LAN 10/100/1000 Mb/s Realtek RTL8111E
+- x2 DDR3 4GB Gskill F3-1600C9D-8GAB
 - RAID 1 soft (root)
-  - 2x SSD Samsung 830 64go
+  - x2 SDD 64GB SSD Samsung 830
 - RAID 10 hardware (data)
-  - 4x Seagate 7200tr/min 2To
+  - RAID Controller LSI MEGARAID SAS 9240-4
+  - x4 HDD 2TB Seagate Barracuda 64MiB 7200tr/min
 - JBOD soft (backup)
-  - 2x Seagate 7200tr/min 2To
+  - x2 HDD 2TB Seagate Barracuda 64MiB 7200tr/min
 
 :Homemade Desktop v1.0:
 
-- Intel i7-3770K
-- DDR3 16Go
-- 1x SSD Samsung 830 250go
+- Cpu Intel i7-3770K 3.5GHz
+- Motherboard MSI Z77-G65
+  - Gigabit LAN 10/100/1000 Mb/s Intel 82579V
+- x4 DDR3 4GB Gskill F3-2133C9Q-16GAB
+- SSD Samsung 830 250GB
+- GPU ???
+- Display Dell
+- keyboard ???
+- mouse ???
+- sound ???
 
 :Laptop Thinkpad X220:
 
-- Intel i5-2540M
-- DDR3 8go
-- SSD Samsung 830 64go
+- Cpu Intel i5-2540M 2.6GHz
+- x2 DDR3 4GB 10700
+- SSD Samsung 830 64GB
+- Display 12.5" HD LED IPS TFT 1366x768
+- Gigabit LAN Intel PRO/1000 LAN
+- Wi-Fi a/g/n
+- DisplayPort, VGA
+- Li-ion 9 cellules
+- Trackpoint, touchpad
 
 ============
 Contributing

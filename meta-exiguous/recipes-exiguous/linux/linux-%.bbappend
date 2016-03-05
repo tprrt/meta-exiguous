@@ -24,20 +24,21 @@ SRC_URI += "file://embedded.cfg \
             file://crypto.cfg \
             \
             ${@bb.utils.contains("TUNE_FEATURES", "neon", "file://crypto-arm.cfg", "", d)} \
-            \
             ${@bb.utils.contains("TUNE_FEATURES", "aarch64", "file://crypto-arm64.cfg", "", d)} \
-            \
             ${@bb.utils.contains("TUNE_FEATURES", "corei7", "file://crypto-intel.cfg", "", d)} \
+            \
             ${@bb.utils.contains("TUNE_FEATURES", "corei7", "file://microcode.cfg", "", d)} \
             \
             ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "file://systemd.cfg", "", d)} \
             \
             ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "file://debug.cfg", "", d)} \
+            \
+            ${@bb.utils.contains("EXIGUOUS_PROFILING", "Yes", "file://profiling.cfg", "", d)} \
            "
 
+# FIXME [exiguous] Enable the support of USB Null-Modem cable
+
 CMDLINE += "init=/init \
-            oops=panic \
-            panic=10 \
             memtest=5 \
             crashkernel=512M-2G:64M@64M,2G-:128M@128M \
             \

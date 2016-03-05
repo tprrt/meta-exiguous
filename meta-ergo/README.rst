@@ -44,6 +44,12 @@ This layer depends on:
 .. - branch: master
 .. - revision: HEAD
 
+.. :meta-intel-edison:
+..
+.. - URI: git://git.yoctoproject.org/meta-intel-edison
+.. - branch: master
+.. - revision: HEAD
+
 ======================
 Machines configuration
 ======================
@@ -51,67 +57,136 @@ Machines configuration
 :v0.1:
 
 - DFRobot Romeo v1 (Arduino sketch)
-- 4x DC geared Motors
-- Bluetooth
-- 3x Ultrasonic sensors
+- DFRobot Bluetooth V3
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
 - Ambient sensors
 
 :v0.2:
 
-- Raspberry PI rev.B (OS based on BuildRoot)
-- DFRobot Romeo v1 USB serial (Firmware based on an Arduino sketch)
-- 4x DC geared Motors
-- 3x Ultrasonic sensors
+- Raspberry PI rev.B (powered by BuildRoot)
+  - 512MB SDRAM
+- SDcard Lexar SD Card 32GB 400X Professional UHS-I
+- Wifi (802.11n) USB 2.0 Adapter
+- DFRobot Romeo V1 USB serial (Firmware based on an Arduino sketch)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
+- I2C to GPIO modules
+- Ambient sensors
+
+:v0.3:
+
+- Raspberry PI rev.B (powered by BuildRoot)
+  - SDRAM 512MB
+- SDcard Lexar SD Card 32 GB 400X Professional UHS-I
+- Wifi (802.11n) USB 2.0 Adapter
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
+- I2C to GPIO modules
+- Ambient sensors
+
+:v0.4:
+
+- Raspberry PI rev.B (powered by BuildRoot)
+  - SDRAM 512MB
+- SDcard Lexar SD Card 32 GB 400X Professional UHS-I
+- Wifi (802.11n) USB 2.0 Adapter
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS + kernel linux driver)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
 - I2C to GPIO modules
 - Ambient sensors
 
 :v1.0:
 
-- Raspberry PI rev.B (OS based on OpenEmbedded/Yocto)
-- SDcard ?? 64go
-- DFRobot Romeo v1 USB serial (Firmware based on an Arduino sketch)
-- 4x DC geared Motors
-- 3x Ultrasonic sensors
+- Raspberry PI rev.B
+  - SDRAM 512MB
+- SDcard Lexar SD Card 32 GB 400X Professional UHS-I
+- Wifi (802.11n) USB 2.0 Adapter
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS + kernel Linux driver)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
 - I2C to GPIO modules
 - Ambient sensors
 
-:v1.1:
+:v1.1 (current):
 
-- Raspberry PI rev.B (OS based on OpenEmbedded/Yocto)
-- SDcard ?? 64go
-- DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
-- 4x DC geared Motors
-- 3x Ultrasonic sensors
+- Raspberry PI rev.B
+  - SDRAM 512MB
+- SDcard Lexar SD Card 32GB 400X Professional UHS-I
+- Wifi (802.11n) USB 2.0 Adapter
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS + kernel Linux driver)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
+- x3 IR Sensors
+- I2C to GPIO modules
+- Ambient sensors
+
+:v1.2 (next step):
+
+- Raspberry PI rev.B
+  - SDRAM 512MB
+- SDcard Lexar SD Card 32GB 400X Professional UHS-I
+- Wifi (802.11n) USB 2.0 Adapter
+- Telecom Design TD1208 SIGFOX gateway modules
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS + kernel Linux driver)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
+- x3 IR Sensors
 - I2C to GPIO modules
 - Ambient sensors
 
 :v2.0:
 
-- Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto )
-- micro SDcard ?? 32go
-- DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
-- 4x DC geared Motors
-- 3x Ultrasonic sensors
+- Beagle Bone Black rev.B
+  - DDR3 512MB
+  - eMMC 4GB
+- Wifi (802.11n) USB 2.0 Adapter
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS + kernel Linux driver)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
 - I2C to GPIO modules
 - Ambient sensors
 
 :v2.1 (current):
 
-- Beagle Bone Black rev.B (OS based on OpenEmbedded/Yocto)
-- micro SDcard ?? 32go
-- DFRobot Romeo v1 USB serial (Firmware based on ChibiOS + specific kernel Linux driver)
-- 4x DC geared Motors
-- 3x Ultrasonic sensors
-- 3x IR Sensors
+- Beagle Bone Black rev.B
+  - DDR3 512MB
+  - eMMC 4GB
+- Wifi (802.11n) USB 2.0 Adapter
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS + kernel Linux driver)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
+- x3 IR Sensors
 - I2C to GPIO modules
 - Ambient sensors
 
-:v3.0 (next step):
+:v2.2 (next step):
 
-- DFRobot Romeo for Edison Controller (OS based on OpenEmbedded/Yocto)
-- 4x DC geared Motors
-- 3x Ultrasonic sensors
-- 3x IR Sensors
+- Beagle Bone Black rev.B
+  - DDR3 512MB
+  - eMMC 4GB
+- Wifi (802.11n) USB 2.0 Adapter
+- Telecom Design TD1208 SIGFOX gateway modules
+- DFRobot Romeo V1 USB serial (Firmware based on ChibiOS + kernel Linux driver)
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
+- x3 IR Sensors
+- I2C to GPIO modules
+- Ambient sensors
+
+:v3.2 (next step):
+
+- DFRobot Romeo for Edison Controller
+  - LPDDR3 1GB
+  - eMMC 4GB
+  - Broadcom 43340 802.11 a/b/g/n dual band (2.4G and 5GHz) Wi-Fi
+  - Support Bluetooth 4.0
+- Telecom Design TD1208 SIGFOX gateway modules
+- x4 DC geared Motors
+- x3 Ultrasonic sensors
+- x3 IR Sensors
 - I2C to GPIO modules
 - Ambient sensors
 

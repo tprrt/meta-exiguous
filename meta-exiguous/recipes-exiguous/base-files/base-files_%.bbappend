@@ -9,6 +9,8 @@ SRC_URI += "file://motd \
             file://exiguous.fstab \
            "
 
+hostname = "exiguous"
+
 do_install_append() {
 
     # Merge exiguous.fstab to fstab (add or replace line)

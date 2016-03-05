@@ -1,21 +1,7 @@
+#
+# -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
+
 # Exiguous sanity check
-
-def exiguous_machine_checker(d):
-    supported_machines = ["qemux86-64",
-                          "raspberrypi",
-                          "beaglebone",
-                          "tupi-desktop",
-                          "tupi-htpc",
-                          "tupi-nas",
-                          "tupi-router",
-                          "tupi-x220",
-                          "ergo_1",
-                          "ergo_2",
-                          "heart_1"]
-    current_machine = d.getVar("MACHINE", True)
-
-    if not current_machine in supported_machines:
-        bb.fatal("Exiguous distribution does not supported on %s" % (current_machine))
 
 def exiguous_bblayer_checker(d):
     bblayers = d.getVar("BBLAYERS", True).split()
@@ -32,7 +18,6 @@ def exiguous_flags_checker(d):
 
     flags["all"] = d.getVar("EXIGUOUS_ALL", True)
     flags["features_all"] = d.getVar("EXIGUOUS_FEATURES_ALL", True)
-    flags["extra_all"] = d.getVar("EXIGUOUS_EXTRA_ALL", True)
 
     flags["features_ci"] = d.getVar("EXIGUOUS_FEATURES_CI", True)
     flags["features_htpc"] = d.getVar("EXIGUOUS_FEATURES_HTPC", True)
@@ -40,11 +25,6 @@ def exiguous_flags_checker(d):
     flags["features_nas"] = d.getVar("EXIGUOUS_FEATURES_NAS", True)
     flags["features_router"] = d.getVar("EXIGUOUS_FEATURES_ROUTER", True)
     flags["features_station"] = d.getVar("EXIGUOUS_FEATURES_STATION", True)
-
-    flags["extra_debug_tools"] = d.getVar("EXIGUOUS_DEBUG_TOOLS", True)
-    flags["extra_debug_symbols"] = d.getVar("EXIGUOUS_DEBUG_SYMBOLS", True)
-    flags["extra_profiling_tools"] = d.getVar("EXIGUOUS_PROFILING_TOOLS", True)
-    flags["extra_security_tools"] = d.getVar("EXIGUOUS_SECURITY_ANALYSIS_TOOLS", True)
 
     for key,value in flags.items():
         if not value in ["Yes", "No", None]:
@@ -56,8 +36,6 @@ def exiguous_flags_checker(d):
     if flags["all"] is "Yes":
         if not flags["features_all"] is "Yes":
             bb.fatal("EXIGUOUS_FEATURES_ALL value should be 'Yes'")
-        if not flags["extra_all"] is "Yes":
-            bb.fatal("EXIGUOUS_EXTRA_ALL value should be 'Yes'")
 
     if flags["features_all"] is "Yes":
         if not flags["features_ci"] is "Yes":
@@ -73,24 +51,98 @@ def exiguous_flags_checker(d):
         if not flags["features_station"] is "Yes":
             bb.fatal("EXIGUOUS_FEATURES_STATION value should be 'Yes'")
 
-    if flags["extra_all"] is "Yes":
-        if not flags["extra_debug_tools"] is "Yes":
-            bb.fatal("EXIGUOUS_DEBUG_TOOLS value should be 'Yes'")
-        if not flags["extra_debug_symbols"] is "Yes":
-            bb.fatal("EXIGUOUS_DEBUG_SYMBOLS value should be 'Yes'")
-        if not flags["extra_profiling_tools"] is "Yes":
-            bb.fatal("EXIGUOUS_PROFILING_TOOLS value should be 'Yes'")
-        if not flags["security_analysis_tools"] is "Yes":
-            bb.fatal("EXIGUOUS_SECURITY_ANALYSIS_TOOLS value should be 'Yes'")
+def exiguous_tclibc_checker(d):
+    tclibc = d.getVar("TCLIBC", True)
+    if not tclibc == "musl":
+        bb.fatal("The primary toolchain of Exiguous should use 'musl' instead of '%s'" % (tclibc))
 
-def exiguous_image_checker(d):
-    image = d.getVar("BUILD_IMAGES_FROM_FEEDS", True)
-    if not image is None and not "exiguous-" in image:
-        bb.fatal("Exiguous distribution is not compatible with %s" % (image))
+def exiguous_distro_name_checker(d):
+    distro = d.getVar("DISTRO", True)
+    distro_name = d.getVar("DISTRO_NAME", True)
 
-python __anonymous() {
-    exiguous_bblayer_checker(d)
-    exiguous_machine_checker(d)
-    exiguous_flags_checker(d)
-    exiguous_image_checker(d)
+    if not distro == "exiguous":
+        bb.fatal("'DISTRO' should be set to 'exiguous' instead of '%s'" % (distro))
+
+    if not distro_name == "Exiguous powered by OpenEmbedded/Yocto":
+        bb.fatal("'DISTRO_NAME' should be set to 'Exiguous powered by OpenEmbedded/Yocto' instead of '%s'" % (distro_name))
+
+# FIXME Implement sanity check to verify distro's version
+# def exiguous_distro_version_checker(d):
+#     raise NotImplementedError
+
+# FIXME Implement sanity check to verify distro's features
+# def exiguous_distro_features_checker(d):
+#     raise NotImplementedError
+
+def exiguous_image_name_checker(d):
+    # img_basename = d.getVar("IMAGE_BASENAME", True)
+    #     if not "exiguous-image" in img_basename:
+    #         bb.fatal("Invalid Exiguous image: IMAGE_BASENAME = '%s'" % (img_basename))
+
+    # img_name = d.getVar("IMAGE_NAME", True)
+    #     if not "exiguous-image" in img_name:
+    #         bb.fatal("Invalid Exiguous image: IMAGE_NAME = '%s'" % (img_name))
+
+    current_linguas = d.getVar("IMAGE_LINGUAS", True)
+    if not current_linguas == "":
+        bb.fatal("'IMAGE_LINGUAS' should be set to '' instead of '%s'" % (current_linguas))
+
+    current_extra = d.getVar("EXTRA_IMAGE_FEATURES", True)
+    if not current_extra == "":
+        bb.fatal("'EXTRA_IMAGE_FEATURES' should be set to '' instead of '%s'" % (current_extra))
+
+def exiguous_machine_checker(d):
+    supported_machines = ["qemu-exiguous",
+                          "raspberrypi",
+                          "raspberrypi2",
+                          "beaglebone",
+                          "qemu-exiguous",
+                          "tupi-desktop",
+                          "tupi-htpc",
+                          "tupi-nas",
+                          "tupi-router",
+                          "tupi-x220",
+                          "ergo-rpi",
+                          "ergo-bbb",
+                          "heart"]
+    current_machine = d.getVar("MACHINE", True)
+
+    if not current_machine in supported_machines:
+        bb.fatal("Exiguous distribution does not supported on %s" % (current_machine))
+
+# FIXME Implement sanity check to verify machine's features
+# def exiguous_machine_features_checker(d):
+#     raise NotImplementedError
+
+# FIXME Implement sanity check to verify the kernel configuration
+# def exiguous_kernel_checker(d):
+#     raise NotImplementedError
+
+# To run Exiguous's sanity checks only if OE's sanity checks have been passed
+addhandler exiguous_checker
+exiguous_checker[eventmask] = "bb.event.SanityCheckPassed bb.event.NetworkTestPassed"
+
+python exiguous_checker() {
+    ename = bb.event.getName(e)
+    if ename == "SanityCheckPassed" or ename == "NetworkTestPassed":
+        d = copy_data(e)
+
+        exiguous_bblayer_checker(d)
+
+        exiguous_flags_checker(d)
+        exiguous_tclibc_checker(d)
+
+        exiguous_distro_name_checker(d)
+        # exiguous_distro_version_checker(d)
+        # exiguous_distro_features_checker(d)
+
+        exiguous_image_name_checker(d)
+        # exiguous_image_features_checker(d)
+
+        exiguous_machine_checker(d)
+        # exiguous_machine_features_checker(d)
+
+        # exiguous_kernel_checker(d)
+
+    return
 }

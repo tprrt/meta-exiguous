@@ -27,6 +27,7 @@ LOG_FILE=/initramfs.log
 CONSOLE=/dev/console
 
 ROOT_DIR=/mnt/root
+KDUMP_DIR=/mnt/kdump
 
 msg() {
     echo "initramfs: $@" >$CONSOLE | tee -a $LOG_FILE >&2
@@ -83,6 +84,9 @@ for arg in $CMDLINE ; do
         init=*)
             $INIT=${arg#init=}
             ;;
+        rootdelay=*)
+            rootdelay=${arg#rootdelay=}
+            ;;
         *)
             ;;
     esac
@@ -90,6 +94,13 @@ done
 
 # Repair mechanism of filesystem
 # -----------------------------------------------------------------------------
+
+delay=${rootdelay:-5}
+log "waiting $delay seconds to let the kernel be aware of devices..."
+sleep $delay
+
+# To avoid problems which can occur if / is mounted read-only and the information in /etc/mtab is stale
+ln -s /proc/mounts /etc/mtab
 
 # FIXME [exiguous] Re-enable repair mechanism of filesystem
 
@@ -114,21 +125,18 @@ if [ -s /proc/vmcore ] ; then
     # If we have a /proc/vmcore, then we just kdump'ed
     msg "Save kernel coredump"
 
-    # Mount RW partition to save kernel coredump
-    KDUMP_DIR="/mnt/kdump"
-
-    do_mount $ROOT_FS_TYPE $ROOT_FS $TMP_DIR
+    # Mount the partition to save kernel coredump
+    do_mount $ROOT_FS_TYPE $ROOT_FS $KDUMP_DIR
     if [ $? -ne 0 ] ; then
         msg "Unable to mount the partition to save kernel coredump, restarts without saving"
         # FIXME [exiguous] Enable quick reboot using kexec instead the reboot command
         reboot -f 0
     fi
 
-    [ -d $TMP_DIR/var/spool/kerneldump ] && mkdir -p $TMP_DIR/var/spool/kerneldump
+    [ -d $KDUMP_DIR/var/spool/kerneldump ] && mkdir -p $KDUMP_DIR/var/spool/kerneldump
 
     # Save kernel panic coredump
     SUFFIX=$(date +"%Y%m%d%H%M")
-    [ -d /tmp ] || mkdir /tmp
     makedumpfile -c -d 31 /proc/vmcore $TMP_DIR/var/spool/kerneldump/vmcore.$SUFFIX
     sync
     umount $TMP_DIR

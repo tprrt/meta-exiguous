@@ -42,7 +42,8 @@ Machines configuration
 .. # FIXME [heart] Add the list of sensors
 
 - Raspberry PI rev.B
-- SDcard ?? 64go
+  - SDRAM 512MB
+- SDcard Lexar SD Card 32GB 400X Professional UHS-I
 - I2C to GPIO modules
 - Digital sensors
 - I2C sensors

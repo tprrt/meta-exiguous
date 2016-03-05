@@ -26,13 +26,6 @@ dest_dir = @os.getenv("DEST_DIR")
 branch = master
 last_revision = 09cadd509b8cdbe02631646f7925f3fc76aa6299
 
-[meta-selinux]
-src_uri = git://github.com/tprrt/meta-selinux.git
-local_repo_dir = @os.getenv("LOCAL_REPO_DIR") + "/meta-selinux"
-dest_dir = @os.getenv("DEST_DIR") + "/meta-selinux"
-branch = master-stabilized
-last_revision = 3ea63fd2cd5797a8398a92958123271b9666d161
-
 [meta-exiguous]
 src_uri = git://github.com/tprrt/meta-exiguous.git
 local_repo_dir = @os.getenv("LOCAL_REPO_DIR") + "/meta-exiguous"

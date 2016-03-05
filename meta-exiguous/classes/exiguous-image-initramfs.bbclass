@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=80
 
 IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
 
-# avoid circular dependencies
+# To avoid circular dependencies
 EXTRA_IMAGEDEPENDS = ""
 
 PACKAGE_INSTALL = "initramfs-exiguous"

@@ -9,31 +9,31 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
 # -----------------------------------------------------------------------------
-# Define packages for features of Exiguous
+# Define image's features of Exiguous
 # -----------------------------------------------------------------------------
 
-FEATURE_PACKAGES_exiguous-station = "packagegroup-exiguous-features-station"
-FEATURE_PACKAGES_exiguous-router = "packagegroup-exiguous-features-router"
-FEATURE_PACKAGES_exiguous-nas = "packagegroup-exiguous-features-nas"
-FEATURE_PACKAGES_exiguous-mediaserver = "packagegroup-exiguous-features-mediaserver"
-FEATURE_PACKAGES_exiguous-htpc = "packagegroup-exiguous-features-htpc"
-FEATURE_PACKAGES_exiguous-ci = "packagegroup-exiguous-features-ci"
+FEATURE_PACKAGES_tools-sdk = "packagegroup-core-sdk \
+                              packagegroup-core-standalone-sdk-target \
+                             "
+FEATURE_PACKAGES_tools-debug = "packagegroup-core-tools-debug"
+FEATURE_PACKAGES_tools-profile = "packagegroup-core-tools-profile"
+FEATURE_PACKAGES_tools-testapps = "packagegroup-core-tools-testapps"
+FEATURE_PACKAGES_eclipse-debug = "packagegroup-core-eclipse-debug"
+
+FEATURE_PACKAGES_exiguous-ci = "packagegroup-exiguous-ci"
+FEATURE_PACKAGES_exiguous-htpc = "packagegroup-exiguous-htpc"
+FEATURE_PACKAGES_exiguous-mediaserver = "packagegroup-exiguous-mediaserver"
+FEATURE_PACKAGES_exiguous-nas = "packagegroup-exiguous-nas"
+FEATURE_PACKAGES_exiguous-router = "packagegroup-exiguous-router"
+FEATURE_PACKAGES_exiguous-station = "packagegroup-exiguous-station"
 
 # -----------------------------------------------------------------------------
-# Exiguous image properties
+# Properties of Exiguous's images
 # -----------------------------------------------------------------------------
 
 # FIXME [exiguous] Re-enable read-only-rootfs
 
-# Specifies a list of distro-specific features to INSTALL to ALL Exiguous images.
-IMAGE_FEATURES_append = " \
-    ${@bb.utils.contains("EXIGUOUS_FEATURES_CI", "Yes", "exiguous-ci", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_FEATURES_HTPC", "Yes", "exiguous-htpc", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_FEATURES_MEDIASERVER", "Yes", "exiguous-mediaserver", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_FEATURES_NAS", "Yes", "exiguous-nas", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_FEATURES_ROUTER", "Yes", "exiguous-router", "", d)} \
-    ${@bb.utils.contains("EXIGUOUS_FEATURES_STATION", "Yes", "exiguous-station", "", d)} \
-"
+IMAGE_LINGUAS = ""
 
 USE_DEVFS = "1"
 USE_DEVMOD = "1"
@@ -46,15 +46,3 @@ IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "syst
 export IMAGE_BASENAME = "exiguous-image"
 
 inherit image
-
-python __anonymous() {
-    all_features = bb.data.getVar("EXIGUOUS_FEATURES_ALL", d, 1)
-    all = bb.data.getVar("EXIGUOUS_ALL", d, 1)
-    if all_features == "Yes" or all == "Yes":
-        bb.data.setVar("EXIGUOUS_FEATURES_CI", "Yes", d)
-        bb.data.setVar("EXIGUOUS_FEATURES_HTPC", "Yes", d)
-        bb.data.setVar("EXIGUOUS_FEATURES_MEDIASERVER", "Yes", d)
-        bb.data.setVar("EXIGUOUS_FEATURES_NAS", "Yes", d)
-        bb.data.setVar("EXIGUOUS_FEATURES_ROUTER", "Yes", d)
-        bb.data.setVar("EXIGUOUS_FEATURES_STATION", "Yes", d)
-}

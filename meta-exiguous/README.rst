@@ -36,13 +36,6 @@ This layer depends on:
 - revision: HEAD
 - prio: default
 
-:meta-selinux:
-
-- URI: git://git.yoctoproject.org/meta-selinux
-- branch: master
-- revision: HEAD
-- prio: default
-
 :meta-virtualization:
 
 - URI: git://git.yoctoproject.org/meta-virtualization
@@ -50,25 +43,9 @@ This layer depends on:
 - revision: HEAD
 - prio: default
 
-:meta-security (Optional):
-
-- URI: git://git.yoctoproject.org/meta-security
-- branch: master
-- revision: HEAD
-- prio: default
-
-*NB: Optionals layers are not need to build Exiguous base distribution*
-
 .. :meta-measured:
 ..
 .. - URI: git://git@github.com:flihp/meta-measured.git
-.. - branch: master
-.. - revision: HEAD
-.. - prio: default
-
-.. :meta-musl:
-..
-.. - URI: git://git@github.com:kraj/meta-musl.git
 .. - branch: master
 .. - revision: HEAD
 .. - prio: default
@@ -104,10 +81,8 @@ System
 - E dbus                openembedded-core
 - E watchdog            openembedded-core
 - E cronie              openembedded-core
-- E sysklogd            openembedded-core
-- E acpid               openembedded-core
+- E acpid/apmd          openembedded-core
 - E tzdata              openembedded-core
-- E acl                 openembedded-core
 - E usbhost             openembedded-core
 - E usbutils            openembedded-core
 - E usbgadget           openembedded-core
@@ -142,10 +117,10 @@ Optimization
 Network
 ~~~~~~~
 
-- E iptables            openembedded-core
 - E dropbear            openembedded-core
 - E avahi               openembedded-core
 
+- E nftables            meta-oe
 - E samba               meta-oe
 
 - D freelan (VPN)       meta-exiguous
@@ -155,60 +130,14 @@ Security
 
 - E security flags      openembedded-core
 
-- E audit               meta-selinux
-- E pkg-core-selinux    meta-selinux
-
 - E fail2ban            meta-exiguous
 - E denyhosts           meta-exiguous
+- D knockd              meta-exiguous
 
 Backup
 ~~~~~~
 
 - D unison              meta-exiguous
-
---------------
-Extra packages
---------------
-  
-Debug-tools
-~~~~~~~~~~~
-
-- E gdbserver           openembedded-core             (only for DEBUG)
-- E gdb                 openembedded-core             (only for DEBUG)    
-
-- E crash               meta-oe                       (only for DEBUG)
-
-Debug symbols
-~~~~~~~~~~~~~
-
-- D exiguous-symbols   meta-exiguous                 (only for DEBUG)
-
-Tests
-~~~~~
-
-- D ptests              openembedded-core             (only for DEBUG)
-- D ptest-runner        openembedded-core             (only for DEBUG)
-
-- D pm-qa               meta-oe                       (only for DEBUG)
-
-Profiling
-~~~~~~~~~
-
-- E strace              openembedded-core             (only for DEBUG)
-- E perf                openembedded-core             (only for DEBUG)
-- E oprofile            openembedded-core             (only for DEBUG)
-- E valgrind            openembedded-core             (only for DEBUG)
-
-- E ltrace              meta-oe                       (only for DEBUG)
-
-Security analysis
-~~~~~~~~~~~~~~~~~
-
-- E checksec            meta-security                 (only for DEBUG)
-- E checksecurity       meta-security                 (only for DEBUG)
-- E nikto               meta-security                 (only for DEBUG)
-- E nmap                meta-security                 (only for DEBUG)
-- E buck-security       meta-security                 (only for DEBUG)
 
 -------------------------------
 Additional features for station
@@ -275,10 +204,12 @@ Reverse Proxy
 
 - D varnish             meta-exiguous
 
-IRC Bouncer
-~~~~~~~~~~~
+IRC Bouncer/Bots
+~~~~~~~~~~~~~~~~
 
 - D znc                 meta-networking
+- D notifico            meta-exiguous
+- D cardinal            meta-exiguous
 
 ---------------------------
 Additional features for NAS
@@ -322,8 +253,8 @@ Additional features for CI
 - D gerrit              meta-exiguous
 - D opengrok            meta-exiguous
 - D git-repo            meta-exiguous
-
-.. - D autobuilder meta-exiguous
+- D toaster             meta-exiguous
+- D autobuilder         meta-exiguous
 
 ==================
 Supported machines
@@ -331,16 +262,17 @@ Supported machines
 
 :Current:
 
-- qemux86-64
+- qemu-exiguous
 - corei7-64
-- Raspberry Pi rev. B
-- BeagleBone Black rev. B
+- Raspberry Pi rev.B
+- Raspberry Pi 2 rev.B
+- BeagleBone Black rev.B
 
 :Next:
 
-- Raspberry Pi 2 rev. B
-- SAMA5D3 Xplained
-- SABRE Lite Design (BD-SL-i.MX6)
+- ODROID-C2
+- Raspberry Pi 3 rev.B
+- Atmel SAMA5D3 Xplained
 - DFRobot Romeo for Edison Controller
 
 ============
@@ -401,7 +333,6 @@ other layers needed. e.g.:
     /path/to/combination/meta-yocto \
     /path/to/combination/meta-oe \
     /path/to/combination/meta-systemd \
-    /path/to/combination/meta-selinux \
     /path/to/combination/meta-virtualization \
     /path/to/combination/meta-exiguous \
     "
