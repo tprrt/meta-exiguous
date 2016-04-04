@@ -10,47 +10,6 @@ def exiguous_bblayer_checker(d):
         if bblayers.count(layer) > 1:
             bb.fatal("Exiguous distribution contains duplicate layers: %s" % (layer))
 
-def exiguous_flags_checker(d):
-
-    flags = {}
-
-    flags["debug"] = d.getVar("EXIGUOUS_DEBUG", True)
-
-    flags["all"] = d.getVar("EXIGUOUS_ALL", True)
-    flags["features_all"] = d.getVar("EXIGUOUS_FEATURES_ALL", True)
-
-    flags["features_ci"] = d.getVar("EXIGUOUS_FEATURES_CI", True)
-    flags["features_htpc"] = d.getVar("EXIGUOUS_FEATURES_HTPC", True)
-    flags["features_mediaserver"] = d.getVar("EXIGUOUS_FEATURES_MEDIASERVER", True)
-    flags["features_nas"] = d.getVar("EXIGUOUS_FEATURES_NAS", True)
-    flags["features_router"] = d.getVar("EXIGUOUS_FEATURES_ROUTER", True)
-    flags["features_station"] = d.getVar("EXIGUOUS_FEATURES_STATION", True)
-
-    for key,value in flags.items():
-        if not value in ["Yes", "No", None]:
-           bb.fatal("Invalid Exiguous flag: %s = '%s'" % (key, value))
-
-    if flags["debug"] is "Yes":
-        bb.warn("Exiguous DEBUG configuration will be used")
-
-    if flags["all"] is "Yes":
-        if not flags["features_all"] is "Yes":
-            bb.fatal("EXIGUOUS_FEATURES_ALL value should be 'Yes'")
-
-    if flags["features_all"] is "Yes":
-        if not flags["features_ci"] is "Yes":
-            bb.fatal("EXIGUOUS_FEATURES_CI value should be 'Yes'")
-        if not flags["features_htpc"] is "Yes":
-            bb.fatal("EXIGUOUS_FEATURES_HTPC value should be 'Yes'")
-        if not flags["features_mediaserver"] is "Yes":
-            bb.fatal("EXIGUOUS_FEATURES_MEDIASERVER value should be 'Yes'")
-        if not flags["features_nas"] is "Yes":
-            bb.fatal("EXIGUOUS_FEATURES_NAS value should be 'Yes'")
-        if not flags["features_router"] is "Yes":
-            bb.fatal("EXIGUOUS_FEATURES_ROUTER value should be 'Yes'")
-        if not flags["features_station"] is "Yes":
-            bb.fatal("EXIGUOUS_FEATURES_STATION value should be 'Yes'")
-
 def exiguous_tclibc_checker(d):
     tclibc = d.getVar("TCLIBC", True)
     if not tclibc == "musl":
@@ -67,22 +26,26 @@ def exiguous_distro_name_checker(d):
         bb.fatal("'DISTRO_NAME' should be set to 'Exiguous powered by OpenEmbedded/Yocto' instead of '%s'" % (distro_name))
 
 # FIXME Implement sanity check to verify distro's version
-# def exiguous_distro_version_checker(d):
-#     raise NotImplementedError
+def exiguous_distro_version_checker(d):
+    from re import compile
+
+    regexp = compile("???? TODO ?????")
+    version = d.getVar("DISTRO_VERSION", True)
+    if version is None:
+        bb.fatal("Undefined runtime's version")
+    elif regexp.match(version) is None:
+        bb.fatal("Malformed runtime's version: '%s'" % (version))
 
 # FIXME Implement sanity check to verify distro's features
 # def exiguous_distro_features_checker(d):
 #     raise NotImplementedError
 
 def exiguous_image_name_checker(d):
-    # img_basename = d.getVar("IMAGE_BASENAME", True)
-    #     if not "exiguous-image" in img_basename:
-    #         bb.fatal("Invalid Exiguous image: IMAGE_BASENAME = '%s'" % (img_basename))
+    image = d.getVar("BUILD_IMAGES_FROM_FEEDS", True)
+    if not image is None and not "exiguous-" in image:
+        bb.fatal("Exiguous is not compatible with %s" % (image))
 
-    # img_name = d.getVar("IMAGE_NAME", True)
-    #     if not "exiguous-image" in img_name:
-    #         bb.fatal("Invalid Exiguous image: IMAGE_NAME = '%s'" % (img_name))
-
+def exiguous_image_features_checker(d):
     current_linguas = d.getVar("IMAGE_LINGUAS", True)
     if not current_linguas == "":
         bb.fatal("'IMAGE_LINGUAS' should be set to '' instead of '%s'" % (current_linguas))
@@ -129,7 +92,6 @@ python exiguous_checker() {
 
         exiguous_bblayer_checker(d)
 
-        exiguous_flags_checker(d)
         exiguous_tclibc_checker(d)
 
         exiguous_distro_name_checker(d)
@@ -137,7 +99,7 @@ python exiguous_checker() {
         # exiguous_distro_features_checker(d)
 
         exiguous_image_name_checker(d)
-        # exiguous_image_features_checker(d)
+        exiguous_image_features_checker(d)
 
         exiguous_machine_checker(d)
         # exiguous_machine_features_checker(d)
