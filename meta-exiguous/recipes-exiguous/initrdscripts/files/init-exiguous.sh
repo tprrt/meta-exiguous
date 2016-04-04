@@ -137,6 +137,7 @@ if [ -s /proc/vmcore ] ; then
 
     # Save kernel panic coredump
     SUFFIX=$(date +"%Y%m%d%H%M")
+    [ -d /tmp] || mkdir /tmp
     makedumpfile -c -d 31 /proc/vmcore $TMP_DIR/var/spool/kerneldump/vmcore.$SUFFIX
     sync
     umount $TMP_DIR
