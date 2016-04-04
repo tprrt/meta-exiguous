@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+#	/etc/rc.d/init.d/preload
+#
+# Starts the preload daemon
+#
+# chkconfig: 2345 05 95
+# description: Adaptive readahead daemon
+# processname: preload
+#
+### BEGIN INIT INFO
+# Provides:          preload.sourceforge.net
+# Required-Start:    $local_fs $remote_fs $time
+# Required-Stop:     $local_fs $remote_fs $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Adaptive readahead daemon
+# Description:       Analyzes what applications users run and tries to predict
+#                    what they would like to run and loads them into memory
+#                    beforehand.
+### END INIT INFO
+
+CONF_FILE=/etc/preload.conf
+PID_FILE=/var/run/preload.pid
+PRELOAD=/usr/sbin/preload
+STATE=/var/spool/preload/preload.state
+
+test -x $PRELOAD || exit 0
+
+# Check for > MIN_MEMORY MB
+MIN_MEMORY=${MIN_MEMORY:-256}
+free -m | awk '/Mem:/ {exit ($2 >= ('"$MIN_MEMORY"'))?0:1}' || exit 0
+
+# Check for ionice and use idle scheduling if available
+RUNAS=""
+IONICE="/usr/bin/ionice"
+if [ -n "$IONICE_OPTS" ]; then
+	if [ -x "$IONICE" ]; then
+		RUNAS="$IONICE $IONICE_OPTS"
+	else
+		echo "ionice not found, running with normal io priority" >&2
+	fi
+fi
+
+case "$1" in
+  start)
+    echo -n "Starting preload:"  
+    [ ! -d $(dirname $STATE) ] && mkdir -m 755 -p $(dirname $STATE)
+    [ ! -f $STATE ] && touch $STATE && chmod 644 $STATE
+    start-stop-daemon --start --quiet --exec $PRELOAD -- -c $CONF_FILE -s $STATE
+    RETVAL=$?
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/preload
+    echo "."
+    ;;
+  stop)
+    echo -n "Stoping preload:"
+    start-stop-daemon --stop --quiet --pidfile $PID_FILE
+    RETVAL=$?
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/preload
+    echo "."
+    ;;
+  reload|force-reload)
+    start-stop-daemon --stop --quiet --signal 1 --exec $PRELOAD
+	;;
+  restart)
+    echo "Stopping preload:"
+    start-stop-daemon --stop --quiet --pidfile $PID_FILE
+    echo -n "Waiting for preload to die off"
+    for i in 1 2 3 ;
+    do
+        sleep 1
+        echo -n "."
+    done
+    echo ""
+    echo -n "Starting preload:"
+    start-stop-daemon --start --quiet --exec $PRELOAD -- -c $CONF_FILE -s $STATE
+    echo "."
+    ;;
+  *)
+    echo "Usage: /etc/init.d/preload {start|stop|reload|restart|force-reload}"
+    exit 1
+esac
+
+exit 0

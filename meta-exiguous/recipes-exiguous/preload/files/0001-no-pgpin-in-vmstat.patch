@@ -1,0 +1,10 @@
+--- a/src/proc.c	2016-03-30 11:50:52.260976964 +0200
++++ b/src/proc.c	2016-03-30 11:49:15.305716366 +0200
+@@ -257,6 +257,6 @@ proc_get_memstat (preload_memory_t *mem)
+   mem->pagein *= pagesize / 1024;
+   mem->pageout *= pagesize / 1024;
+ 
+-  if (!mem->total || !mem->pagein)
++  if (!mem->total)
+     g_warning ("failed to read memory stat, is /proc mounted?");
+ }

@@ -18,10 +18,17 @@ SECTION = "base"
 
 DEPENDS = "glib-2.0 help2man-native"
 
+RDEPENDS_${PN} = "bash lsb"
+
 PR = "r0"
 
 S = "${WORKDIR}/trunk"
 
-inherit autotools-brokensep pkgconfig
+inherit autotools-brokensep pkgconfig update-rc.d
 
 PARALLEL_MAKE = ""
+
+INITSCRIPT_PACKAGES = "${PN}"
+INITSCRIPT_NAME_${PN} = "preload"
+INITSCRIPT_PARAMS_${PN} = "defaults"
+
