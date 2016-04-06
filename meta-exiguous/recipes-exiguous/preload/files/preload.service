@@ -1,0 +1,11 @@
+[Unit]
+Description=Preload readahead daemon
+
+[Service]
+ExecStart=/usr/sbin/preload -f -c /etc/preload.conf
+ExecReload=/bin/kill -HUP $MAINPID
+Nice=15
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=multi-user.target
