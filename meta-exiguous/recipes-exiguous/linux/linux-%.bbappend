@@ -22,6 +22,7 @@ SRC_URI += "file://embedded.cfg \
             file://tpm.cfg \
             file://nmi.cfg \
             file://crypto.cfg \
+            file://lz4.cfg \
             \
             ${@bb.utils.contains("TUNE_FEATURES", "neon", "file://crypto-arm.cfg", "", d)} \
             ${@bb.utils.contains("TUNE_FEATURES", "aarch64", "file://crypto-arm64.cfg", "", d)} \
