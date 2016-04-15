@@ -3,6 +3,8 @@
 
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
+DEPENDS = "lz4-native"
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-exiguous:"
 
 LINUX_VERSION_EXTENSION = "-${DISTRO}-${LINUX_KERNEL_TYPE}"
