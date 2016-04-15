@@ -1,0 +1,11 @@
+--- a/makedepend.SH	2014-05-26 15:34:20.000000000 +0200
++++ b/makedepend.SH	2016-01-21 14:56:36.332521793 +0100
+@@ -243,7 +243,7 @@
+ $rm -f $mf.old
+ $cp $mf $mf.old
+ $rm -f $mf
+-$cp $mf.new $mf
++grep -v '\$(OBJ_EXT): \/' $mf.new > $mf
+ $rm $mf.new
+ $echo "# WARNING: Put nothing here or make depend will gobble it up!" >> $mf
+ $rm -rf .deptmp UU .clist .hlist .hsed .cout .cerr
