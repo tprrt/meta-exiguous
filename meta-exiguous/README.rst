@@ -332,6 +332,7 @@ other layers needed. e.g.:
     /path/to/combination/meta \
     /path/to/combination/meta-yocto \
     /path/to/combination/meta-oe \
+    /path/to/combination/meta-initramfs \
     /path/to/combination/meta-systemd \
     /path/to/combination/meta-virtualization \
     /path/to/combination/meta-exiguous \
