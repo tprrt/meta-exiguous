@@ -74,16 +74,18 @@ def exiguous_machine_checker(d):
         bb.fatal("Exiguous distribution does not supported on %s" % (current_machine))
 
 # FIXME Implement sanity check to verify machine's features
+
 def exiguous_kernel_checker(d):
 
     kernels = {}
-    # kernels["name"] = "linux-exiguous"
+    # FIXME kernels["name"] = "linux-exiguous"
+    kernels["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True)
     kernels["version"] = "4.1%"
-    kernels["initramfs" = "cpio.lz4"
+    kernels["initramfs"] = "cpio.lz4"
     kernels["header"] = "4.4"
 
     current = {}
-    # current["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True)
+    current["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True)
     current["version"] = d.getVar("PREFERRED_VERSION_%s" % (current["name"]), True)
     current["initramfs"] = d.getVar("INITRAMFS_FSTYPES", True)
     current["header"] = d.getVar("LINUXLIBCVERSION", True)

@@ -23,7 +23,7 @@ This layer depends on:
 
 - URI: git://git.openembedded.org/meta-openembedded
 - layers: meta-oe, meta-systemd
-- optional layers: meta-networking, meta-xfce, meta-python, meta-webserver, meta-multimedia
+- optional layers: meta-networking, meta-python, meta-webserver, meta-multimedia
 - branch: master
 - revision: HEAD
 - prio: default
@@ -112,7 +112,7 @@ Optimization
 
 - E zram                meta-oe
 
-- E preload		meta-exiguous
+- E preload             meta-exiguous
 
 Network
 ~~~~~~~
@@ -150,10 +150,6 @@ Additional features for station
 - E irssi               meta-oe
 - E picocom             meta-oe
 - E tree                meta-oe
-
-- E pkg-xfce-base       meta-xfce
-- E pkg-xfce-extended   meta-xfce
-- E pkg-xfce-multimedia meta-xfce
 
 - D byobu               meta-exiguous
 - D meld                meta-exiguous
@@ -330,10 +326,10 @@ other layers needed. e.g.:
 
   BBLAYERS ?= " \
     /path/to/combination/meta \
-    /path/to/combination/meta-yocto \
-    /path/to/combination/meta-oe \
-    /path/to/combination/meta-initramfs \
-    /path/to/combination/meta-systemd \
-    /path/to/combination/meta-virtualization \
-    /path/to/combination/meta-exiguous \
+    /path/to/combination/meta-yocto/meta-poky \
+    /path/to/combination/meta-openembedded/meta-oe \
+    /path/to/combination/meta-openembedded/meta-initramfs \
+    /path/to/combination/meta-openembedded/meta-systemd \
+    /path/to/combination/meta-openembedded/meta-virtualization \
+    /path/to/combination/meta-exiguous/meta-exiguous \
     "

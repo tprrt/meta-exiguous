@@ -5,30 +5,30 @@ BBPATH = "${TOPDIR}"
 BBFILES ?= ""
 
 BBLAYERS = "##COREBASE##/meta \
-            ##COREBASE##/meta-yocto \
+            ##COREBASE##/meta-yocto/meta-poky \
             ##COREBASE##/meta-openembedded/meta-initramfs \
             ##COREBASE##/meta-openembedded/meta-systemd \
             ##COREBASE##/meta-openembedded/meta-oe \
             ##COREBASE##/meta-openembedded/meta-networking \
             ##COREBASE##/meta-openembedded/meta-webserver \
-            ##COREBASE##/meta-openembedded/meta-xfce \
             ##COREBASE##/meta-virtualization \
             ##COREBASE##/meta-security \
             \
-            ##COREBASE##/meta-exiguous \
-            ##COREBASE##/meta-ergo \
-            ##COREBASE##/meta-heart \
-            ##COREBASE##/meta-tupi \
+            ##COREBASE##/meta-exiguous/meta-exiguous \
+            ##COREBASE##/meta-exiguous/meta-ergo \
+            ##COREBASE##/meta-exiguous/meta-heart \
+            ##COREBASE##/meta-exiguous/meta-tupi \
            "
 
 # Dependencies of meta-networking layer
 BBLAYERS += "##COREBASE##/meta-openembedded/meta-python"
 
 # Layers dependencies for meta-ergo, meta-heart and meta-tupi
-BBLAYERS += "##COREBASE##/meta-intel \
-	     ##COREBASE##/meta-raspberrypi \
-	     ##COREBASE##/meta-ti \
-	    "
+BBLAYERS += "##COREBASE##/meta-yocto/meta-yocto-bsp \
+             ##COREBASE##/meta-intel \
+             ##COREBASE##/meta-raspberrypi \
+             ##COREBASE##/meta-ti \
+            "
 
 # Dependency of meta-security layer
 BBLAYERS += "##COREBASE##/meta-openembedded/meta-perl"
@@ -37,7 +37,7 @@ BBLAYERS += "##COREBASE##/meta-openembedded/meta-perl"
 BBLAYERS += "##COREBASE##/meta-selftest"
 
 BBLAYERS_NON_REMOVABLE = "##COREBASE##/meta \
-                          ##COREBASE##/meta-yocto \
+                          ##COREBASE##/meta-yocto/meta-poky \
                           ##COREBASE##/meta-openembedded/meta-initramfs \
                           ##COREBASE##/meta-openembedded/meta-systemd \
                           ##COREBASE##/meta-virtualization \
