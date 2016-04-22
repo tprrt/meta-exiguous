@@ -45,4 +45,4 @@ IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "syst
 
 export IMAGE_BASENAME = "exiguous-image"
 
-inherit image
+inherit exiguous-squashfs-lz4 image
