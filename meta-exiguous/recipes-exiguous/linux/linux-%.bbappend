@@ -10,6 +10,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/linux-exiguous:"
 LINUX_VERSION_EXTENSION = "-${DISTRO}-${LINUX_KERNEL_TYPE}"
 
 INITRAMFS_IMAGE = "exiguous-image-initramfs"
+INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_image_complete"
 
 SRC_URI += "file://embedded.cfg \
             file://watchdog.cfg \
@@ -25,6 +26,7 @@ SRC_URI += "file://embedded.cfg \
             file://nmi.cfg \
             file://crypto.cfg \
             file://lz4.cfg \
+            file://overlayfs.cfg \
             \
             ${@bb.utils.contains("TUNE_FEATURES", "neon", "file://crypto-arm.cfg", "", d)} \
             ${@bb.utils.contains("TUNE_FEATURES", "aarch64", "file://crypto-arm64.cfg", "", d)} \
