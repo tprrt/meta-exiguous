@@ -1,0 +1,133 @@
+From 06eafa6e84204da065bd90a2aa7bdefdf43d3668 Mon Sep 17 00:00:00 2001
+From: Thomas Perrot <thomas.perrot@tupi.fr>
+Date: Mon, 25 Apr 2016 11:13:05 +0200
+Subject: [PATCH] Corrects the problem of build due to the redefinition of
+ PAGESIZE.
+
+Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
+---
+ arch/arm.c     |  2 +-
+ arch/arm64.c   |  2 +-
+ arch/ppc64.c   | 10 +++++-----
+ arch/x86_64.c  |  4 ++--
+ makedumpfile.h |  6 +++---
+ 5 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/arch/arm.c b/arch/arm.c
+index af7442a..c6495bd 100644
+--- a/arch/arm.c
++++ b/arch/arm.c
+@@ -138,7 +138,7 @@ vtop_arm(unsigned long vaddr)
+ 			return NOT_PADDR;
+ 		}
+ 
+-		paddr = PAGEBASE(pte) + (vaddr & (PAGESIZE() - 1));
++		paddr = PAGEBASE(pte) + (vaddr & (PAGESIZE2() - 1));
+ 		break;
+ 	}
+ 
+diff --git a/arch/arm64.c b/arch/arm64.c
+index 06daf64..423694c 100644
+--- a/arch/arm64.c
++++ b/arch/arm64.c
+@@ -234,7 +234,7 @@ vtop_arm64(unsigned long vaddr)
+ 		} else {
+ 
+ 			paddr = (PAGEBASE(pte_val(ptev)) & PHYS_MASK)
+-					+ (vaddr & (PAGESIZE() - 1));
++					+ (vaddr & (PAGESIZE2() - 1));
+ 		}
+ 		break;
+ 	case PMD_TYPE_SECT:
+diff --git a/arch/ppc64.c b/arch/ppc64.c
+index 89a7f05..840104a 100644
+--- a/arch/ppc64.c
++++ b/arch/ppc64.c
+@@ -238,7 +238,7 @@ ppc64_vtop_level4(unsigned long vaddr)
+ 		/*
+ 		 * This is the first vmalloc address translation request
+ 		 */
+-		info->page_buf = (char *)calloc(1, PAGESIZE());
++		info->page_buf = (char *)calloc(1, PAGESIZE2());
+ 		if (info->page_buf == NULL) {
+ 			ERRMSG("Can't allocate memory to read page tables. %s\n",
+ 			       strerror(errno));
+@@ -248,7 +248,7 @@ ppc64_vtop_level4(unsigned long vaddr)
+ 
+ 	level4 = (ulong *)info->kernel_pgd;
+ 	level4_dir = (ulong *)((ulong *)level4 + L4_OFFSET(vaddr));
+-	if (!readmem(VADDR, PAGEBASE(level4), info->page_buf, PAGESIZE())) {
++	if (!readmem(VADDR, PAGEBASE(level4), info->page_buf, PAGESIZE2())) {
+ 		ERRMSG("Can't read level4 page: 0x%llx\n", PAGEBASE(level4));
+ 		return NOT_PADDR;
+ 	}
+@@ -261,7 +261,7 @@ ppc64_vtop_level4(unsigned long vaddr)
+ 	 */
+ 	if (info->l3_index_size != 0) {
+ 		page_dir = (ulong *)((ulong *)level4_pte + PGD_OFFSET_L4(vaddr));
+-		if (!readmem(VADDR, PAGEBASE(level4_pte), info->page_buf, PAGESIZE())) {
++		if (!readmem(VADDR, PAGEBASE(level4_pte), info->page_buf, PAGESIZE2())) {
+ 			ERRMSG("Can't read PGD page: 0x%llx\n", PAGEBASE(level4_pte));
+ 			return NOT_PADDR;
+ 		}
+@@ -273,7 +273,7 @@ ppc64_vtop_level4(unsigned long vaddr)
+ 	}
+ 
+ 	page_middle = (ulong *)((ulong *)pgd_pte + PMD_OFFSET_L4(vaddr));
+-	if (!readmem(VADDR, PAGEBASE(pgd_pte), info->page_buf, PAGESIZE())) {
++	if (!readmem(VADDR, PAGEBASE(pgd_pte), info->page_buf, PAGESIZE2())) {
+ 		ERRMSG("Can't read PMD page: 0x%llx\n", PAGEBASE(pgd_pte));
+ 		return NOT_PADDR;
+ 	}
+@@ -283,7 +283,7 @@ ppc64_vtop_level4(unsigned long vaddr)
+ 
+ 	page_table = (ulong *)(pmd_pte & ~(info->l2_masked_bits))
+ 			+ (BTOP(vaddr) & (info->ptrs_per_l1 - 1));
+-	if (!readmem(VADDR, PAGEBASE(pmd_pte), info->page_buf, PAGESIZE())) {
++	if (!readmem(VADDR, PAGEBASE(pmd_pte), info->page_buf, PAGESIZE2())) {
+ 		ERRMSG("Can't read page table: 0x%llx\n", PAGEBASE(pmd_pte));
+ 		return NOT_PADDR;
+ 	}
+diff --git a/arch/x86_64.c b/arch/x86_64.c
+index 4788f55..47c3288 100644
+--- a/arch/x86_64.c
++++ b/arch/x86_64.c
+@@ -91,7 +91,7 @@ get_machdep_info_x86_64(void)
+ 		return FALSE;
+ 	}
+ 	if (!readmem(MADDR_XEN, pfn_to_paddr(p2m_mfn),
+-		     &frame_mfn, PAGESIZE())) {
++		     &frame_mfn, PAGESIZE2())) {
+ 		ERRMSG("Can't read p2m_mfn.\n");
+ 		return FALSE;
+ 	}
+@@ -105,7 +105,7 @@ get_machdep_info_x86_64(void)
+ 			break;
+ 
+ 		if (!readmem(MADDR_XEN, pfn_to_paddr(frame_mfn[i]), &buf,
+-		    PAGESIZE())) {
++		    PAGESIZE2())) {
+ 			ERRMSG("Can't get frame_mfn[%d].\n", i);
+ 			return FALSE;
+ 		}
+diff --git a/makedumpfile.h b/makedumpfile.h
+index e0b5bbf..d17daa2 100644
+--- a/makedumpfile.h
++++ b/makedumpfile.h
+@@ -167,10 +167,10 @@ isAnon(unsigned long mapping)
+ #define PTOB(X)			(((unsigned long long)(X)) << PAGESHIFT())
+ #define BTOP(X)			(((unsigned long long)(X)) >> PAGESHIFT())
+ 
+-#define PAGESIZE()		(info->page_size)
++#define PAGESIZE2()		(info->page_size)
+ #define PAGESHIFT()		(info->page_shift)
+-#define PAGEOFFSET(X)		(((unsigned long long)(X)) & (PAGESIZE() - 1))
+-#define PAGEBASE(X)		(((unsigned long long)(X)) & ~(PAGESIZE() - 1))
++#define PAGEOFFSET(X)		(((unsigned long long)(X)) & (PAGESIZE2() - 1))
++#define PAGEBASE(X)		(((unsigned long long)(X)) & ~(PAGESIZE2() - 1))
+ 
+ /*
+  * for SPARSEMEM
+-- 
+2.1.4
+
