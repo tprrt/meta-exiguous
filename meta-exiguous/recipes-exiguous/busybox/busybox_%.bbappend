@@ -11,7 +11,8 @@ SRC_URI += "file://core.cfg \
             file://no-udhcp.cfg \
            "
 
-# Whether to split the suid apps into a seperate binary
+# For the BusyBox recipe, specifies whether to split the output executable file
+# into two parts: one for features that require setuid root, and one for the remaining features.
 BUSYBOX_SPLIT_SUID = "1"
 
 RRECOMMENDS_${PN}_remove = "${PN}-syslog ${PN}-udhcpc"
