@@ -9,7 +9,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/linux-exiguous:"
 
 LINUX_VERSION_EXTENSION = "-${DISTRO}-${LINUX_KERNEL_TYPE}"
 
-INITRAMFS_IMAGE = "exiguous-image-initramfs"
+# INITRAMFS_IMAGE = "exiguous-image-initramfs"
 # INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_image_complete"
 
 SRC_URI += "file://embedded.cfg \

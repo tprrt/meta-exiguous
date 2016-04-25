@@ -31,6 +31,9 @@ FEATURE_PACKAGES_exiguous-station = "packagegroup-exiguous-station"
 # Properties of Exiguous's images
 # -----------------------------------------------------------------------------
 
+# FIXME [exiguous] Workaround to fix initramfs build issue
+do_rootfs[depends] += "exiguous-image-initramfs:do_rootfs"
+
 # FIXME [exiguous] Re-enable read-only-rootfs
 
 IMAGE_LINGUAS = ""
