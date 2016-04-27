@@ -102,8 +102,8 @@ other layers needed. e.g.:
 
   BBLAYERS ?= " \
     /path/to/yocto/meta \
-    /path/to/yocto/meta-yocto \
-    /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-yocto/meta-poky \
+    /path/to/yocto/meta-yocto/meta-yocto-bsp \
     /path/to/yocto/meta-raspberrypi \
     /path/to/yocto/meta-heart \
     "

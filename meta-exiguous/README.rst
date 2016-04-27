@@ -102,7 +102,7 @@ System
 
 - D pkg-tpm             meta-exiguous (a fork of recipes from meta-measured)
 
-- E makedumpfile        meta-exiguous (a fork of recipes from meta-cgl)
+- E makedumpfile        meta-exiguous
 - E thermald            meta-exiguous
 
 Optimization

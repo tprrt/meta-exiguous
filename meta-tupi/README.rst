@@ -163,10 +163,12 @@ OE build tree, you can add it to the build system by adding the
 location of the Tupi layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
+::
+
   BBLAYERS ?= " \
     /path/to/yocto/meta \
-    /path/to/yocto/meta-yocto \
-    /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-yocto/meta-poky \
+    /path/to/yocto/meta-yocto/meta-yocto-bsp \
     /path/to/yocto/meta-raspberrypi \
     /path/to/yocto/meta-ti \
     /path/to/yocto/meta-intel \

@@ -13,14 +13,6 @@ Please see the respective README files in each layer subdirectories for more inf
 - **scripts**: Useful tools to build, to flash...
 - **config**: combo-layer configurations to build Exiguous distributions
 
-To Do
------
-
-- Update CI tests to run them on github, blessing travis, circle...
-- Clean and push a stable distribution layer
-- Clean and push machines layers
-- Clean and push new recipes
-
 Upstreaming
 -----------
 
