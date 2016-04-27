@@ -43,8 +43,8 @@ USE_DEVMOD = "1"
 
 IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "" ,d)}"
 
-# Already remove into busybox_%.bbappend
-# BAD_RECOMMENDATIONS += "busybox-syslog busybox-udhcpc"
+# Also removed from the busybox recipe
+BAD_RECOMMENDATIONS += "busybox-syslog busybox-udhcpc"
 
 export IMAGE_BASENAME = "exiguous-image"
 
