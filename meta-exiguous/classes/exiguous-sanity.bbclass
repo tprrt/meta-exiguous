@@ -25,18 +25,18 @@ def exiguous_distro_name_checker(d):
     if not distro_name == "Exiguous powered by OpenEmbedded/Yocto":
         bb.fatal("'DISTRO_NAME' should be set to 'Exiguous powered by OpenEmbedded/Yocto' instead of '%s'" % (distro_name))
 
-# FIXME Implement sanity check to verify distro's version
+# FIXME [exiguous] Implement sanity check to verify distro's version
 def exiguous_distro_version_checker(d):
     from re import compile
 
-    regexp = compile("???? TODO ?????")
+    regexp = compile("???? # FIXME ?????")
     version = d.getVar("DISTRO_VERSION", True)
     if version is None:
         bb.fatal("Undefined runtime's version")
     elif regexp.match(version) is None:
         bb.fatal("Malformed runtime's version: '%s'" % (version))
 
-# FIXME Implement sanity check to verify distro's features
+# FIXME [exiguous] Implement sanity check to verify distro's features
 # def exiguous_distro_features_checker(d):
 #     raise NotImplementedError
 
@@ -56,45 +56,40 @@ def exiguous_image_features_checker(d):
 
 def exiguous_machine_checker(d):
     supported_machines = ["qemu-exiguous",
-                          "raspberrypi",
-                          "raspberrypi2",
-                          "beaglebone",
-                          "qemu-exiguous",
                           "tupi-desktop",
-                          "tupi-htpc",
+                          "tupi-htpc-rpi2",
                           "tupi-nas",
                           "tupi-router",
                           "tupi-x220",
                           "ergo-rpi",
                           "ergo-bbb",
-                          "heart"]
+                          "heart-rpi"]
     current_machine = d.getVar("MACHINE", True)
 
     if not current_machine in supported_machines:
         bb.fatal("Exiguous distribution does not supported on %s" % (current_machine))
 
-# FIXME Implement sanity check to verify machine's features
+# FIXME [exiguous] Implement sanity check to verify machine's features
 
+# FIXME [exiguous] Update kernel checker to fix issue with rpi and bbb
 def exiguous_kernel_checker(d):
 
-    kernels = {}
-    # FIXME kernels["name"] = "linux-exiguous"
-    kernels["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True)
-    kernels["version"] = "4.1%"
-    kernels["initramfs"] = "cpio.lz4"
-    kernels["header"] = "4.4"
+    kernel = {}
+    kernel["name"] = "linux-stable-security"
+    kernel["version"] = "4.1%"
+    kernel["initramfs"] = "cpio.lz4"
+    kernel["header"] = "4.4"
 
     current = {}
-    current["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True)
-    current["version"] = d.getVar("PREFERRED_VERSION_%s" % (current["name"]), True)
-    current["initramfs"] = d.getVar("INITRAMFS_FSTYPES", True)
-    current["header"] = d.getVar("LINUXLIBCVERSION", True)
+    current["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True) or ""
+    current["version"] = d.getVar("PREFERRED_VERSION_%s" % (current["name"]), True) or ""
+    current["initramfs"] = d.getVar("INITRAMFS_FSTYPES", True) or ""
+    current["header"] = d.getVar("LINUXLIBCVERSION", True) or ""
 
-    diffs = [ key for key in current if current[key] != kernels[key] ]
+    diffs = [ key for key in kernel if not kernel[key] in current[key] ]
 
     for diff in diffs:
-        bb.fatal("A kernel requirement is not met: '%s' has '%s' expected '%s'" % (diff, current[diff], kernels[machine][diff]))
-
+        bb.fatal("A kernel requirement is not met: '%s' has '%s' expected '%s'" % (diff, current[diff], kernel[diff]))
 
 # To run Exiguous's sanity checks only if OE's sanity checks have been passed
 addhandler exiguous_checker

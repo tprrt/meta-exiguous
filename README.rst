@@ -7,11 +7,11 @@ Brief description of the layers's collection
 Please see the respective README files in each layer subdirectories for more information.
 
 - **meta-exiguous**: Exiguous distribution layer and recipes can be pushed to OpenEmbedded
+- **meta-exiguous-bsp**: BSPs layer and recipes can be pushed to OpenEmbedded
 - **meta-tupi**: Machines configuration layer for homemade NAS, HTPC, router...
 - **meta-ergo**: Machines configuration layer for a exploration rover
 - **meta-heart**: Machines configuration layer for a home automation station
 - **scripts**: Useful tools to build, to flash...
-- **config**: combo-layer configurations to build Exiguous distributions
 
 Upstreaming
 -----------

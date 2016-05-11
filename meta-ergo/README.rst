@@ -18,14 +18,6 @@ This layer depends on:
 - revision: HEAD
 - prio: default
 
-:meta-yocto:
-
-- URI: git://git.yoctoproject.org/meta-yocto
-- layers: meta-yocto, meta-yocto-bsp
-- branch: master
-- revision: HEAD
-- prio: default
-
 :meta-raspberrypi:
 
 - URI: git://git.yoctoproject.org/meta-raspberrypi
@@ -243,7 +235,6 @@ other layers needed. e.g.:
 
   BBLAYERS ?= " \
     /path/to/yocto/meta \
-    /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-raspberrypi \
     /path/to/yocto/meta-ti \
     /path/to/yocto/meta-ergo \

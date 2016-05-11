@@ -31,7 +31,7 @@ This layer depends on:
 :meta-yocto:
 
 - URI: git://git.yoctoproject.org/meta-yocto
-- layers: meta-yocto
+- layers: meta-poky
 - branch: master
 - revision: HEAD
 - prio: default
@@ -67,190 +67,193 @@ This layer depends on:
 Distro features
 ===============
 
--------------
-Core packages
--------------
+*FIXME*
 
-System
-~~~~~~
+..
+   -------------
+   Core packages
+   -------------
 
-- E hwcodecs            openembedded-core
-- E read-only-rootfs    openembedded-core
-- E kernel Linux v4.1   openembedded-core
-- E systemd             openembedded-core
-- E dbus                openembedded-core
-- E watchdog            openembedded-core
-- E cronie              openembedded-core
-- E acpid/apmd          openembedded-core
-- E tzdata              openembedded-core
-- E usbhost             openembedded-core
-- E usbutils            openembedded-core
-- E usbgadget           openembedded-core
-- E rsync               openembedded-core
-- E pm-utils            openembedded-core
-- E pigz                openembedded-core
-- E busybox             openembedded-core
-- E procps              openembedded-core
-- E kexec               openembedded-core
+   System
+   ~~~~~~
 
-- E cryptsetup          meta-oe
-- E udisks              meta-oe
-- E networkmanager      meta-oe
-- E lvm2                meta-oe
+   - E hwcodecs                     openembedded-core
+   - E read-only-rootfs             openembedded-core
+   - E Linux stable security v4.1   openembedded-core
+   - E systemd                      openembedded-core
+   - E dbus                         openembedded-core
+   - E watchdog                     openembedded-core
+   - E cronie                       openembedded-core
+   - E acpid/apmd                   openembedded-core
+   - E tzdata                       openembedded-core
+   - E usbhost                      openembedded-core
+   - E usbutils                     openembedded-core
+   - E usbgadget                    openembedded-core
+   - E rsync                        openembedded-core
+   - E pm-utils                     openembedded-core
+   - E pigz                         openembedded-core
+   - E busybox                      openembedded-core
+   - E procps                       openembedded-core
+   - E kexec                        openembedded-core
 
-- E lxc                 meta-virtualization
+   - E cryptsetup                   meta-oe
+   - E udisks                       meta-oe
+   - E networkmanager               meta-oe
+   - E lvm2                         meta-oe
 
-- D pkg-tpm             meta-exiguous (a fork of recipes from meta-measured)
+   - E lxc                          meta-virtualization
 
-- E makedumpfile        meta-exiguous
-- E thermald            meta-exiguous
+   - D pkg-tpm                      meta-exiguous (a fork of recipes from meta-measured)
 
-Optimization
-~~~~~~~~~~~~~
+   - E makedumpfile                 meta-exiguous
+   - E thermald                     meta-exiguous
 
-- E prelink             openembedded-core
+   Optimization
+   ~~~~~~~~~~~~~
 
-- E zram                meta-oe
+   - E prelink                      openembedded-core
 
-- E preload             meta-exiguous
+   - E zram                         meta-oe
 
-Network
-~~~~~~~
+   - E preload                      meta-exiguous
 
-- E dropbear            openembedded-core
-- E avahi               openembedded-core
+   Network
+   ~~~~~~~
 
-- E nftables            meta-oe
-- E samba               meta-oe
+   - E dropbear                     openembedded-core
+   - E avahi                        openembedded-core
 
-- D freelan (VPN)       meta-exiguous
+   - E nftables                     meta-oe
+   - E samba                        meta-oe
 
-Security
-~~~~~~~~
+   - D freelan (VPN)                meta-exiguous
 
-- E security flags      openembedded-core
+   Security
+   ~~~~~~~~
 
-- E fail2ban            meta-exiguous
-- E denyhosts           meta-exiguous
-- D knockd              meta-exiguous
+   - E security flags               openembedded-core
 
-Backup
-~~~~~~
+   - E fail2ban                     meta-exiguous
+   - E denyhosts                    meta-exiguous
+   - D knockd                       meta-exiguous
 
-- D unison              meta-exiguous
+   Backup
+   ~~~~~~
 
--------------------------------
-Additional features for station
--------------------------------
+   - D unison                       meta-exiguous
 
-- E sudo                openembedded-core
-- E wayland             openembedded-core
+   -------------------------------
+   Additional features for station
+   -------------------------------
 
-- E emacs               meta-oe
-- E irssi               meta-oe
-- E picocom             meta-oe
-- E tree                meta-oe
+   - E sudo                         openembedded-core
+   - E wayland                      openembedded-core
 
-- D byobu               meta-exiguous
-- D meld                meta-exiguous
-- D chromium            meta-exiguous
+   - E emacs                        meta-oe
+   - E irssi                        meta-oe
+   - E picocom                      meta-oe
+   - E tree                         meta-oe
 
----------------------------------------------------------------------
-Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
----------------------------------------------------------------------
+   - D byobu                        meta-exiguous
+   - D meld                         meta-exiguous
+   - D chromium                     meta-exiguous
 
-Router Freelan
-~~~~~~~~~~~~~~
+   ---------------------------------------------------------------------
+   Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
+   ---------------------------------------------------------------------
 
-- D freeland (VPN)      meta-exiguous
+   Router Freelan
+   ~~~~~~~~~~~~~~
 
-Router TCP/IP
-~~~~~~~~~~~~~
+   - D freeland (VPN)               meta-exiguous
 
-- D iproute2            openembedded-core
-- D tcp-wrappers        openembedded-core
+   Router TCP/IP
+   ~~~~~~~~~~~~~
 
-- D rng-tools           meta-oe
+   - D iproute2                     openembedded-core
+   - D tcp-wrappers                 openembedded-core
 
-- D ipsec-tools         meta-networking
+   - D rng-tools                    meta-oe
 
-Router PPP
-~~~~~~~~~~
+   - D ipsec-tools                  meta-networking
 
-- D ppp                 openembedded-core
+   Router PPP
+   ~~~~~~~~~~
 
-- D rp-pppoe            meta-networking
+   - D ppp                          openembedded-core
 
-Server DNS
-~~~~~~~~~~
+   - D rp-pppoe                     meta-networking
 
-- D bind                openembedded-core
+   Server DNS
+   ~~~~~~~~~~
 
-Proxy
-~~~~~
+   - D bind                         openembedded-core
 
-- D squid               meta-networking
+   Proxy
+   ~~~~~
 
-Reverse Proxy
-~~~~~~~~~~~~~
+   - D squid                        meta-networking
 
-- D nginx               meta-webserver
+   Reverse Proxy
+   ~~~~~~~~~~~~~
 
-- D memcached           meta-networking
+   - D nginx                        meta-webserver
 
-- D varnish             meta-exiguous
+   - D memcached                    meta-networking
 
-IRC Bouncer/Bots
-~~~~~~~~~~~~~~~~
+   - D varnish                      meta-exiguous
 
-- D znc                 meta-networking
-- D notifico            meta-exiguous
-- D cardinal            meta-exiguous
+   IRC Bouncer/Bots
+   ~~~~~~~~~~~~~~~~
 
----------------------------
-Additional features for NAS
----------------------------
+   - D znc                          meta-networking
+   - D notifico                     meta-exiguous
+   - D cardinal                     meta-exiguous
 
-System
-~~~~~~
+   ---------------------------
+   Additional features for NAS
+   ---------------------------
 
-- D mdadm              openembedded-core
+   System
+   ~~~~~~
 
-Newsgroups
-~~~~~~~~~~
+   - D mdadm                        openembedded-core
 
-- D sabnzbd             meta-exiguous
-- D headphones          meta-exiguous
-- D sickbeard           meta-exiguous
-- D couchpotato         meta-exiguous
+   Newsgroups
+   ~~~~~~~~~~
 
-------------------------------------
-Additional features for media server
-------------------------------------
+   - D sabnzbd                      meta-exiguous
+   - D headphones                   meta-exiguous
+   - D sickbeard                    meta-exiguous
+   - D couchpotato                  meta-exiguous
 
-- D ReadyMedia          meta-oe
+   ------------------------------------
+   Additional features for media server
+   ------------------------------------
 
-----------------------------
-Additional features for htpc
-----------------------------
+   - D ReadyMedia                   meta-oe
 
-- D kodi                meta-exiguous (a fork of recipes from meta-kodi)
-- D libretro            meta-exiguous
-- D EmulationStation    meta-exiguous
-- D Bluetooth-tools     meta-exiguous (a fork of recipes from meta-tizen)
+   ----------------------------
+   Additional features for htpc
+   ----------------------------
 
---------------------------
-Additional features for CI
---------------------------
+   - D kodi                         meta-exiguous (a fork of recipes from meta-kodi)
+   - D libretro                     meta-exiguous
+   - D EmulationStation             meta-exiguous
+   - D Bluetooth-tools              meta-exiguous (a fork of recipes from meta-tizen)
 
-- D git                 openembedded-core
+   --------------------------
+   Additional features for CI
+   --------------------------
 
-- D buildbot            meta-exiguous
-- D gerrit              meta-exiguous
-- D opengrok            meta-exiguous
-- D git-repo            meta-exiguous
-- D toaster             meta-exiguous
-- D autobuilder         meta-exiguous
+   - D git                          openembedded-core
+
+   - D buildbot                     meta-exiguous
+   - D gerrit                       meta-exiguous
+   - D opengrok                     meta-exiguous
+   - D git-repo                     meta-exiguous
+   - D toaster                      meta-exiguous
+   - D autobuilder                  meta-exiguous
 
 ==================
 Supported machines
@@ -331,5 +334,5 @@ other layers needed. e.g.:
     /path/to/combination/meta-openembedded/meta-initramfs \
     /path/to/combination/meta-openembedded/meta-systemd \
     /path/to/combination/meta-openembedded/meta-virtualization \
-    /path/to/combination/meta-exiguous/meta-exiguous \
+    /path/to/combination/meta-exiguous/meta-exiguous-bsp \
     "

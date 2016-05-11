@@ -23,15 +23,18 @@ BBLAYERS = "##COREBASE##/meta \
 # Dependencies of meta-networking layer
 BBLAYERS += "##COREBASE##/meta-openembedded/meta-python"
 
+# Dependency of meta-security layer
+BBLAYERS += "##COREBASE##/meta-openembedded/meta-perl"
+
 # Layers dependencies for meta-ergo, meta-heart and meta-tupi
-BBLAYERS += "##COREBASE##/meta-yocto/meta-yocto-bsp \
+BBLAYERS += "##COREBASE##/meta-exiguous/meta-exiguous-bsp \
              ##COREBASE##/meta-intel \
              ##COREBASE##/meta-raspberrypi \
              ##COREBASE##/meta-ti \
             "
 
-# Dependency of meta-security layer
-BBLAYERS += "##COREBASE##/meta-openembedded/meta-perl"
+# Dependencies of meta-intel layer
+BBLAYERS += "##COREBASE##/meta-yocto/meta-yocto-bsp"
 
 # Layer only need to run oe-selftest
 BBLAYERS += "##COREBASE##/meta-selftest"

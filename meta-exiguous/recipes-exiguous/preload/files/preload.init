@@ -53,7 +53,7 @@ case "$1" in
     echo "."
     ;;
   stop)
-    echo -n "Stoping preload:"
+    echo -n "Stopping preload:"
     start-stop-daemon --stop --quiet --pidfile $PID_FILE
     RETVAL=$?
     [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/preload

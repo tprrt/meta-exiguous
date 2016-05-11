@@ -5,7 +5,7 @@ AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-# FIXME [exiguous] Enable systemd configuration !!!!!
+# FIXME [exiguous] Fix the systemd recipe !!!!!
 
 # SRC_URI_append = " file://50-default.conf \
 #                    file://system.conf \
@@ -20,17 +20,17 @@ PACKAGECONFIG[chrony] = "--disable-timesyncd,--enable-timesyncd,chrony"
 # Enable console-getty
 # -----------------------------------------------------------------------------
 
-do_install_append () {
-    install -d ${D}${systemd_unitdir}/system/
-    install -d ${D}${sysconfdir}/systemd/system/getty.target.wants/
+# do_install_append () {
+#     install -d ${D}${systemd_unitdir}/system/
+#     install -d ${D}${sysconfdir}/systemd/system/getty.target.wants/
 
-    # Disable all getty services
-    rm -rf ${D}${sysconfdir}/systemd/system/getty.target.wants/*
+#     # Disable all getty services
+#     rm -rf ${D}${sysconfdir}/systemd/system/getty.target.wants/*
 
-    # Enable only console-getty service
-    ln -sf ${systemd_unitdir}/system/console-getty.service \
-        ${D}${sysconfdir}/systemd/system/getty.target.wants/console-getty.service
-}
+#     # Enable only console-getty service
+#     ln -sf ${systemd_unitdir}/system/console-getty.service \
+#         ${D}${sysconfdir}/systemd/system/getty.target.wants/console-getty.service
+# }
 
 # -----------------------------------------------------------------------------
 # Enable coredumpctl
