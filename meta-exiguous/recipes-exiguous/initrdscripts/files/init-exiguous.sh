@@ -92,15 +92,15 @@ for arg in $CMDLINE ; do
     esac
 done
 
-# Repair mechanism of filesystem
-# -----------------------------------------------------------------------------
-
 delay=${rootdelay:-5}
 log "waiting $delay seconds to let the kernel be aware of devices..."
 sleep $delay
 
 # To avoid problems which can occur if / is mounted read-only and the information in /etc/mtab is stale
 ln -s /proc/mounts /etc/mtab
+
+# Repair mechanism of filesystem
+# -----------------------------------------------------------------------------
 
 # FIXME [exiguous] Re-enable repair mechanism of filesystem
 
@@ -175,7 +175,18 @@ fi
 # Fallback mechanism
 # -----------------------------------------------------------------------------
 
+# Enable the watchdog mechanism
+if [ -c /dev/watchdog ] ; then
+    msg "Enabling the watchdog..."
+    echo -n "" > /dev/watchdog
+fi
+
 # FIXME [exiguous] Re-enable fallback mecanism
+
+# Recovery mechanism
+# -----------------------------------------------------------------------------
+
+# FIXME [exiguous] Re-enable recovery mecanism
 
 # Mount real root filesystem
 # -----------------------------------------------------------------------------
