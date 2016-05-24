@@ -21,6 +21,7 @@
 ### END INIT INFO
 
 CONF_FILE=/etc/preload.conf
+LOG_FILE=/dev/null
 PID_FILE=/var/run/preload.pid
 PRELOAD=/usr/sbin/preload
 STATE=/var/spool/preload/preload.state
@@ -47,7 +48,7 @@ case "$1" in
     echo -n "Starting preload:"  
     [ ! -d $(dirname $STATE) ] && mkdir -m 755 -p $(dirname $STATE)
     [ ! -f $STATE ] && touch $STATE && chmod 644 $STATE
-    start-stop-daemon --start --quiet --exec $PRELOAD -- -c $CONF_FILE -s $STATE
+    start-stop-daemon --start --quiet --exec $PRELOAD -- -c $CONF_FILE -l $LOG_FILE -s $STATE
     RETVAL=$?
     [ $RETVAL -eq 0 ] && touch /var/lock/subsys/preload
     echo "."
@@ -73,7 +74,7 @@ case "$1" in
     done
     echo ""
     echo -n "Starting preload:"
-    start-stop-daemon --start --quiet --exec $PRELOAD -- -c $CONF_FILE -s $STATE
+    start-stop-daemon --start --quiet --exec $PRELOAD -- -c $CONF_FILE -l $LOG_FILE -s $STATE
     echo "."
     ;;
   *)

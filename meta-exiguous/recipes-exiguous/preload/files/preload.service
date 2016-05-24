@@ -2,7 +2,7 @@
 Description=Preload readahead daemon
 
 [Service]
-ExecStart=/usr/sbin/preload -f -c /etc/preload.conf
+ExecStart=/usr/sbin/preload -f -c /etc/preload.conf -l /dev/null -s /var/spool/preload/preload.state
 ExecReload=/bin/kill -HUP $MAINPID
 Nice=15
 IOSchedulingClass=idle
