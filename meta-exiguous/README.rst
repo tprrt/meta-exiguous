@@ -67,7 +67,15 @@ This layer depends on:
 Distro features
 ===============
 
-*FIXME*
+- Read-only rootfs
+- Trusted Platform Module
+- Integrity Measurement Architecture
+- Trusted and secured boot
+- Seamless and over-the-air updates
+- Fallback, recovery and watchdog mechanism
+- Two-factor authentication mechanism
+
+.. # FIXME [exiguous] Complete the distro features list
 
 ..
    -------------
