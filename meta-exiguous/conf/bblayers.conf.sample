@@ -14,10 +14,10 @@ BBLAYERS = "##COREBASE##/meta \
             ##COREBASE##/meta-virtualization \
             ##COREBASE##/meta-security \
             \
-            ##COREBASE##/meta-exiguous/meta-exiguous \
-            ##COREBASE##/meta-exiguous/meta-ergo \
-            ##COREBASE##/meta-exiguous/meta-heart \
-            ##COREBASE##/meta-exiguous/meta-tupi \
+            ##COREBASE##/meta-tprrt/meta-exiguous \
+            ##COREBASE##/meta-tprrt/meta-ergo \
+            ##COREBASE##/meta-tprrt/meta-heart \
+            ##COREBASE##/meta-tprrt/meta-tupi \
            "
 
 # Dependencies of meta-networking layer
@@ -27,7 +27,7 @@ BBLAYERS += "##COREBASE##/meta-openembedded/meta-python"
 BBLAYERS += "##COREBASE##/meta-openembedded/meta-perl"
 
 # Layers dependencies for meta-ergo, meta-heart and meta-tupi
-BBLAYERS += "##COREBASE##/meta-exiguous/meta-exiguous-bsp \
+BBLAYERS += "##COREBASE##/meta-tprrt/meta-exiguous-bsp \
              ##COREBASE##/meta-intel \
              ##COREBASE##/meta-raspberrypi \
              ##COREBASE##/meta-ti \
@@ -45,5 +45,6 @@ BBLAYERS_NON_REMOVABLE = "##COREBASE##/meta \
                           ##COREBASE##/meta-openembedded/meta-systemd \
                           ##COREBASE##/meta-virtualization \
                           \
-                          ##COREBASE##/meta-exiguous \
+                          ##COREBASE##/meta-tprrt/meta-exiguous \
+                          ##COREBASE##/meta-tprrt/meta-exiguous-bsp \
                          "

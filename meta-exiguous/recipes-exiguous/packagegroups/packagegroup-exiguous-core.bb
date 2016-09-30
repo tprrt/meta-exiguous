@@ -49,6 +49,7 @@ RDEPENDS_${PN}-core-system = "tzdata \
                               dbus \
                               udisks \
                               cryptsetup \
+                              ${@bb.utils.contains("MACHINE_FEATURES", "softraid", "mdadm", "", d)} \
                               lvm2 \
                               lxc \
                               rsync \

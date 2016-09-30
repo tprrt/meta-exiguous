@@ -53,13 +53,14 @@ CMDLINE_append = " init=/init \
                    crashkernel=512M-2G:64M@64M,2G-:128M@128M \
                    \
                    loglevel=${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "7", "4", d)} \
+                   ${@bb.utils.contains("VIRTUAL-RUNTIME_init_manager", "systemd", bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "systemd.log_level=debug", "", d), "", d)} \
                  "
 
 do_kernel_configme_append() {
-	# Set the kernel cmdline
+        # Set the kernel cmdline
         TRIMMED=$(echo ${CMDLINE}|tr -s " ")
         sed -i -e "s|^CONFIG_CMDLINE=.*$|CONFIG_CMDLINE=\"${TRIMMED}\"|" ${KBUILD_OUTPUT}/.config
 
-	# Set the default hostname
-	sed -i -e "s|^CONFIG_DEFAULT_HOSTNAME=.*$|CONFIG_DEFAULT_HOSTNAME=\"${MACHINE}\"|" ${KBUILD_OUTPUT}/.config
+        # Set the default hostname
+        sed -i -e "s|^CONFIG_DEFAULT_HOSTNAME=.*$|CONFIG_DEFAULT_HOSTNAME=\"${MACHINE}\"|" ${KBUILD_OUTPUT}/.config
 }

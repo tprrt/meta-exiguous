@@ -111,7 +111,7 @@ Distro features
 
    - E lxc                          meta-virtualization
 
-   - D pkg-tpm                      meta-exiguous (a fork of recipes from meta-measured)
+   - D pkg-tpm                      meta-security
 
    - E makedumpfile                 meta-exiguous
    - E thermald                     meta-exiguous
@@ -145,6 +145,17 @@ Distro features
    - E denyhosts                    meta-exiguous
    - D knockd                       meta-exiguous
 
+   Security Audit Tools (only embedded on dev releases)
+   ~~~~~~~~~~~~~~~~~~~~
+
+   - D chkrootkit                     meta-security
+   - D checksecurity                  meta-security
+   - D buck-security                  meta-security
+   - D nikto                          meta-security
+
+   - D nix-privesc-check              meta-exiguous
+   - D LinEnum                        meta-exiguous
+
    Backup
    ~~~~~~
 
@@ -163,6 +174,7 @@ Distro features
    - E tree                         meta-oe
 
    - D byobu                        meta-exiguous
+   - D BitlBee                      meta-exiguous
    - D meld                         meta-exiguous
    - D chromium                     meta-exiguous
 
@@ -248,6 +260,7 @@ Distro features
    - D kodi                         meta-exiguous (a fork of recipes from meta-kodi)
    - D libretro                     meta-exiguous
    - D EmulationStation             meta-exiguous
+   - D sixpair/sixad                meta-exiguous
    - D Bluetooth-tools              meta-exiguous (a fork of recipes from meta-tizen)
 
    --------------------------
@@ -290,10 +303,10 @@ Contributing
 Mailing List
 ------------
 
-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-exiguous]' in the subject'
+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-tprrt]' in the subject'
 
 Feel free to ask any kind of questions but always prepend your email subject
-with "[meta-exiguous]". This is because we use the 'yocto' mailing list and
+with "[meta-tprrt]". This is because we use the 'yocto' mailing list and
 not a perticular 'meta-exiguous' mailing list.
 
 To contribute to this layer you should send the patches for review to the
@@ -312,7 +325,7 @@ To send changes to mailing list use something like:
 Forking via github
 ------------------
 
-You are encouraged to fork the mirror on [github](https://github.com/tprrt/meta-exiguous/)
+You are encouraged to fork the mirror on [github](https://github.com/tprrt/meta-tprrt/)
 to share your patches, this is preferred for patch sets consisting of more than 
 one patch. Other services like gitorious, repo.or.cz or self hosted setups are 
 of course accepted as well, 'git fetch <remote>' works the same on all of them.
@@ -342,5 +355,5 @@ other layers needed. e.g.:
     /path/to/combination/meta-openembedded/meta-initramfs \
     /path/to/combination/meta-openembedded/meta-systemd \
     /path/to/combination/meta-openembedded/meta-virtualization \
-    /path/to/combination/meta-exiguous/meta-exiguous-bsp \
+    /path/to/combination/meta-tprrt/meta-exiguous-bsp \
     "

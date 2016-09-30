@@ -1,6 +1,10 @@
 #
 # -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/files/${MACHINE}:"
+
+SRC_URI += "file://defconfig"
+
 COMPATIBLE_MACHINE_ergo-bbb = "ergo-bbb"
 DEFAULT_PREFERENCE_ergo-bbb = "1"
 

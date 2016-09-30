@@ -48,4 +48,4 @@ BAD_RECOMMENDATIONS += "busybox-syslog busybox-udhcpc"
 
 export IMAGE_BASENAME = "exiguous-image"
 
-inherit exiguous-squashfs-lz4 image
+inherit exiguous-image_types image

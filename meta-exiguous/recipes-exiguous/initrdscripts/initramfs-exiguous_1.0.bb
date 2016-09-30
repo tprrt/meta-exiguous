@@ -16,16 +16,16 @@ inherit allarch
 
 S = "${WORKDIR}"
 
-# FIXME [exiguous] Replace all tools of initramfs by busybox or a version
-# statically linked with klibc to reduce its size.
+# FIXME [exiguous] Replace all tools of initramfs by a version statically
+# linked with klibc to reduce its size.
 
-# FIXME [exiguous] Re-enable crypto in initramfs
+# FIXME [exiguous] Re-enable all features disabled into the initramfs
 
 # FIXME [exiguous] bash is a required depend of lvm2 !?
 
 # FIXME [exiguous] Enable mdadm only if software RAID is used by the machine target
 
-# RDEPENDS_${PN} = "busybox kexec makedumpfile udev mdadm cryptsetup lvm2"
+# RDEPENDS_${PN} = "busybox kexec-klibc makedumpfile cryptsetup lvm2 ${@bb.utils.contains("MACHINE_FEATURES", "softraid", "mdadm", "", d)}"
 RDEPENDS_${PN} = "busybox kexec makedumpfile"
 
 do_install() {

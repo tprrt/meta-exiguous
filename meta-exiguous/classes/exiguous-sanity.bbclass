@@ -75,8 +75,8 @@ def exiguous_machine_checker(d):
 def exiguous_kernel_checker(d):
 
     kernel = {}
-    kernel["name"] = "linux-stable-security"
-    kernel["version"] = "4.1%"
+    kernel["name"] = "linux-stable"
+    kernel["version"] = "4.4%"
     kernel["initramfs"] = "cpio.lz4"
     kernel["header"] = "4.4"
 

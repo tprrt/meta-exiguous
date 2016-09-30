@@ -1,1 +1,0 @@
-inherit exiguous-image
