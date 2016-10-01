@@ -78,13 +78,13 @@ def exiguous_kernel_checker(d):
     kernel["name"] = "linux-stable"
     kernel["version"] = "4.4%"
     kernel["initramfs"] = "cpio.lz4"
-    kernel["header"] = "4.4"
+    # kernel["header"] = "4.4"
 
     current = {}
     current["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True) or ""
     current["version"] = d.getVar("PREFERRED_VERSION_%s" % (current["name"]), True) or ""
     current["initramfs"] = d.getVar("INITRAMFS_FSTYPES", True) or ""
-    current["header"] = d.getVar("LINUXLIBCVERSION", True) or ""
+    # current["header"] = d.getVar("LINUXLIBCVERSION", True) or ""
 
     diffs = [ key for key in kernel if not kernel[key] in current[key] ]
 
