@@ -12,8 +12,8 @@ def exiguous_bblayer_checker(d):
 
 def exiguous_tclibc_checker(d):
     tclibc = d.getVar("TCLIBC", True)
-    if not tclibc == "musl":
-        bb.fatal("The primary toolchain of Exiguous should use 'musl' instead of '%s'" % (tclibc))
+    if not tclibc == "glibc":
+        bb.fatal("The primary toolchain of Exiguous should use 'glibc' instead of '%s'" % (tclibc))
 
 def exiguous_distro_name_checker(d):
     distro = d.getVar("DISTRO", True)
@@ -47,7 +47,7 @@ def exiguous_image_name_checker(d):
 
 def exiguous_image_features_checker(d):
     current_linguas = d.getVar("IMAGE_LINGUAS", True)
-    if not current_linguas == "":
+    if not current_linguas == "en-us en-gb":
         bb.fatal("'IMAGE_LINGUAS' should be set to '' instead of '%s'" % (current_linguas))
 
     current_extra = d.getVar("EXTRA_IMAGE_FEATURES", True)

@@ -29,15 +29,26 @@ CONSOLE=/dev/console
 ROOT_DIR=/mnt/root
 KDUMP_DIR=/mnt/kdump
 
-msg() {
+log() {
     echo "initramfs: $@" >$CONSOLE | tee -a $LOG_FILE >&2
+    return 0
+}
+
+error() {
+    [ -z "$1" ] && log "$1"
+    if [ -z "$RDRESCUE" ] ; then
+        log "Exiting..."
+        exit 2
+    fi
+    log "Launching rescue..."
+    exec $RDRESCUE
 }
 
 do_mount() {
     [ ! -d $3 ] && mkdir -p $3
-    mount -t $1 $2 $3 ; status=$?
+    mount -t $1 $2 $3 ${4+-o }$4; status=$?
     if [ $status -ne 0 ] ; then
-        msg "ERROR: Unable to mount $2 to $3 !!!"
+        error "Unable to mount $2 to $3!"
     fi
     return $status
 }
@@ -46,7 +57,7 @@ do_move() {
     [ ! -d $2 ] && mkdir -p $2
     mount -n --move $1 $2 ; status=$?
     if [ $status -ne 0 ] ; then
-        msg "ERROR: Unable to move $1 to $2 !!!"
+        error "Unable to move $1 to $2!"
     fi
     return $status
 }
@@ -66,7 +77,7 @@ do_mount devtmpfs devtmpfs /dev
 
 # Parse the kernel cmdline
 # -----------------------------------------------------------------------------
-msg "Parsing the kernel cmdline..."
+log "Parsing the kernel cmdline..."
 
 [ -z "$CMDLINE" ] && CMDLINE=$(cat /proc/cmdline)
 
@@ -76,28 +87,39 @@ for arg in $CMDLINE ; do
             $ROOT_FS=${arg#root=}
             ;;
         rootfstype=*)
-            $ROOT_FS_TYPE=${arg#rootfstype=}
-            ;;
-        initrd=*)
-            $INITRD=${arg#initrd=}
-            ;;
-        init=*)
-            $INIT=${arg#init=}
+            ROOT_FS_TYPE=${arg#rootfstype=}
             ;;
         rootdelay=*)
-            rootdelay=${arg#rootdelay=}
+            DELAY=${arg#rootdelay=}
+            ;;
+        initrd=*)
+            INITRD=${arg#initrd=}
+            ;;
+        init=*)
+            INIT=${arg#init=}
+            ;;
+        rdrescue=*)
+            RDRESCUE=${arg#rdrescue=}
+            ;;
+        rdtrace)
+            set -x
             ;;
         *)
             ;;
     esac
 done
 
-delay=${rootdelay:-5}
-log "waiting $delay seconds to let the kernel be aware of devices..."
-sleep $delay
+[ -z "$ROOT_FS" ] && error "'root' must be specified into the kernel's cmdline!"
+[ ! -b "$ROOT_FS" ] && [ ! -c "$ROOT_FS" ] && error "'$root' device is not available!"
+
+[ -z "$ROOT_FS_TYPE" ] && error "'rootfstype' must be specified into the kernel's cmdline!"
+
+DELAY=${DELAY:-5}
+log "waiting $DELAY seconds to let the kernel be aware of devices..."
+sleep $DELAY
 
 # To avoid problems which can occur if / is mounted read-only and the information in /etc/mtab is stale
-ln -s /proc/mounts /etc/mtab
+[ ! -f /etc/mtab ] && ln -s /proc/mounts /etc/mtab
 
 # Repair mechanism of filesystem
 # -----------------------------------------------------------------------------
@@ -123,12 +145,12 @@ esac
 
 if [ -s /proc/vmcore ] ; then
     # If we have a /proc/vmcore, then we just kdump'ed
-    msg "Save kernel coredump"
+    log "Save kernel coredump"
 
     # Mount the partition to save kernel coredump
     do_mount $ROOT_FS_TYPE $ROOT_FS $KDUMP_DIR
     if [ $? -ne 0 ] ; then
-        msg "Unable to mount the partition to save kernel coredump, restarts without saving"
+        log "Unable to mount the partition to save kernel coredump, restarts without saving"
         # FIXME [exiguous] Enable quick reboot using kexec instead the reboot command
         reboot -f 0
     fi
@@ -149,7 +171,7 @@ if [ -s /proc/vmcore ] ; then
     # eval $KEXEC_CMD
 
     # if [ $? -ne 0 ] ; then
-    #     msg "ERROR: Failed to load the kernel to reboot !!!"
+    #     error "Unable to reboot!"
     # fi
 
     # kexec -e
@@ -157,7 +179,7 @@ if [ -s /proc/vmcore ] ; then
 
 elif [ -s /proc/kcore ] ; then
     # Else, we've just booted and need to load the kdump kernel
-    msg "Start kdump kernel"
+    log "Start kdump kernel"
 
     KDUMP_ARGS=$(echo $CMDLINE | \
         sed -r -e 's/(^| )crashkernel=[^ ]*//g' \
@@ -168,18 +190,18 @@ elif [ -s /proc/kcore ] ; then
     eval $KEXEC_CMD
 
     if [ $? -ne 0 ] ; then
-        msg "ERROR: Failed to load kdump kernel !!!"
+        error "Unable to load kdump kernel !"
     fi
+fi
+
+# Enable the watchdog mechanism
+if [ -c /dev/watchdog ] ; then
+    log "Enabling the watchdog..."
+    echo -n "" > /dev/watchdog
 fi
 
 # Fallback mechanism
 # -----------------------------------------------------------------------------
-
-# Enable the watchdog mechanism
-if [ -c /dev/watchdog ] ; then
-    msg "Enabling the watchdog..."
-    echo -n "" > /dev/watchdog
-fi
 
 # FIXME [exiguous] Re-enable fallback mecanism
 
@@ -191,14 +213,21 @@ fi
 # Mount real root filesystem
 # -----------------------------------------------------------------------------
 
-msg "Mounting partitions..."
+log "Mounting partitions..."
 
-do_mount $ROOT_FS_TYPE $ROOT_FS $ROOT_DIR || sh <$CONSOLE >$CONSOLE 2>$CONSOLE
+cat - >./rootfs.key<<EOF
+63205B7374921E47A0E01B598BE152ABCD8F1D0EEB505EC583A1BD95F29A6177
+EOF
+
+cryptsetup luksOpen $ROOT_FS rootfs --key-file=./rootfs.key --batch-mode \
+           || error "Unable to open the rootfs!"
+
+do_mount $ROOT_FS_TYPE /dev/mapper/rootfs $ROOT_DIR
 
 # Switch to real root filesystem
 # -----------------------------------------------------------------------------
 
-msg "Switching to real root filesystem..."
+log "Switching to real root filesystem..."
 
 do_move /proc $ROOT_DIR/proc
 
@@ -212,4 +241,6 @@ mv $LOG_FILE $ROOT_DIR/var/log/
 cd $ROOT_DIR
 
 switch_root -c $CONSOLE $ROOT_DIR ${INIT:-/sbin/init} $CMDLINE \
-    || sh <$CONSOLE >$CONSOLE 2>$CONSOLE
+    || error "Unable to switch root!"
+
+exit 0

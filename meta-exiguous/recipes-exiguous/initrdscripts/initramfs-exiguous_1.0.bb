@@ -21,20 +21,14 @@ S = "${WORKDIR}"
 
 # FIXME [exiguous] Re-enable all features disabled into the initramfs
 
-# FIXME [exiguous] bash is a required depend of lvm2 !?
-
 # FIXME [exiguous] Enable mdadm only if software RAID is used by the machine target
 
 # RDEPENDS_${PN} = "busybox kexec-klibc makedumpfile cryptsetup lvm2 ${@bb.utils.contains("MACHINE_FEATURES", "softraid", "mdadm", "", d)}"
-RDEPENDS_${PN} = "busybox kexec makedumpfile"
+RDEPENDS_${PN} = "busybox kexec makedumpfile cryptsetup"
 
 do_install() {
     install -m 0755 ${WORKDIR}/init-exiguous.sh ${D}/init
-
-    # Create device nodes expected by some kernels in initramfs
-    # before even executing /init.
-    install -d ${D}/dev
-    mknod -m 622 ${D}/dev/console c 5 1
 }
 
-FILES_${PN} = "/init /dev"
+FILES_${PN} = "/init"
+

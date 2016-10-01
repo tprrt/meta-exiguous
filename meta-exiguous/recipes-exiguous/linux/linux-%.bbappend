@@ -19,6 +19,7 @@ INITRAMFS_FSTYPES = "cpio.lz4"
 
 SRC_URI_append = " file://embedded.cfg \
                    file://watchdog.cfg \
+		   file://rtc.cfg \
                    file://security.cfg \
                    file://initramfs.cfg \
                    file://earlyprintk.cfg \
@@ -32,6 +33,7 @@ SRC_URI_append = " file://embedded.cfg \
                    file://crypto.cfg \
                    file://lz4.cfg \
                    file://overlayfs.cfg \
+		   file://dm-crypt.cfg \
                    \
                    ${@bb.utils.contains("TUNE_FEATURES", "neon", "file://crypto-arm.cfg", "", d)} \
                    ${@bb.utils.contains("TUNE_FEATURES", "aarch64", "file://crypto-arm64.cfg", "", d)} \
