@@ -76,9 +76,9 @@ def exiguous_kernel_checker(d):
 
     kernel = {}
     kernel["name"] = "linux-stable"
-    kernel["version"] = "4.4%"
+    kernel["version"] = "4.7%"
     kernel["initramfs"] = "cpio.lz4"
-    # kernel["header"] = "4.4"
+    # kernel["header"] = "4.7"
 
     current = {}
     current["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True) or ""
