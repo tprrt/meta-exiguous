@@ -24,7 +24,9 @@ BBLAYERS = "##COREBASE##/meta \
 BBLAYERS += "##COREBASE##/meta-openembedded/meta-python"
 
 # Dependency of meta-security layer
-BBLAYERS += "##COREBASE##/meta-openembedded/meta-perl"
+BBLAYERS += "##COREBASE##/meta-openembedded/meta-perl \
+             ##COREBASE##/meta-openembedded/meta-filesystems \
+            "
 
 # Layers dependencies for meta-ergo, meta-heart and meta-tupi
 BBLAYERS += "##COREBASE##/meta-tprrt/meta-exiguous-bsp \

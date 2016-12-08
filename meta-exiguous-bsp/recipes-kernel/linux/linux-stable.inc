@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 LINUX_VERSION_EXTENSION ?= "-stable"
 
-LINUX_VERSION ?= "4.4"
+LINUX_VERSION ?= "4.8"
 
-KBRANCH ?= "linux-4.4.y"
+KBRANCH ?= "linux-4.8.y"
 
 SRCREV ?= "${AUTOREV}"
 SRCREV_machine ?= "${AUTOREV}"

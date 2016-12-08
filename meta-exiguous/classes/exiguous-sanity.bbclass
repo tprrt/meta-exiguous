@@ -1,4 +1,4 @@
-#
+# Exiguous Sanity check
 # -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
 
 # Exiguous sanity check
@@ -56,11 +56,11 @@ def exiguous_image_features_checker(d):
 
 def exiguous_machine_checker(d):
     supported_machines = ["qemu-exiguous",
-                          "tupi-desktop",
+                          "tupi-desktop-z77",
                           "tupi-htpc-rpi2",
-                          "tupi-nas",
-                          "tupi-router",
-                          "tupi-x220",
+                          "tupi-nas-b75m",
+                          "tupi-router-bbb",
+                          "tupi-laptop-x220",
                           "ergo-rpi",
                           "ergo-bbb",
                           "heart-rpi"]
@@ -76,9 +76,9 @@ def exiguous_kernel_checker(d):
 
     kernel = {}
     kernel["name"] = "linux-stable"
-    kernel["version"] = "4.7%"
+    kernel["version"] = "4.8%"
     kernel["initramfs"] = "cpio.lz4"
-    # kernel["header"] = "4.7"
+    # kernel["header"] = "4.8"
 
     current = {}
     current["name"] = d.getVar("PREFERRED_PROVIDER_virtual/kernel", True) or ""
@@ -110,8 +110,10 @@ python exiguous_checker() {
 
         exiguous_image_name_checker(d)
         exiguous_image_features_checker(d)
+	# exiguous_image_install_checker(d)
 
         exiguous_machine_checker(d)
+	# FIXME [exiguous] Move sanity checkers for machine features into machines layers
         # exiguous_machine_features_checker(d)
 
         exiguous_kernel_checker(d)

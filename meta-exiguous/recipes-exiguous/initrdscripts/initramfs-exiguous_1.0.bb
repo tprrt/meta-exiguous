@@ -12,8 +12,6 @@ SRC_URI = "file://init-exiguous.sh"
 
 PR = "r0"
 
-inherit allarch
-
 S = "${WORKDIR}"
 
 # FIXME [exiguous] Replace all tools of initramfs by a version statically
@@ -31,4 +29,3 @@ do_install() {
 }
 
 FILES_${PN} = "/init"
-

@@ -28,11 +28,8 @@ FEATURE_PACKAGES_exiguous-router = "packagegroup-exiguous-router"
 FEATURE_PACKAGES_exiguous-station = "packagegroup-exiguous-station"
 
 # -----------------------------------------------------------------------------
-# Properties of Exiguous's images
+# Properties of images
 # -----------------------------------------------------------------------------
-
-# FIXME [exiguous] Workaround to fix initramfs build issue
-do_rootfs[depends] += "exiguous-image-initramfs:do_rootfs"
 
 # FIXME [exiguous] Re-enable read-only-rootfs
 
@@ -47,5 +44,11 @@ IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "syst
 BAD_RECOMMENDATIONS += "busybox-syslog busybox-udhcpc"
 
 export IMAGE_BASENAME = "exiguous-image"
+
+# -----------------------------------------------------------------------------
+# Properties of SDK
+# -----------------------------------------------------------------------------
+
+SDKIMAGE_FEATURES = "dev-pkgs dbg-pkgs gir-pkgs kernel-vmlinux kernel-dev"
 
 inherit exiguous-image_types image

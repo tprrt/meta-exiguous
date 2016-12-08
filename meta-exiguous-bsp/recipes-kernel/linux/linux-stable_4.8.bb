@@ -3,10 +3,10 @@
 
 AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
-LINUX_VERSION = "4.7.6"
+LINUX_VERSION = "4.8.12"
 
-KBRANCH = "linux-4.7.y"
+KBRANCH = "linux-4.8.y"
 
-SRCREV = "f849d45b3247ff5fdb5bee25e120559ea5970d2d"
+SRCREV = "356ccf6d2b0cfe9dca6c5d961bfd04dc8c0f4e64"
 
 require recipes-kernel/linux/linux-stable.inc

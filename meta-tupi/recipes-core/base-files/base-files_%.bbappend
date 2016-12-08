@@ -5,9 +5,9 @@ AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI += "file://desktop.fstab \
-            file://nas.fstab \
-            file://x220.fstab \
+SRC_URI += "file://tupi-desktop-z77.fstab \
+            file://tupi-nas-b75m.fstab \
+            file://tupi-laptop-x220.fstab \
            "
 
 do_install_append() {

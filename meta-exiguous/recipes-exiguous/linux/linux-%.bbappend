@@ -14,8 +14,8 @@ KCONF_BSP_AUDIT_LEVEL = "2"
 
 INITRAMFS_FSTYPES = "cpio.lz4"
 
-# INITRAMFS_IMAGE = "exiguous-image-initramfs"
-# INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_image_complete"
+INITRAMFS_IMAGE = "exiguous-image-initramfs"
+INITRAMFS_IMAGE_BUNDLE = "1"
 
 SRC_URI_append = " file://embedded.cfg \
                    file://watchdog.cfg \
@@ -66,3 +66,6 @@ do_kernel_configme_append() {
         # Set the default hostname
         sed -i -e "s|^CONFIG_DEFAULT_HOSTNAME=.*$|CONFIG_DEFAULT_HOSTNAME=\"${MACHINE}\"|" ${KBUILD_OUTPUT}/.config
 }
+
+# To force the generation of vmlinux for the SDK when it is not into the required KERNEL_IMAGETYPE otherwise the package will be empty
+RDEPENDS_kernel-image += "kernel-vmlinux"

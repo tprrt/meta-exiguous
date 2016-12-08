@@ -5,17 +5,17 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files/${MACHINE}:"
 
 SRC_URI += "file://defconfig"
 
-COMPATIBLE_MACHINE_tupi-desktop = "tupi-desktop"
-DEFAULT_PREFERENCE_tupi-desktop = "1"
+COMPATIBLE_MACHINE_tupi-desktop-z77 = "tupi-desktop-z77"
+DEFAULT_PREFERENCE_tupi-desktop-z77 = "1"
 
 COMPATIBLE_MACHINE_tupi-htpc-rpi2 = "tupi-htpc-rpi2"
 DEFAULT_PREFERENCE_tupi-htpc-rpi2 = "1"
 
-COMPATIBLE_MACHINE_tupi-nas = "tupi-nas"
-DEFAULT_PREFERENCE_tupi-nas = "1"
+COMPATIBLE_MACHINE_tupi-nas-b75m = "tupi-nas-b75m"
+DEFAULT_PREFERENCE_tupi-nas-b75m = "1"
 
-COMPATIBLE_MACHINE_tupi-router = "tupi-router"
-DEFAULT_PREFERENCE_tupi-router = "1"
+COMPATIBLE_MACHINE_tupi-router-bbb = "tupi-router-bbb"
+DEFAULT_PREFERENCE_tupi-router-bbb = "1"
 
-COMPATIBLE_MACHINE_tupi-x220 = "tupi-x220"
-DEFAULT_PREFERENCE_tupi-x220 = "1"
+COMPATIBLE_MACHINE_tupi-laptop-x220 = "tupi-laptop-x220"
+DEFAULT_PREFERENCE_tupi-laptop-x220 = "1"
