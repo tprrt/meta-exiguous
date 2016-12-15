@@ -5,8 +5,7 @@ AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI += "file://core.cfg \
-            file://console.cfg \
+SRC_URI += "file://exiguous-core.cfg \
             \
             file://no-udhcp.cfg \
            "

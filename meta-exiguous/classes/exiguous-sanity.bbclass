@@ -51,8 +51,9 @@ def exiguous_image_features_checker(d):
         bb.fatal("'IMAGE_LINGUAS' should be set to '' instead of '%s'" % (current_linguas))
 
     current_extra = d.getVar("EXTRA_IMAGE_FEATURES", True)
-    if not current_extra == "":
-        bb.fatal("'EXTRA_IMAGE_FEATURES' should be set to '' instead of '%s'" % (current_extra))
+    for feature in current_extra.split():
+        if not feature in "":
+            bb.fatal("'EXTRA_IMAGE_FEATURES' should be set to '' instead of '%s'" % (current_extra))
 
 def exiguous_machine_checker(d):
     supported_machines = ["qemu-exiguous",
@@ -77,7 +78,7 @@ def exiguous_kernel_checker(d):
     kernel = {}
     kernel["name"] = "linux-stable"
     kernel["version"] = "4.8%"
-    kernel["initramfs"] = "cpio.lz4"
+    kernel["initramfs"] = "cpio cpio.lz4"
     # kernel["header"] = "4.8"
 
     current = {}

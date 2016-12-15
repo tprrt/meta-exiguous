@@ -19,7 +19,7 @@ do_install_append() {
         for current in $(cat ${WORKDIR}/exiguous.fstab|grep "^[^#]"); do
             mount_to=$(echo $current|awk '{print $2}')
             if [[ $mount_used == *$mount_to* ]]; then
-                sed -i "s/^$mount_to.*$/$current/" ${D}${sysconfdir}/fstab
+                sed -i "s/^$mount_to.*$/$current/g" ${D}${sysconfdir}/fstab
             else
                 echo $current >> ${D}${sysconfdir}/fstab
             fi

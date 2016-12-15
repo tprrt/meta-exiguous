@@ -31,3 +31,6 @@ KCONFIG_MODE ?= "--allnoconfig"
 
 KCONF_AUDIT_LEVEL ?= "2"
 KCONF_BSP_AUDIT_LEVEL ?= "2"
+
+# Remove kernel fragment applied by default in linux-yocto on all qemu targets
+KERNEL_FEATURES_remove = "features/debug/printk.scc"

@@ -12,11 +12,6 @@ KCONFIG_MODE = "--allnoconfig"
 KCONF_AUDIT_LEVEL = "2"
 KCONF_BSP_AUDIT_LEVEL = "2"
 
-INITRAMFS_FSTYPES = "cpio.lz4"
-
-INITRAMFS_IMAGE = "exiguous-image-initramfs"
-INITRAMFS_IMAGE_BUNDLE = "1"
-
 SRC_URI_append = " file://embedded.cfg \
                    file://watchdog.cfg \
 		   file://rtc.cfg \

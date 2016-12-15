@@ -1,13 +1,6 @@
 #
 # -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
 
-SUMMARY = "Exiguous distribution image class"
-DESCRIPTION = "Exiguous distribution image class"
-AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
-
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-
 # -----------------------------------------------------------------------------
 # Define image's features of Exiguous
 # -----------------------------------------------------------------------------
@@ -31,8 +24,6 @@ FEATURE_PACKAGES_exiguous-station = "packagegroup-exiguous-station"
 # Properties of images
 # -----------------------------------------------------------------------------
 
-# FIXME [exiguous] Re-enable read-only-rootfs
-
 IMAGE_LINGUAS = ""
 
 USE_DEVFS = "1"
@@ -43,6 +34,11 @@ IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "syst
 # Also removed from the busybox recipe
 BAD_RECOMMENDATIONS += "busybox-syslog busybox-udhcpc"
 
+# Specifies a list of distro-specific features to INSTALL to ALL images.
+IMAGE_FEATURES += ""
+
+inherit exiguous-image_types image exiguous-rootfs-postcommands
+
 export IMAGE_BASENAME = "exiguous-image"
 
 # -----------------------------------------------------------------------------
@@ -50,5 +46,3 @@ export IMAGE_BASENAME = "exiguous-image"
 # -----------------------------------------------------------------------------
 
 SDKIMAGE_FEATURES = "dev-pkgs dbg-pkgs gir-pkgs kernel-vmlinux kernel-dev"
-
-inherit exiguous-image_types image

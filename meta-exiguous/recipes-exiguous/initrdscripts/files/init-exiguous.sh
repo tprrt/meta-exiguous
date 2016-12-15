@@ -121,6 +121,9 @@ sleep $DELAY
 # To avoid problems which can occur if / is mounted read-only and the information in /etc/mtab is stale
 [ ! -f /etc/mtab ] && ln -s /proc/mounts /etc/mtab
 
+# To avoid domain name resolution issues
+[ ! -f /etc/resolv.conf ] && cat /proc/net/pnp > /etc/resolv.conf
+
 # Repair mechanism of filesystem
 # -----------------------------------------------------------------------------
 
@@ -215,12 +218,8 @@ fi
 
 log "Mounting partitions..."
 
-cat - >./rootfs.key<<EOF
-63205B7374921E47A0E01B598BE152ABCD8F1D0EEB505EC583A1BD95F29A6177
-EOF
-
 cryptsetup luksOpen $ROOT_FS rootfs --key-file=./rootfs.key --batch-mode \
-           || error "Unable to open the rootfs!"
+    || error "Unable to open the rootfs!"
 
 do_mount $ROOT_FS_TYPE /dev/mapper/rootfs $ROOT_DIR
 
