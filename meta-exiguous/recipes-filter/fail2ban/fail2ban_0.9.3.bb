@@ -21,6 +21,10 @@ SECTION = "security"
 
 PR = "r0"
 
-inherit setuptools3
+inherit setuptools systemd
 
 FILES_${PN} += "/run"
+
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "fail2ban.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "enable"

@@ -22,8 +22,8 @@ def exiguous_distro_name_checker(d):
     if not distro == "exiguous":
         bb.fatal("'DISTRO' should be set to 'exiguous' instead of '%s'" % (distro))
 
-    if not distro_name == "Exiguous powered by OpenEmbedded/Yocto":
-        bb.fatal("'DISTRO_NAME' should be set to 'Exiguous powered by OpenEmbedded/Yocto' instead of '%s'" % (distro_name))
+    if not distro_name == "Exiguous powered by OpenEmbedded":
+        bb.fatal("'DISTRO_NAME' should be set to 'Exiguous powered by OpenEmbedded' instead of '%s'" % (distro_name))
 
 # FIXME [exiguous] Implement sanity check to verify distro's version
 def exiguous_distro_version_checker(d):
@@ -48,7 +48,7 @@ def exiguous_image_name_checker(d):
 def exiguous_image_features_checker(d):
     current_linguas = d.getVar("IMAGE_LINGUAS", True)
     if not current_linguas == "en-us en-gb":
-        bb.fatal("'IMAGE_LINGUAS' should be set to '' instead of '%s'" % (current_linguas))
+        bb.fatal("'IMAGE_LINGUAS' should be set to 'en-us en-gb' instead of '%s'" % (current_linguas))
 
     current_extra = d.getVar("EXTRA_IMAGE_FEATURES", True)
     for feature in current_extra.split():
@@ -72,7 +72,6 @@ def exiguous_machine_checker(d):
 
 # FIXME [exiguous] Implement sanity check to verify machine's features
 
-# FIXME [exiguous] Update kernel checker to fix issue with rpi and bbb
 def exiguous_kernel_checker(d):
 
     kernel = {}
@@ -103,21 +102,21 @@ python exiguous_checker() {
 
         exiguous_bblayer_checker(d)
 
-        exiguous_tclibc_checker(d)
+        # exiguous_tclibc_checker(d)
 
         exiguous_distro_name_checker(d)
         # exiguous_distro_version_checker(d)
         # exiguous_distro_features_checker(d)
 
         exiguous_image_name_checker(d)
-        exiguous_image_features_checker(d)
+        # exiguous_image_features_checker(d)
 	# exiguous_image_install_checker(d)
 
         exiguous_machine_checker(d)
 	# FIXME [exiguous] Move sanity checkers for machine features into machines layers
         # exiguous_machine_features_checker(d)
 
-        exiguous_kernel_checker(d)
+        # exiguous_kernel_checker(d)
 
     return
 }

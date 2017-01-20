@@ -24,5 +24,3 @@ compile_python3_sources() {
 }
 
 ROOTFS_POSTPROCESS_COMMAND += "compile_python3_sources ; "
-
-# FIXME [exiguous] Re-enable read-only-rootfs

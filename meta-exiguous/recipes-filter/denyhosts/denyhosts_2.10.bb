@@ -19,4 +19,8 @@ SECTION = "security"
 
 PR = "r0"
 
-inherit setuptools
+inherit setuptools systemd
+
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "denyhost.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "enable"

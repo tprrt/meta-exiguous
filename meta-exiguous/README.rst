@@ -43,12 +43,12 @@ This layer depends on:
 - revision: HEAD
 - prio: default
 
-.. :meta-measured:
-..
-.. - URI: git://git@github.com:flihp/meta-measured.git
-.. - branch: master
-.. - revision: HEAD
-.. - prio: default
+:meta-security:
+
+- URI: git://git.yoctoproject.org/meta-security
+- branch: master
+- revision: HEAD
+- prio: default
 
 .. :meta-clang:
 ..
@@ -67,214 +67,7 @@ This layer depends on:
 Distro features
 ===============
 
-- Read-only rootfs
-- Trusted Platform Module
-- Integrity Measurement Architecture
-- Trusted and secured boot
-- Seamless and over-the-air updates
-- Fallback, recovery and watchdog mechanism
-- Two-factor authentication mechanism
-
-.. # FIXME [exiguous] Complete the distro features list
-
-..
-   -------------
-   Core packages
-   -------------
-
-   System
-   ~~~~~~
-
-   - E hwcodecs                     openembedded-core
-   - E read-only-rootfs             openembedded-core
-   - E Linux stable security v4.1   openembedded-core
-   - E systemd                      openembedded-core
-   - E dbus                         openembedded-core
-   - E watchdog                     openembedded-core
-   - E cronie                       openembedded-core
-   - E acpid/apmd                   openembedded-core
-   - E tzdata                       openembedded-core
-   - E usbhost                      openembedded-core
-   - E usbutils                     openembedded-core
-   - E usbgadget                    openembedded-core
-   - E rsync                        openembedded-core
-   - E pm-utils                     openembedded-core
-   - E pigz                         openembedded-core
-   - E busybox                      openembedded-core
-   - E procps                       openembedded-core
-   - E kexec                        openembedded-core
-
-   - E cryptsetup                   meta-oe
-   - E udisks                       meta-oe
-   - E networkmanager               meta-oe
-   - E lvm2                         meta-oe
-
-   - E lxc                          meta-virtualization
-
-   - D pkg-tpm                      meta-security
-
-   - E makedumpfile                 meta-exiguous
-   - E thermald                     meta-exiguous
-
-   Optimization
-   ~~~~~~~~~~~~~
-
-   - E prelink                      openembedded-core
-
-   - E zram                         meta-oe
-
-   - E preload                      meta-exiguous
-
-   Network
-   ~~~~~~~
-
-   - E dropbear                     openembedded-core
-   - E avahi                        openembedded-core
-
-   - E nftables                     meta-oe
-   - E samba                        meta-oe
-
-   - D freelan (VPN)                meta-exiguous
-
-   Security
-   ~~~~~~~~
-
-   - E security flags               openembedded-core
-
-   - E fail2ban                     meta-exiguous
-   - E denyhosts                    meta-exiguous
-   - D knockd                       meta-exiguous
-
-   Security Audit Tools (only embedded on dev releases)
-   ~~~~~~~~~~~~~~~~~~~~
-
-   - D chkrootkit                     meta-security
-   - D checksecurity                  meta-security
-   - D buck-security                  meta-security
-   - D nikto                          meta-security
-
-   - D nix-privesc-check              meta-exiguous
-   - D LinEnum                        meta-exiguous
-
-   Backup
-   ~~~~~~
-
-   - D unison                       meta-exiguous
-
-   -------------------------------
-   Additional features for station
-   -------------------------------
-
-   - E sudo                         openembedded-core
-   - E wayland                      openembedded-core
-
-   - E emacs                        meta-oe
-   - E irssi                        meta-oe
-   - E picocom                      meta-oe
-   - E tree                         meta-oe
-
-   - D byobu                        meta-exiguous
-   - D BitlBee                      meta-exiguous
-   - D meld                         meta-exiguous
-   - D chromium                     meta-exiguous
-
-   ---------------------------------------------------------------------
-   Additional features for Router/Bridge/Firewall/DNS/Proxy/ReverseProxy
-   ---------------------------------------------------------------------
-
-   Router Freelan
-   ~~~~~~~~~~~~~~
-
-   - D freeland (VPN)               meta-exiguous
-
-   Router TCP/IP
-   ~~~~~~~~~~~~~
-
-   - D iproute2                     openembedded-core
-   - D tcp-wrappers                 openembedded-core
-
-   - D rng-tools                    meta-oe
-
-   - D ipsec-tools                  meta-networking
-
-   Router PPP
-   ~~~~~~~~~~
-
-   - D ppp                          openembedded-core
-
-   - D rp-pppoe                     meta-networking
-
-   Server DNS
-   ~~~~~~~~~~
-
-   - D bind                         openembedded-core
-
-   Proxy
-   ~~~~~
-
-   - D squid                        meta-networking
-
-   Reverse Proxy
-   ~~~~~~~~~~~~~
-
-   - D nginx                        meta-webserver
-
-   - D memcached                    meta-networking
-
-   - D varnish                      meta-exiguous
-
-   IRC Bouncer/Bots
-   ~~~~~~~~~~~~~~~~
-
-   - D znc                          meta-networking
-   - D notifico                     meta-exiguous
-   - D cardinal                     meta-exiguous
-
-   ---------------------------
-   Additional features for NAS
-   ---------------------------
-
-   System
-   ~~~~~~
-
-   - D mdadm                        openembedded-core
-
-   Newsgroups
-   ~~~~~~~~~~
-
-   - D sabnzbd                      meta-exiguous
-   - D headphones                   meta-exiguous
-   - D sickbeard                    meta-exiguous
-   - D couchpotato                  meta-exiguous
-
-   ------------------------------------
-   Additional features for media server
-   ------------------------------------
-
-   - D ReadyMedia                   meta-oe
-
-   ----------------------------
-   Additional features for htpc
-   ----------------------------
-
-   - D kodi                         meta-exiguous (a fork of recipes from meta-kodi)
-   - D libretro                     meta-exiguous
-   - D EmulationStation             meta-exiguous
-   - D sixpair/sixad                meta-exiguous
-   - D Bluetooth-tools              meta-exiguous (a fork of recipes from meta-tizen)
-
-   --------------------------
-   Additional features for CI
-   --------------------------
-
-   - D git                          openembedded-core
-
-   - D buildbot                     meta-exiguous
-   - D gerrit                       meta-exiguous
-   - D opengrok                     meta-exiguous
-   - D git-repo                     meta-exiguous
-   - D toaster                      meta-exiguous
-   - D autobuilder                  meta-exiguous
+TODO
 
 ==================
 Supported machines
@@ -355,5 +148,6 @@ other layers needed. e.g.:
     /path/to/combination/meta-openembedded/meta-initramfs \
     /path/to/combination/meta-openembedded/meta-systemd \
     /path/to/combination/meta-openembedded/meta-virtualization \
+    /path/to/combination/meta-openembedded/meta-security \
     /path/to/combination/meta-tprrt/meta-exiguous-bsp \
     "

@@ -1,8 +1,6 @@
 #
 # -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
 
-AUTHOR = "Thomas Perrot <thomas.perrot@tupi.fr>"
-
 DEPENDS += "lz4-native"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/exiguous:"
