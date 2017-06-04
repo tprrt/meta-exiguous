@@ -37,4 +37,5 @@ export IMAGE_BASENAME = "exiguous-image"
 # Properties of SDK
 # -----------------------------------------------------------------------------
 
-SDKIMAGE_FEATURES = "dev-pkgs dbg-pkgs gir-pkgs kernel-vmlinux kernel-dev"
+SDKIMAGE_FEATURES = "dev-pkgs dbg-pkgs"
+SDKIMAGE_INSTALL_COMPLEMENTARY = "kernel-vmlinux kernel-dev"
