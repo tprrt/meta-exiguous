@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 LINUX_VERSION_EXTENSION ?= "-stable"
 
-LINUX_VERSION ?= "4.8"
+LINUX_VERSION ?= "4.9"
 
-KBRANCH ?= "linux-4.8.y"
+KBRANCH ?= "linux-4.9.y"
 
 SRCREV ?= "${AUTOREV}"
 SRCREV_machine ?= "${AUTOREV}"
@@ -33,4 +33,4 @@ KCONF_AUDIT_LEVEL ?= "2"
 KCONF_BSP_AUDIT_LEVEL ?= "2"
 
 # Remove kernel fragment applied by default in linux-yocto on all qemu targets
-KERNEL_FEATURES_remove = "features/debug/printk.scc"
+KERNEL_FEATURES_remove = "features/debug/printk.scc cfg/virtio.scc"
