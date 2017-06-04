@@ -36,7 +36,7 @@ SRC_URI_append = " file://embedded.cfg \
                    \
                    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "file://systemd.cfg", "", d)} \
                    \
-                   ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "file://debug.cfg", "", d)} \
+                   ${@bb.utils.contains("EXIGUOUS_DEBUG", "Yes", "file://debug.cfg file://debug-memleak.cfg", "", d)} \
                    \
                    ${@bb.utils.contains("EXIGUOUS_PROFILING", "Yes", "file://profiling.cfg", "", d)} \
                  "
@@ -59,6 +59,3 @@ do_kernel_configme_append() {
         # Set the default hostname
         sed -i -e "s|^CONFIG_DEFAULT_HOSTNAME=.*$|CONFIG_DEFAULT_HOSTNAME=\"${MACHINE}\"|" ${KBUILD_OUTPUT}/.config
 }
-
-# To force the generation of vmlinux for the SDK when it is not into the required KERNEL_IMAGETYPE otherwise the package will be empty
-RDEPENDS_kernel-image += "kernel-vmlinux"
